@@ -181,6 +181,16 @@
             url: https://portainer.lab.lemisieur.com
             env: 2
             key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
+    - docker-03:
+        href: https://portainer.lab.lemisieur.com/#!/4/docker/dashboard
+        description: docker-03.lab.lemisieur.com
+        icon: si-docker-#2496ED
+        siteMonitor: https://portainer.lab.lemisieur.com
+        widget:
+            type: portainer
+            url: https://portainer.lab.lemisieur.com
+            env: 4
+            key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
 - data:
     - nas:
         href: https://nas.lab.lemisieur.com
