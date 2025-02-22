@@ -30,7 +30,7 @@ jobs:
       
       - name: Mount nas drive
         run: |
-          mkdir -p ${{env.HOMEPAGE_NAS_MOUNT}}
+          mkdir -p ${{env.NAS_MOUNT}}
           sudo mount -t cifs ${{vars.HOMEPAGE_NAS_MOUNT}} ${{env.NAS_MOUNT}} -o username=${{secrets.LDAP_USERNAME}},password=${{secrets.LDAP_PASSWORD}},file_mode=0777,dir_mode=0777
           ls -la ${{env.NAS_MOUNT}}
 
