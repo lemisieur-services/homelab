@@ -35,14 +35,11 @@ jobs:
           ls -la ${{env.NAS_MOUNT}}
 
       - name: Replace files
-        run: 
+        run: |
           rm -rf ${{env.NAS_MOUNT}}/config/*.yaml ${{env.NAS_MOUNT}}/config/*.css ${{env.NAS_MOUNT}}/config/*.js
-
           rm -rf ${{env.NAS_MOUNT}}/icons/*
-
-          cp -rf ./services/homepage/icons/* ${{env.NAS_MOUNT}}/icons
-
-          cp -rf ./services/homepage/config/* ${{env.NAS_MOUNT}}/config
+          cp -rf services/homepage/config/* ${{env.NAS_MOUNT}}/config
+          cp -rf services/homepage/icons/* ${{env.NAS_MOUNT}}/icons
 
       - name: Unmount nas drive
         if: always()
