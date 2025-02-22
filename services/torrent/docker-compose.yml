@@ -1,0 +1,80 @@
+services:
+  jellyseerr:
+    image: fallenbagel/jellyseerr:2.3.0
+    container_name: jellyseerr-01
+    ports:
+      - 5055:5055
+    environment:
+      - TZ=America/Toronto
+    volumes:
+      - /share/containers/jellyseerr/config:/app/config
+    dns:
+      - 192.168.4.1
+    restart: unless-stopped
+  prolarr:
+    image: linuxserver/prowlarr:1.30.2
+    container_name: prowlarr-01
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    ports:
+      - 9696:9696
+    volumes:
+      - /share/containers/prowlarr/config:/config
+    restart: unless-stopped
+  radarr:
+    image: linuxserver/radarr:5.18.4
+    container_name: radarr-01
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    ports:
+      - 7878:7878
+    volumes:
+      - /share/containers/radarr/config:/config
+      - /share/downloads:/mount/downloads
+    restart: unless-stopped
+  sonarr:
+    container_name: sonarr-01
+    image: linuxserver/sonarr:4.0.13
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    ports:
+      - 8989:8989
+    volumes:
+      - /share/containers/sonarr/config:/config
+      - /share/downloads:/mount/downloads
+  readarr:
+    container_name: readarr-01
+    image: linuxserver/readarr:develop
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    ports:
+      - 8787:8787
+    volumes:
+      - /share/containers/readarr/config:/config
+      - /share/downloads:/mount/downloads
+  qbittorrent:
+    container_name: qbittorrent-01
+    image: linuxserver/qbittorrent:5.0.3
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+      - 2099:2099 #vpm
+    volumes:
+      - /share/containers/qbittorrent/config:/config
+      - /share/containers/qbittorrent/themes:/themes
+      - /share/downloads:/mount/downloads
+    environment:
+      - PUID=1000
+      - PGID=1000
