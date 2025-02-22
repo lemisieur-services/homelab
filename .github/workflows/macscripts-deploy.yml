@@ -1,0 +1,36 @@
+name: Mac Scripts - Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - services/mac-scripts/**
+  workflow_dispatch:
+
+# Allow all permissions on the repository
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.CASHEW_SSH_PRIVATE_KEY }}
+      
+      - name: Add known hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ vars.CASHEW_HOST_KEY }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Copy files
+        run: scp -r -v services/mac-scripts/* ${{ secrets.CASHEW_SSH_USERNAME }}@${{ vars.CASHEW_FQDN }}:/Users/jpoulin/scripts/
+  
