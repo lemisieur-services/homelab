@@ -38,8 +38,8 @@ jobs:
         run: |
           rm -rf ${{env.NAS_MOUNT}}/config/*.yaml ${{env.NAS_MOUNT}}/config/*.css ${{env.NAS_MOUNT}}/config/*.js
           rm -rf ${{env.NAS_MOUNT}}/icons/*
-          cp -rf services/homepage/config/* ${{env.NAS_MOUNT}}/config
-          cp -rf services/homepage/icons/* ${{env.NAS_MOUNT}}/icons
+          cp -rf services/homepage/config/* ${{env.NAS_MOUNT}}/config || true
+          cp -rf services/homepage/icons/* ${{env.NAS_MOUNT}}/icons || true
 
       - name: Unmount nas drive
         if: always()
