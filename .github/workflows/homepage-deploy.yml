@@ -40,9 +40,9 @@ jobs:
 
           rm -rf ${{env.NAS_MOUNT}}/icons/*
 
-          cp -rf ./icons/* ${{env.NAS_MOUNT}}/icons
+          cp -rf ./services/homepage/icons/* ${{env.NAS_MOUNT}}/icons
 
-          cp -rf ./config/* ${{env.NAS_MOUNT}}/config
+          cp -rf ./services/homepage/config/* ${{env.NAS_MOUNT}}/config
 
       - name: Unmount nas drive
         if: always()
