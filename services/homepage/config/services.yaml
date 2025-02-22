@@ -1,0 +1,199 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/services/
+
+- home:
+    - homeassistant:
+        href: https://ha.lab.lemisieur.com
+        description: ha.lab.lemisieur.com
+        icon: si-homeassistant-#18BCF2
+        siteMonitor: https://ha.lab.lemisieur.com
+        widget:
+            type: homeassistant
+            url: http://ha.ip.lab.lemisieur.com:8123
+            key: {{HOMEPAGE_VAR_HOMEASSISTANT_KEY}}
+            custom:
+                - state: update.home_assistant_operating_system_update
+                  label: os
+                - state: update.home_assistant_core_update
+                  label: core
+                - state: update.home_assistant_supervisor_update
+                  label: supervisor
+    - homebridge:
+        href: https://hb.lab.lemisieur.com
+        description: hb.lab.lemisieur.com
+        icon: si-homebridge-#491F59
+        siteMonitor: http://hb.ip.lab.lemisieur.com:8581
+        widget:
+            type: homebridge
+            url: https://hb.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_HOMEBRIDGE_USERNAME}}
+            password: {{HOMEPAGE_VAR_HOMEBRIDGE_PASSWORD}}
+            fields: ["updates"]
+    - jellyfin:
+        href: https://watch.lab.lemisieur.com
+        description: watch.lab.lemisieur.com
+        icon: si-jellyfin-#00A4DC
+        siteMonitor: http://jellyfin.ip.lab.lemisieur.com:8096
+        widget:
+            type: jellyfin
+            url: https://watch.lab.lemisieur.com
+            key: {{HOMEPAGE_VAR_JELLYFIN_KEY}}
+            fields: ["movies", "series", "episodes"]
+            enableNowPlaying: false
+            enableBlocks: true
+            showEpisodeNumber: true # optional, defaults to false
+            expandOneStreamToTwoRows: false # optional, defaults to true
+    - jellyseerr:
+        href: https://request.lab.lemisieur.com
+        description: request.lab.lemisieur.com
+        icon: sh-jellyseerr
+        siteMonitor: http://docker-01.ip.lab.lemisieur.com:5055
+        widget:
+            type: jellyseerr
+            url: https://request.lab.lemisieur.com
+            key: {{HOMEPAGE_VAR_JELLYSEERR_KEY}}
+
+- torrent:
+    - qbittorrent:
+        href: https://torrent.lab.lemisieur.com
+        description: torrent.lab.lemisieur.com
+        icon: si-qbittorrent-#2F67BA
+        siteMonitor: http://docker-01.ip.lab.lemisieur.com:8080
+        widget:
+            type: qbittorrent
+            url: https://torrent.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_QBIT_USERNAME}}
+            password: {{HOMEPAGE_VAR_QBIT_PASSWORD}}
+    - prowlarr:
+        href: https://prowlarr.lab.lemisieur.com
+        description: prowlarr.lab.lemisieur.com
+        icon: sh-prowlarr
+        siteMonitor: http://docker-01.ip.lab.lemisieur.com:9696
+        widget:
+            type: prowlarr
+            url: https://prowlarr.lab.lemisieur.com
+            key: {{HOMEPAGE_VAR_PROWLARR_KEY}}
+    - radarr:
+        href: https://radarr.lab.lemisieur.com
+        description: radarr.lab.lemisieur.com
+        icon: sh-radarr
+        siteMonitor: http://docker-01.ip.lab.lemisieur.com:7878
+        widget:
+            type: radarr
+            url: https://radarr.lab.lemisieur.com
+            key: {{HOMEPAGE_VAR_RADARR_KEY}}
+    - sonarr:
+        href: https://sonarr.lab.lemisieur.com
+        description: sonarr.lab.lemisieur.com
+        icon: sh-sonarr
+        siteMonitor: http://docker-01.ip.lab.lemisieur.com:8989
+        widget:
+            type: sonarr
+            url: https://sonarr.lab.lemisieur.com
+            key: {{HOMEPAGE_VAR_SONARR_KEY}}
+    - readarr:
+        href: https://readarr.lab.lemisieur.com
+        description: readarr.lab.lemisieur.com
+        icon: sh-readarr
+        siteMonitor: http://docker-01.ip.lab.lemisieur.com:8787
+        widget:
+            type: readarr
+            url: https://readarr.lab.lemisieur.com
+            key: {{HOMEPAGE_VAR_READARR_KEY}}
+
+- network:
+    - unifi:
+        href: https://udm.lab.lemisieur.com
+        description: udm.lab.lemisieur.com
+        icon: si-ubiquiti-#0559C9
+        ping: 192.168.1.1
+        widget:
+            type: unifi
+            url: https://udm.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_UNIFI_USERNAME}}
+            password: {{HOMEPAGE_VAR_UNIFI_PASSWORD}}
+    - proxy:
+        href: https://srvs.lab.lemisieur.com
+        description: srvs.lab.lemisieur.com
+        icon: si-envoyproxy-#AC6199
+        siteMonitor: http://proxy-01.ip.lab.lemisieur.com:8000
+    - nextdns:
+        href: https://my.nextdns.io
+        description: my.nextdns.io
+        icon: si-nextdns-#007BFF
+        ping: {{HOMEPAGE_VAR_NEXTDNS_ENDPOINT}}
+        widget:
+            type: nextdns
+            profile: {{HOMEPAGE_VAR_NEXTDNS_PROFILE}}
+            key: {{HOMEPAGE_VAR_NEXTDNS_KEY}}
+- hosting:
+    - proxmox:
+        href: https://pve.lab.lemisieur.com
+        description: pve.lab.lemisieur.com
+        icon: si-proxmox-#E57000
+        siteMonitor: https://pve.lab.lemisieur.com
+        widget:
+            type: proxmox
+            url: https://pve.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_PVE_USERNAME}}
+            password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
+            node: proxmox
+    - jackson:
+        href: https://pve.lab.lemisieur.com
+        description: pve.lab.lemisieur.com
+        icon: si-proxmox-#E57000
+        siteMonitor: https://pve.lab.lemisieur.com
+        widget:
+            type: proxmox
+            url: https://pve.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_PVE_USERNAME}}
+            password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
+            node: jackson
+    - groot:
+        href: https://pve.lab.lemisieur.com
+        description: pve.lab.lemisieur.com
+        icon: si-proxmox-#E57000
+        siteMonitor: https://pve.lab.lemisieur.com
+        widget:
+            type: proxmox
+            url: https://pve.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_PVE_USERNAME}}
+            password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
+            node: groot
+    - docker-01:
+        href: https://portainer.lab.lemisieur.com/#!/3/docker/dashboard
+        description: docker-01.lab.lemisieur.com
+        icon: si-docker-#2496ED
+        siteMonitor: https://portainer.lab.lemisieur.com
+        widget:
+            type: portainer
+            url: https://portainer.lab.lemisieur.com
+            env: 3
+            key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
+    - docker-02:
+        href: https://portainer.lab.lemisieur.com/#!/2/docker/dashboard
+        description: docker-02.lab.lemisieur.com
+        icon: si-docker-#2496ED
+        siteMonitor: https://portainer.lab.lemisieur.com
+        widget:
+            type: portainer
+            url: https://portainer.lab.lemisieur.com
+            env: 2
+            key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
+- data:
+    - nas:
+        href: https://nas.lab.lemisieur.com
+        description: nas.lab.lemisieur.com
+        icon: sh-truenas-core
+        siteMonitor: https://nas-proxy.lab.lemisieur.com
+        widget:
+            type: qnap
+            url: https://nas-proxy.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_QNAP_USERNAME}}
+            password: {{HOMEPAGE_VAR_QNAP_PASSWORD}}
+    - backup server:
+        href: https://pbs.lab.lemisieur.com
+        description: pbs.lab.lemisieur.com
+        icon: si-proxmox-#E57000
+        siteMonitor: https://pbs.lab.lemisieur.com
