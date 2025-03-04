@@ -196,7 +196,7 @@
         href: https://nas.lab.lemisieur.com
         description: nas.lab.lemisieur.com
         icon: sh-truenas-core
-        siteMonitor: https://nas-proxy.lab.lemisieur.com
+        siteMonitor: https://nas.lab.lemisieur.com
         widget:
             type: qnap
             url: https://nas-proxy.lab.lemisieur.com
