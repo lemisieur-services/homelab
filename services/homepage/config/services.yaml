@@ -199,7 +199,7 @@
         siteMonitor: https://nas.lab.lemisieur.com
         widget:
             type: qnap
-            url: https://nas-proxy.lab.lemisieur.com
+            url: https://nas.lab.lemisieur.com
             username: {{HOMEPAGE_VAR_QNAP_USERNAME}}
             password: {{HOMEPAGE_VAR_QNAP_PASSWORD}}
     - backup server:
