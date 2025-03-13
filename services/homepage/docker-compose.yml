@@ -4,6 +4,7 @@ services:
     container_name: homepage-01
     ports:
       - 3000:3000
+    restart: unless-stopped
     environment:
       HOMEPAGE_VAR_HOMEASSISTANT_KEY: ${HOMEPAGE_VAR_HOMEASSISTANT_KEY}
       HOMEPAGE_VAR_HOMEBRIDGE_USERNAME: ${HOMEPAGE_VAR_HOMEBRIDGE_USERNAME}
