@@ -1,0 +1,11 @@
+{
+  "A": [
+    {
+      "name": "test.lab.lemisieur.com",
+      "value": "192.168.8.206"
+    }
+  ],
+  "CNAME": [],
+  "MX": [],
+  "TXT": []
+}
