@@ -1,5 +1,10 @@
 {
-  "A": [],
+  "A": [
+    {
+      "name": "rocket.lab.lemisieur.com",
+      "value": "192.168.6.115"
+    }
+  ],
   "CNAME": [],
   "MX": [],
   "TXT": []
