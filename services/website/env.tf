@@ -28,6 +28,10 @@ locals {
       scope = "RUN_AND_BUILD_TIME"
       value = "LeMisieur Services © 2025"
     },
+    THEME = {
+      scope = "RUN_AND_BUILD_TIME"
+      value = "Dark"
+    },
     LANG = {
       scope = "RUN_AND_BUILD_TIME"
       value = "en"
@@ -103,10 +107,6 @@ locals {
     OG_URL = {
       scope = "RUN_AND_BUILD_TIME"
       value = "https://lemisieur.com"
-    },
-    THEME_COLOR = {
-      scope = "RUN_AND_BUILD_TIME"
-      value = "Dark"
     },
   }
 }
