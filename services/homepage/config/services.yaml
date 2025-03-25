@@ -207,3 +207,8 @@
         description: pbs.lab.lemisieur.com
         icon: si-proxmox-#E57000
         siteMonitor: https://pbs.lab.lemisieur.com
+        widget:
+            type: proxmoxbackupserver
+            url: https://pbs.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_PBS_USERNAME}}
+            password: {{HOMEPAGE_VAR_PBS_PASSWORD}}
