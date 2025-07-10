@@ -64,7 +64,7 @@ services:
       - /share/downloads:/mount/downloads
   qbittorrent:
     container_name: qbittorrent-01
-    image: linuxserver/qbittorrent:5.0.4
+    image: linuxserver/qbittorrent:5.2.1
     restart: unless-stopped
     ports:
       - 8080:8080
