@@ -51,7 +51,7 @@ services:
       - /share/downloads:/mount/downloads
   readarr:
     container_name: readarr-01
-    image: linuxserver/readarr:develop
+    image: linuxserver/readarr:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -64,7 +64,7 @@ services:
       - /share/downloads:/mount/downloads
   qbittorrent:
     container_name: qbittorrent-01
-    image: linuxserver/qbittorrent:5.2.1
+    image: linuxserver/qbittorrent:5.1.2
     restart: unless-stopped
     ports:
       - 8080:8080
