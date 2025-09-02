@@ -30,6 +30,13 @@
             username: {{HOMEPAGE_VAR_HOMEBRIDGE_USERNAME}}
             password: {{HOMEPAGE_VAR_HOMEBRIDGE_PASSWORD}}
             fields: ["updates"]
+    - scrypted:
+        href: https://cams.lab.lemisieur.com
+        description: cams.lab.lemisieur.com
+        icon: sh-scrypted
+        siteMonitor: https://cams.lab.lemisieur.com
+
+- torrent:
     - jellyfin:
         href: https://watch.lab.lemisieur.com
         description: watch.lab.lemisieur.com
@@ -53,8 +60,6 @@
             type: jellyseerr
             url: https://request.lab.lemisieur.com
             key: {{HOMEPAGE_VAR_JELLYSEERR_KEY}}
-
-- torrent:
     - qbittorrent:
         href: https://torrent.lab.lemisieur.com
         description: torrent.lab.lemisieur.com
