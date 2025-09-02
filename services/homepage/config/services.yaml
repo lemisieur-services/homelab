@@ -202,3 +202,8 @@
             url: https://pbs.lab.lemisieur.com
             username: {{HOMEPAGE_VAR_PBS_USERNAME}}
             password: {{HOMEPAGE_VAR_PBS_PASSWORD}}
+    - offsite:
+        href: https://duplicacy.lab.lemisieur.com
+        description: duplicacy.lab.lemisieur.com
+        icon: sh-duplicacy
+        siteMonitor: https://duplicacy.lab.lemisieur.com
