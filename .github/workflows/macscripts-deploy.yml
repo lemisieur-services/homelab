@@ -12,6 +12,9 @@ on:
 permissions:
   contents: read
 
+env:
+  NAS_MOUNT: /tmp/mount
+
 jobs:
   deploy:
     runs-on: self-hosted
@@ -20,17 +23,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.CASHEW_SSH_PRIVATE_KEY }}
-      
-      - name: Add known hosts
+      - name: Mount nas drive
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ vars.CASHEW_HOST_KEY }}" >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+          mkdir -p ${{ env.NAS_MOUNT }}
+          sudo mount -t cifs ${{ vars.MACSCRIPTS_NAS_MOUNT }} ${{ env.NAS_MOUNT }} -o username=${{ secrets.LDAP_USERNAME }},password=${{ secrets.LDAP_PASSWORD }},file_mode=0777,dir_mode=0777
+          ls -la ${{ env.NAS_MOUNT }}
 
-      - name: Copy files
-        run: scp -r -v services/mac-scripts/* ${{ secrets.CASHEW_SSH_USERNAME }}@${{ vars.CASHEW_FQDN }}:/Users/jpoulin/scripts/
+      - name: Replace files
+        run: |
+          rm -rf  ${{ env.NAS_MOUNT }}/*
+          cp -rf services/mac-scripts/* ${{ env.NAS_MOUNT }}/ || true
+
+      - name: Unmount nas drive
+        if: always()
+        run: sudo umount ${{ env.NAS_MOUNT }}
   
