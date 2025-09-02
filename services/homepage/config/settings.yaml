@@ -19,7 +19,7 @@ quicklaunch:
 layout:
   home:
     style: row
-    columns: 4
+    columns: 3
   network:
     style: row
     columns: 3
