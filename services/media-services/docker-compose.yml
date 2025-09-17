@@ -1,6 +1,6 @@
 services:
   jellyseerr:
-    image: fallenbagel/jellyseerr:2.7.2
+    image: fallenbagel/jellyseerr:2.7.3
     container_name: jellyseerr-01
     ports:
       - 5055:5055
