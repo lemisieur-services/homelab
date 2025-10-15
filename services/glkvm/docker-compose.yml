@@ -1,27 +1,19 @@
+version: "3.8"
 services:
   rttys:
     image: ${GLKVM_IMAGE:-glzhitong/glkvm-cloud:latest}
     container_name: glkvm_cloud
     restart: always
     environment:
-      # Preferred: set GLKVM_ACCESS_IP explicitly; if empty, entrypoint will auto-detect once.
       GLKVM_ACCESS_IP: ${GLKVM_ACCESS_IP:-}
-
-      # ---- rttys ----
       RTTYS_TOKEN: ${RTTYS_TOKEN:-DeviceTokenYouCanChangeMe}
       RTTYS_PASS:  ${RTTYS_PASS:-StrongP@ssw0rd}
-
-      # Ports inside container (mirrored to host via `ports` below)
-      RTTYS_DEVICE_PORT:      ${RTTYS_DEVICE_PORT:-5912}    # addr-dev
-      RTTYS_WEBUI_PORT:       ${RTTYS_WEBUI_PORT:-443}      # addr-user
-      RTTYS_HTTP_PROXY_PORT:  ${RTTYS_HTTP_PROXY_PORT:-10443} # addr-http-proxy
-
-      # WebRTC / TURN reference (used by rttys template)
+      RTTYS_DEVICE_PORT: ${RTTYS_DEVICE_PORT:-5912}
+      RTTYS_WEBUI_PORT: ${RTTYS_WEBUI_PORT:-443}
+      RTTYS_HTTP_PROXY_PORT: ${RTTYS_HTTP_PROXY_PORT:-10443}
       TURN_PORT:  ${TURN_PORT:-3478}
       TURN_USER:  ${TURN_USER:-glkvmcloudwebrtcuser}
       TURN_PASS:  ${TURN_PASS:-AnotherS3cret}
-
-      # ---- LDAP Configuration ----
       LDAP_ENABLED: ${LDAP_ENABLED:-false}
       LDAP_SERVER: ${LDAP_SERVER:-}
       LDAP_PORT: ${LDAP_PORT:-389}
@@ -49,7 +41,6 @@ services:
     container_name: glkvm_coturn
     restart: always
     environment:
-      # Same semantics as above: prefer explicit value, else auto-detect
       GLKVM_ACCESS_IP: ${GLKVM_ACCESS_IP:-}
       TURN_PORT:  ${TURN_PORT:-3478}
       TURN_USER:  ${TURN_USER:-glkvmcloudwebrtcuser}
