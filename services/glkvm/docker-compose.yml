@@ -6,7 +6,7 @@ services:
     environment:
       # ---- rttys ----
       RTTYS_TOKEN: ${RTTYS_TOKEN}
-      RTTYS_PASS:  ${RTTYS_PASS}
+      RTTYS_PASS: ${RTTYS_PASS}
 
       # Ports inside container (mirrored to host via `ports` below)
       RTTYS_DEVICE_PORT: 5912
