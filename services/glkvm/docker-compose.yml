@@ -1,22 +1,39 @@
+version: "2.0"
+
 services:
   rttys:
-    image: glzhitong/glkvm-cloud:latest
+    image: ${GLKVM_IMAGE:-glzhitong/glkvm-cloud:latest}
     container_name: glkvm_cloud
     restart: always
     environment:
+      # Preferred: set GLKVM_ACCESS_IP explicitly; if empty, entrypoint will auto-detect once.
+      GLKVM_ACCESS_IP: ${GLKVM_ACCESS_IP:-}
+
       # ---- rttys ----
       RTTYS_TOKEN: ${RTTYS_TOKEN:-DeviceTokenYouCanChangeMe}
       RTTYS_PASS:  ${RTTYS_PASS:-StrongP@ssw0rd}
 
       # Ports inside container (mirrored to host via `ports` below)
-      RTTYS_DEVICE_PORT: 5912
-      RTTYS_WEBUI_PORT: 443
-      RTTYS_HTTP_PROXY_PORT: 10443
+      RTTYS_DEVICE_PORT:      ${RTTYS_DEVICE_PORT:-5912}    # addr-dev
+      RTTYS_WEBUI_PORT:       ${RTTYS_WEBUI_PORT:-443}      # addr-user
+      RTTYS_HTTP_PROXY_PORT:  ${RTTYS_HTTP_PROXY_PORT:-10443} # addr-http-proxy
 
       # WebRTC / TURN reference (used by rttys template)
-      TURN_PORT: 3478
-      TURN_USER: ${TURN_USER}
-      TURN_PASS: ${TURN_PASS}
+      TURN_PORT:  ${TURN_PORT:-3478}
+      TURN_USER:  ${TURN_USER:-glkvmcloudwebrtcuser}
+      TURN_PASS:  ${TURN_PASS:-AnotherS3cret}
+
+      # ---- LDAP Configuration ----
+      LDAP_ENABLED: ${LDAP_ENABLED:-false}
+      LDAP_SERVER: ${LDAP_SERVER:-}
+      LDAP_PORT: ${LDAP_PORT:-389}
+      LDAP_USE_TLS: ${LDAP_USE_TLS:-false}
+      LDAP_BIND_DN: ${LDAP_BIND_DN:-}
+      LDAP_BIND_PASSWORD: ${LDAP_BIND_PASSWORD:-}
+      LDAP_BASE_DN: ${LDAP_BASE_DN:-}
+      LDAP_USER_FILTER: ${LDAP_USER_FILTER:-(uid=%s)}
+      LDAP_ALLOWED_GROUPS: ${LDAP_ALLOWED_GROUPS:-}
+      LDAP_ALLOWED_USERS: ${LDAP_ALLOWED_USERS:-}
     volumes:
       - ./templates/rttys.conf.template:/tpl/rttys.conf.tmpl:ro
       - ./scripts/docker-entrypoint.sh:/docker-entrypoint.sh:ro
@@ -25,23 +42,25 @@ services:
     entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
     command: ["rttys"]
     ports:
-      - 443:443
-      - 10443:10443
-      - 5912:5912
+      - "${RTTYS_WEBUI_PORT:-443}:${RTTYS_WEBUI_PORT:-443}"
+      - "${RTTYS_HTTP_PROXY_PORT:-10443}:${RTTYS_HTTP_PROXY_PORT:-10443}"
+      - "${RTTYS_DEVICE_PORT:-5912}:${RTTYS_DEVICE_PORT:-5912}"
 
   coturn:
-    image: coturn/coturn:edge-alpine
+    image: ${COTURN_IMAGE:-coturn/coturn:edge-alpine}
     container_name: glkvm_coturn
     restart: always
     environment:
-      TURN_PORT: 3478
-      TURN_USER: ${TURN_USER}
-      TURN_PASS: ${TURN_PASS}
+      # Same semantics as above: prefer explicit value, else auto-detect
+      GLKVM_ACCESS_IP: ${GLKVM_ACCESS_IP:-}
+      TURN_PORT:  ${TURN_PORT:-3478}
+      TURN_USER:  ${TURN_USER:-glkvmcloudwebrtcuser}
+      TURN_PASS:  ${TURN_PASS:-AnotherS3cret}
     entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
     command: ["coturn"]
     volumes:
       - ./templates/turnserver.conf.template:/tpl/turnserver.conf.tmpl:ro
       - ./scripts/docker-entrypoint.sh:/docker-entrypoint.sh:ro
     ports:
-      - 3478:3478
-      - 3478:3478/udp
+      - "${TURN_PORT:-3478}:3478/tcp"
+      - "${TURN_PORT:-3478}:3478/udp"
