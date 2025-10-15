@@ -1,0 +1,47 @@
+services:
+  rttys:
+    image: glzhitong/glkvm-cloud:latest
+    container_name: glkvm_cloud
+    restart: always
+    environment:
+      # ---- rttys ----
+      RTTYS_TOKEN: ${RTTYS_TOKEN}
+      RTTYS_PASS:  ${RTTYS_PASS}
+
+      # Ports inside container (mirrored to host via `ports` below)
+      RTTYS_DEVICE_PORT: 5912
+      RTTYS_WEBUI_PORT: 443
+      RTTYS_HTTP_PROXY_PORT: 10443
+
+      # WebRTC / TURN reference (used by rttys template)
+      TURN_PORT: 3478
+      TURN_USER: ${TURN_USER}
+      TURN_PASS: ${TURN_PASS}
+    volumes:
+      - ./templates/rttys.conf.template:/tpl/rttys.conf.tmpl:ro
+      - ./scripts/docker-entrypoint.sh:/docker-entrypoint.sh:ro
+      - ./certificate/glkvm.cer:/home/certificate/glkvm_cer:ro
+      - ./certificate/glkvm.key:/home/certificate/glkvm_key:ro
+    entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
+    command: ["rttys"]
+    ports:
+      - 443:443
+      - 10443:10443
+      - 5912:5912
+
+  coturn:
+    image: coturn/coturn:edge-alpine
+    container_name: glkvm_coturn
+    restart: always
+    environment:
+      TURN_PORT: 3478
+      TURN_USER: ${TURN_USER}
+      TURN_PASS: ${TURN_PASS}
+    entrypoint: ["/bin/sh", "/docker-entrypoint.sh"]
+    command: ["coturn"]
+    volumes:
+      - ./templates/turnserver.conf.template:/tpl/turnserver.conf.tmpl:ro
+      - ./scripts/docker-entrypoint.sh:/docker-entrypoint.sh:ro
+    ports:
+      - 3478:3478
+      - 3478:3478/udp
