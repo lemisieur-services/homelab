@@ -1,7 +1,0 @@
-listening-port={{TURN_PORT}}
-lt-cred-mech
-user={{TURN_USER}}:{{TURN_PASS}}
-realm=glkvm
-no-multicast-peers
-allowed-peer-ip=0.0.0.0/0
-external-ip={{GLKVM_ACCESS_IP}}
