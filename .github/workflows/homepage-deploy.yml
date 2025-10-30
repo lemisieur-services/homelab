@@ -23,7 +23,7 @@ env:
 jobs:
   push:
     name: Rsync file updates
-    runs-on: lab-site01
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
