@@ -17,8 +17,7 @@ permissions:
   security-events: write
 
 env:
-  NAS_MOUNT: /tmp/mount
-  HOMEPAGE_NAS_MOUNT: //nas.lab.lemisieur.com/lab_containers/homepage
+  NAS_MOUNT: /share/containers/homepage
 
 jobs:
   push:
@@ -28,20 +27,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Mount nas drive
-        run: |
-          mkdir -p ${{env.NAS_MOUNT}}
-          sudo mount -t cifs ${{env.HOMEPAGE_NAS_MOUNT}} ${{env.NAS_MOUNT}} -o username=${{secrets.NAS_USERNAME}},password=${{secrets.NAS_PASSWORD}},file_mode=0777,dir_mode=0777
-          ls -la ${{env.NAS_MOUNT}}
-
+    
       - name: Replace files
         run: |
           rm -rf ${{env.NAS_MOUNT}}/config/*.yaml ${{env.NAS_MOUNT}}/config/*.css ${{env.NAS_MOUNT}}/config/*.js
           rm -rf ${{env.NAS_MOUNT}}/icons/*
           cp -rf services/homepage/config/* ${{env.NAS_MOUNT}}/config || true
           cp -rf services/homepage/icons/* ${{env.NAS_MOUNT}}/icons || true
-
-      - name: Unmount nas drive
-        if: always()
-        run: sudo umount ${{env.NAS_MOUNT}}
