@@ -153,29 +153,7 @@
             url: https://pve.lab.lemisieur.com
             username: {{HOMEPAGE_VAR_PVE_USERNAME}}
             password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
-            node: proxmox
-    - jackson:
-        href: https://pve.lab.lemisieur.com
-        description: pve.lab.lemisieur.com
-        icon: si-proxmox-#E57000
-        siteMonitor: https://pve.lab.lemisieur.com
-        widget:
-            type: proxmox
-            url: https://pve.lab.lemisieur.com
-            username: {{HOMEPAGE_VAR_PVE_USERNAME}}
-            password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
             node: jackson
-    - groot:
-        href: https://pve.lab.lemisieur.com
-        description: pve.lab.lemisieur.com
-        icon: si-proxmox-#E57000
-        siteMonitor: https://pve.lab.lemisieur.com
-        widget:
-            type: proxmox
-            url: https://pve.lab.lemisieur.com
-            username: {{HOMEPAGE_VAR_PVE_USERNAME}}
-            password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
-            node: groot
     - docker-01:
         href: https://portainer.lab.lemisieur.com/#!/3/docker/dashboard
         description: docker-01.lab.lemisieur.com
@@ -197,17 +175,7 @@
             env: 2
             key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
 - data:
-    - nas:
-        href: https://nas.lab.lemisieur.com
-        description: nas.lab.lemisieur.com
-        icon: sh-truenas-core
-        siteMonitor: https://nas.lab.lemisieur.com
-        widget:
-            type: qnap
-            url: https://nas.lab.lemisieur.com
-            username: {{HOMEPAGE_VAR_QNAP_USERNAME}}
-            password: {{HOMEPAGE_VAR_QNAP_PASSWORD}}
-    - backup server:
+    - pbs:
         href: https://pbs.lab.lemisieur.com
         description: pbs.lab.lemisieur.com
         icon: si-proxmox-#E57000
@@ -217,8 +185,3 @@
             url: https://pbs.lab.lemisieur.com
             username: {{HOMEPAGE_VAR_PBS_USERNAME}}
             password: {{HOMEPAGE_VAR_PBS_PASSWORD}}
-    - offsite:
-        href: https://duplicacy.lab.lemisieur.com
-        description: duplicacy.lab.lemisieur.com
-        icon: sh-duplicacy
-        siteMonitor: https://duplicacy.lab.lemisieur.com
