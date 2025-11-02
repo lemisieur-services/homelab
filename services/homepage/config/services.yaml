@@ -112,7 +112,6 @@
         href: https://site-01.lab.lemisieur.com
         description: site-01.lab.lemisieur.com
         icon: si-ubiquiti-#0559C9
-        ping: 192.168.1.1
         widget:
             type: unifi
             url: https://site-01.lab.lemisieur.com
@@ -122,7 +121,6 @@
         href: https://site-02.lab.lemisieur.com
         description: site-02.lab.lemisieur.com
         icon: si-ubiquiti-#0559C9
-        ping: 10.0.0.1
         widget:
             type: unifi
             url: https://site-02.lab.lemisieur.com
