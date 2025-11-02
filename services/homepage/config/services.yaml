@@ -7,7 +7,6 @@
         href: https://ha.lab.lemisieur.com
         description: ha.lab.lemisieur.com
         icon: si-homeassistant-#18BCF2
-        siteMonitor: https://ha.lab.lemisieur.com
         widget:
             type: homeassistant
             url: http://ha.ip.lab.lemisieur.com:8123
@@ -23,7 +22,6 @@
         href: https://hb.lab.lemisieur.com
         description: hb.lab.lemisieur.com
         icon: si-homebridge-#491F59
-        siteMonitor: http://hb.ip.lab.lemisieur.com:8581
         widget:
             type: homebridge
             url: https://hb.lab.lemisieur.com
@@ -34,14 +32,12 @@
         href: https://cams.lab.lemisieur.com
         description: cams.lab.lemisieur.com
         icon: sh-scrypted
-        siteMonitor: https://cams.lab.lemisieur.com
 
 - torrent:
     - jellyfin:
         href: https://watch.lab.lemisieur.com
         description: watch.lab.lemisieur.com
         icon: si-jellyfin-#00A4DC
-        siteMonitor: http://jellyfin.ip.lab.lemisieur.com:8096
         widget:
             type: jellyfin
             url: https://watch.lab.lemisieur.com
@@ -55,7 +51,6 @@
         href: https://request.lab.lemisieur.com
         description: request.lab.lemisieur.com
         icon: sh-jellyseerr
-        siteMonitor: http://docker-01.ip.lab.lemisieur.com:5055
         widget:
             type: jellyseerr
             url: https://request.lab.lemisieur.com
@@ -64,7 +59,6 @@
         href: https://torrent.lab.lemisieur.com
         description: torrent.lab.lemisieur.com
         icon: si-qbittorrent-#2F67BA
-        siteMonitor: http://docker-01.ip.lab.lemisieur.com:8080
         widget:
             type: qbittorrent
             url: https://torrent.lab.lemisieur.com
@@ -74,7 +68,6 @@
         href: https://prowlarr.lab.lemisieur.com
         description: prowlarr.lab.lemisieur.com
         icon: sh-prowlarr
-        siteMonitor: http://docker-01.ip.lab.lemisieur.com:9696
         widget:
             type: prowlarr
             url: https://prowlarr.lab.lemisieur.com
@@ -83,7 +76,6 @@
         href: https://radarr.lab.lemisieur.com
         description: radarr.lab.lemisieur.com
         icon: sh-radarr
-        siteMonitor: http://docker-01.ip.lab.lemisieur.com:7878
         widget:
             type: radarr
             url: https://radarr.lab.lemisieur.com
@@ -92,7 +84,6 @@
         href: https://sonarr.lab.lemisieur.com
         description: sonarr.lab.lemisieur.com
         icon: sh-sonarr
-        siteMonitor: http://docker-01.ip.lab.lemisieur.com:8989
         widget:
             type: sonarr
             url: https://sonarr.lab.lemisieur.com
@@ -101,7 +92,6 @@
         href: https://readarr.lab.lemisieur.com
         description: readarr.lab.lemisieur.com
         icon: sh-readarr
-        siteMonitor: http://docker-01.ip.lab.lemisieur.com:8787
         widget:
             type: readarr
             url: https://readarr.lab.lemisieur.com
@@ -130,7 +120,6 @@
         href: https://srvs.lab.lemisieur.com
         description: srvs.lab.lemisieur.com
         icon: si-envoyproxy-#AC6199
-        siteMonitor: http://proxy-01.ip.lab.lemisieur.com:8000
     - nextdns:
         href: https://my.nextdns.io
         description: my.nextdns.io
@@ -145,7 +134,6 @@
         href: https://pve.lab.lemisieur.com
         description: pve.lab.lemisieur.com
         icon: si-proxmox-#E57000
-        siteMonitor: https://pve.lab.lemisieur.com
         widget:
             type: proxmox
             url: https://pve.lab.lemisieur.com
@@ -156,7 +144,6 @@
         href: https://portainer.lab.lemisieur.com/#!/3/docker/dashboard
         description: docker-01.lab.lemisieur.com
         icon: si-docker-#2496ED
-        siteMonitor: https://portainer.lab.lemisieur.com
         widget:
             type: portainer
             url: https://portainer.lab.lemisieur.com
@@ -166,7 +153,6 @@
         href: https://portainer.lab.lemisieur.com/#!/2/docker/dashboard
         description: docker-02.lab.lemisieur.com
         icon: si-docker-#2496ED
-        siteMonitor: https://portainer.lab.lemisieur.com
         widget:
             type: portainer
             url: https://portainer.lab.lemisieur.com
@@ -177,7 +163,6 @@
         href: https://pbs.lab.lemisieur.com
         description: pbs.lab.lemisieur.com
         icon: si-proxmox-#E57000
-        siteMonitor: https://pbs.lab.lemisieur.com
         widget:
             type: proxmoxbackupserver
             url: https://pbs.lab.lemisieur.com
