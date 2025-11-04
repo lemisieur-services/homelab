@@ -159,6 +159,14 @@
             env: 2
             key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
 - data:
+    - nas-01:
+        href: https://nas.lab.lemisieur.com
+        description: nas-01.lab.lemisieur.com
+        icon: si-truenas-#0095D5
+    - nas-02:
+        href: https://nas-02.lab.lemisieur.com
+        description: nas-02.lab.lemisieur.com
+        icon: si-truenas-#0095D5   
     - pbs:
         href: https://pbs.lab.lemisieur.com
         description: pbs.lab.lemisieur.com
