@@ -130,6 +130,10 @@
             profile: {{HOMEPAGE_VAR_NEXTDNS_PROFILE}}
             key: {{HOMEPAGE_VAR_NEXTDNS_KEY}}
 - hosting:
+    - level.io:
+        href: https://app.level.io
+        description: app.level.io
+        icon: si-removedotbg-#2EB4E3
     - proxmox:
         href: https://pve.lab.lemisieur.com
         description: pve.lab.lemisieur.com
