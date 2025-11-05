@@ -55,47 +55,22 @@
             type: jellyseerr
             url: https://request.lab.lemisieur.com
             key: {{HOMEPAGE_VAR_JELLYSEERR_KEY}}
-    - qbittorrent:
-        href: https://torrent.lab.lemisieur.com
-        description: torrent.lab.lemisieur.com
-        icon: si-qbittorrent-#2F67BA
-        widget:
-            type: qbittorrent
-            url: https://torrent.lab.lemisieur.com
-            username: {{HOMEPAGE_VAR_QBIT_USERNAME}}
-            password: {{HOMEPAGE_VAR_QBIT_PASSWORD}}
+    - rtorrent:
+        href: https://rtorrent.wb.lab.lemisieur.com
+        description: rtorrent.wb.lab.lemisieur.com
+        icon: si-abdownloadmanager-#2F67BA
     - prowlarr:
-        href: https://prowlarr.lab.lemisieur.com
-        description: prowlarr.lab.lemisieur.com
+        href: https://prowlarr.wb.lab.lemisieur.com
+        description: prowlarr.wb.lab.lemisieur.com
         icon: sh-prowlarr
-        widget:
-            type: prowlarr
-            url: https://prowlarr.lab.lemisieur.com
-            key: {{HOMEPAGE_VAR_PROWLARR_KEY}}
     - radarr:
-        href: https://radarr.lab.lemisieur.com
-        description: radarr.lab.lemisieur.com
+        href: https://radarr.wb.lab.lemisieur.com
+        description: radarr.wb.lab.lemisieur.com
         icon: sh-radarr
-        widget:
-            type: radarr
-            url: https://radarr.lab.lemisieur.com
-            key: {{HOMEPAGE_VAR_RADARR_KEY}}
     - sonarr:
-        href: https://sonarr.lab.lemisieur.com
-        description: sonarr.lab.lemisieur.com
+        href: https://sonarr.wb.lab.lemisieur.com
+        description: sonarr.wb.lab.lemisieur.com
         icon: sh-sonarr
-        widget:
-            type: sonarr
-            url: https://sonarr.lab.lemisieur.com
-            key: {{HOMEPAGE_VAR_SONARR_KEY}}
-    - readarr:
-        href: https://readarr.lab.lemisieur.com
-        description: readarr.lab.lemisieur.com
-        icon: sh-readarr
-        widget:
-            type: readarr
-            url: https://readarr.lab.lemisieur.com
-            key: {{HOMEPAGE_VAR_READARR_KEY}}
 
 - network:
     - site-01:
