@@ -49,12 +49,8 @@
             expandOneStreamToTwoRows: false # optional, defaults to true
     - jellyseerr:
         href: https://request.wb.lab.lemisieur.com
-        description: request.lab.lemisieur.com
+        description: request.wb.lab.lemisieur.com
         icon: sh-jellyseerr
-        widget:
-            type: jellyseerr
-            url: https://request.lab.lemisieur.com
-            key: {{HOMEPAGE_VAR_JELLYSEERR_KEY}}
     - rtorrent:
         href: https://rtorrent.wb.lab.lemisieur.com
         description: rtorrent.wb.lab.lemisieur.com
