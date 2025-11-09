@@ -123,15 +123,6 @@
             username: {{HOMEPAGE_VAR_PVE_USERNAME}}
             password: {{HOMEPAGE_VAR_PVE_PASSWORD}}
             node: jackson
-    - docker-01:
-        href: https://portainer.lab.lemisieur.com/#!/3/docker/dashboard
-        description: docker-01.lab.lemisieur.com
-        icon: si-docker-#2496ED
-        widget:
-            type: portainer
-            url: https://portainer.lab.lemisieur.com
-            env: 3
-            key: {{HOMEPAGE_VAR_PORTAINER_KEY}}
     - docker-02:
         href: https://portainer.lab.lemisieur.com/#!/2/docker/dashboard
         description: docker-02.lab.lemisieur.com
