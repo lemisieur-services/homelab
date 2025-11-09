@@ -48,7 +48,7 @@
             showEpisodeNumber: true # optional, defaults to false
             expandOneStreamToTwoRows: false # optional, defaults to true
     - jellyseerr:
-        href: https://request.lab.lemisieur.com
+        href: https://request.wb.lab.lemisieur.com
         description: request.lab.lemisieur.com
         icon: sh-jellyseerr
         widget:
@@ -109,6 +109,10 @@
         href: https://app.level.io
         description: app.level.io
         icon: si-removedotbg-#2EB4E3
+    - ngrok:
+        href: https://dashboard.ngrok.com/endpoints
+        description: ngrok.com
+        icon: si-ngrok-#1F1E37
     - proxmox:
         href: https://pve.lab.lemisieur.com
         description: pve.lab.lemisieur.com
