@@ -78,6 +78,15 @@
             url: https://site-01.lab.lemisieur.com
             username: {{HOMEPAGE_VAR_UNIFI_USERNAME}}
             password: {{HOMEPAGE_VAR_UNIFI_PASSWORD}}
+    - site-01-fiber:
+        href: https://site-01-fiber.lab.lemisieur.com
+        description: site-01-fiber.lab.lemisieur.com
+        icon: si-ubiquiti-#0559C9
+        widget:
+            type: unifi
+            url: https://site-01-fiber.lab.lemisieur.com
+            username: {{HOMEPAGE_VAR_UNIFI_USERNAME}}
+            password: {{HOMEPAGE_VAR_UNIFI_PASSWORD}}
     - site-02:
         href: https://site-02.lab.lemisieur.com
         description: site-02.lab.lemisieur.com
