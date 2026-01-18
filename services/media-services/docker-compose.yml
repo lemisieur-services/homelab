@@ -1,13 +1,16 @@
 services:
-  jellyseerr:
-    image: fallenbagel/jellyseerr:2.7.3
-    container_name: jellyseerr-01
+  dispatcharr:
+    image: ghcr.io/dispatcharr/dispatcharr:latest
+    container_name: dispatcharr-01
     ports:
-      - 5055:5055
-    environment:
-      - TZ=America/Toronto
+      - 9191:9191
     volumes:
-      - /share/containers/jellyseerr/config:/app/config
+      - /share/containers/dispatcharr/data:/data
+    environment:
+      - DISPATCHARR_ENV=aio
+      - REDIS_HOST=localhost
+      - CELERY_BROKER_URL=redis://localhost:6379/0
+      - DISPATCHARR_LOG_LEVEL=info
     dns:
       - 192.168.4.1
     restart: unless-stopped
