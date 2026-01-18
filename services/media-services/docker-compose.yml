@@ -2,6 +2,7 @@ services:
   dispatcharr:
     image: ghcr.io/dispatcharr/dispatcharr:latest
     container_name: dispatcharr-01
+    user: nfsnobody
     ports:
       - 9191:9191
     volumes:
