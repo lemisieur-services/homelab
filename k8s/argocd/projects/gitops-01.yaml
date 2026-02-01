@@ -13,6 +13,11 @@ spec:
   # Allow manifests to deploy from any Git repos
   sourceRepos:
   - '*'
+  
+  destinations:
+  - namespace: '*'  # Or arc-systems; use '*' for any
+    server: https://kubernetes.default.svc
+
   # Enables namespace orphaned resource monitoring.
   orphanedResources:
     warn: false
