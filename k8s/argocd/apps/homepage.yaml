@@ -4,7 +4,7 @@ metadata:
   name: homepage
   namespace: argocd
 spec:
-  project: gitops
+  project: homepage
   source:
     repoURL: https://github.com/lemisieur-services/homelab.git
     targetRevision: main
