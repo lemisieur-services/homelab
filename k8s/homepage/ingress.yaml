@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`home.k8s.lab.lemisieur.com`)
+    kind: Rule
+    priority: 10
+    services:
+    - name: homepage
+      port: 3000
