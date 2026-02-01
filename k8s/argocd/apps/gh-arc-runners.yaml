@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gh-arc-runners
+  namespace: argocd
+spec:
+  project: github
+  source:
+    repoURL: ghcr.io/actions/actions-runner-controller-charts
+    chart: gha-runner-scale-set
+    targetRevision: "0.13.1"
+    helm:
+      parameters:
+        - name: githubConfigUrl
+          value: "https://github.com/lemisieur-services"
+        - name: githubConfigSecret
+          value: "github-pat-secret"  # Same PAT secret as controller
+        - name: controllerServiceAccount.namespace
+          value: "gh-arc-controller"  # Controller namespace
+        - name: controllerServiceAccount.name
+          value: "gha-runner-scale-set-controller"
+        - name: minRunners
+          value: "1"  # Min idle runners
+        - name: maxRunners
+          value: "10"  # Max runners
+        # Optional: - name: containerMode value: "kubernetes" (or dind)
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gh-arc-runners  # Separate NS for runners; create if needed
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
