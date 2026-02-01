@@ -4,7 +4,7 @@ metadata:
   name: gh-arc-controller
   namespace: argocd  # ArgoCD's namespace
 spec:
-  project: gitops-01
+  project: github
   source:
     repoURL: ghcr.io/actions/actions-runner-controller-charts
     chart: gha-runner-scale-set-controller
