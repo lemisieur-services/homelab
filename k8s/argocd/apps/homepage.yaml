@@ -11,6 +11,7 @@ spec:
     path: k8s/homepage
   destination:
     server: https://kubernetes.default.svc
+    namespace: homepage
   syncPolicy:
     automated:
       enabled: true
