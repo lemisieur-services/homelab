@@ -11,3 +11,6 @@ spec:
     path: k8s/traefik/routes
   destination:
     server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      enabled: true
