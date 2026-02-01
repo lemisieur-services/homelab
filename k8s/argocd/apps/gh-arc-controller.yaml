@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gh-arc-controller
+  namespace: argocd  # ArgoCD's namespace
+spec:
+  project: gitops-01
+  source:
+    repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
+    chart: gha-runner-scale-set-controller
+    targetRevision: "0.13.1"
+    helm:
+      parameters:
+        - name: githubConfigSecret
+          value: "gh-app"
+        - name: serviceAccount.name
+          value: "gha-runner-scale-set-controller"
+        - name: flags.excludeLabelPropagationPrefixes[0]
+          value: "argocd.argoproj.io/instance"
+        - name: flags.excludeLabelPropagationPrefixes[1]
+          value: "app.kubernetes.io/component"
+        - name: flags.excludeLabelPropagationPrefixes[2]
+          value: "app.kubernetes.io/instance"
+        - name: flags.excludeLabelPropagationPrefixes[3]
+          value: "app.kubernetes.io/managed-by"
+        - name: flags.excludeLabelPropagationPrefixes[4]
+          value: "app.kubernetes.io/name"
+        - name: flags.excludeLabelPropagationPrefixes[5]
+          value: "app.kubernetes.io/part-of"
+        - name: flags.excludeLabelPropagationPrefixes[6]
+          value: "app.kubernetes.io/version"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gh-arc-controller
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
