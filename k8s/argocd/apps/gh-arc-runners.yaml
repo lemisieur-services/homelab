@@ -14,7 +14,7 @@ spec:
         - name: githubConfigUrl
           value: "https://github.com/lemisieur-services"
         - name: githubConfigSecret
-          value: "github-pat-secret"  # Same PAT secret as controller
+          value: "gh-app"
         - name: controllerServiceAccount.namespace
           value: "gh-arc-controller"  # Controller namespace
         - name: controllerServiceAccount.name
