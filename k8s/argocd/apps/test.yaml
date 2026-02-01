@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-routes
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/lemisieur-services/homelab.git
+    targetRevision: main
+    path: k8s/traefik/routes
+  destination:
+    server: https://kubernetes.default.svc
