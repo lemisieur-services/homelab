@@ -43,7 +43,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: gh-arc-controller-resources
-  namespace: gh-arc-controller
+  namespace: argocd
 spec:
   project: github
   source:
@@ -52,7 +52,7 @@ spec:
     path: k8s/gh-arc/controller
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    namespace: gh-arc-controller
   syncPolicy:
     automated:
       enabled: true

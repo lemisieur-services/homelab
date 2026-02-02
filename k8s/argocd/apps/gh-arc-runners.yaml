@@ -38,7 +38,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: gh-arc-runners-resources
-  namespace: gh-arc-runners
+  namespace: argocd
 spec:
   project: github
   source:
@@ -47,7 +47,7 @@ spec:
     path: k8s/gh-arc/runners
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    namespace: gh-arc-runners
   syncPolicy:
     automated:
       enabled: true
