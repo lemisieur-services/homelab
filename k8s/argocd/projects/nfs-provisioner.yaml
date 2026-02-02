@@ -15,7 +15,7 @@ spec:
   - '*'
   
   destinations:
-  - namespace: 'external-secrets'
+  - namespace: 'nfs-provisioner'
     server: https://kubernetes.default.svc
 
   clusterResourceWhitelist:
