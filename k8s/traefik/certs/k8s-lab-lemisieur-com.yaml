@@ -1,0 +1,21 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: k8s-lab-lemisieur-com
+  namespace: traefik
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: lemisieur-k8s-secrets
+    kind: ClusterSecretStore
+  target:
+    name: k8s-lab-lemisieur-com
+    template:
+      type: kubernetes.io/tls
+      data:
+        tls.crt: '{{ .cert | b64dec | filterPEM "CERTIFICATE" }}'
+        tls.key: '{{ .cert | b64dec | filterPEM "PRIVATE KEY" }}'
+  data:
+  - secretKey: cert
+    remoteRef:
+      key: k8s-lab-lemisieur-com
