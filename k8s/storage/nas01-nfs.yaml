@@ -9,6 +9,4 @@ parameters:
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=3
   - nolock
-  - proto=tcp
