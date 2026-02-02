@@ -13,8 +13,8 @@ spec:
     template:
       type: kubernetes.io/tls
       data:
-        tls.crt: '{{ .cert | b64dec | filterPEM "CERTIFICATE" }}'
-        tls.key: '{{ .cert | b64dec | filterPEM "PRIVATE KEY" }}'
+        tls.crt: '{{ .cert | b64dec | pkcs12cert }}'
+        tls.key: '{{ .cert | b64dec | pkcs12key }}'
   data:
   - secretKey: cert
     remoteRef:
