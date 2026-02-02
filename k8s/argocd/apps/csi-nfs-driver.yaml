@@ -12,8 +12,8 @@ spec:
     helm:
       values: |
         externalSnapshotter.enabled: true
-        #controller.runOnControlPlane: true
-        #controller.replicas: 2
+        controller.runOnControlPlane: true
+        controller.replicas: 2
         controller.dnsPolicy: ClusterFirstWithHostNet
         node.dnsPolicy: ClusterFirstWithHostNet
         #kubeletDir: "/var/snap/microk8s/common/var/lib/kubelet"
