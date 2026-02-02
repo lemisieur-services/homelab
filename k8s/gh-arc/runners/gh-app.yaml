@@ -10,7 +10,6 @@ spec:
     kind: ClusterSecretStore
   target:
     name: gh-app
-    creationPolicy: Owner
   data:
   - secretKey: github_app_id
     remoteRef:
