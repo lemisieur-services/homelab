@@ -17,5 +17,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: longhorn
   syncPolicy:
+    automated:
+      enabled: true
     syncOptions:
       - CreateNamespace=true
