@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-provisioner
+  namespace: argocd  # Adjust to your ArgoCD namespace
+spec:
+  project: nfs-provisioner
+  source:
+    repoURL: https://nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
+    chart: nfs-provisioner
+    targetRevision: "*"  # Or pin to a specific version like "0.7.0"
+    helm:
+      parameters:
+        - name: nfs.server
+          value: nas.lab.lemisieur.com
+        - name: nfs.path
+          value: /var/nfs/shared/lab_k8s_storage
+        - name: storageClass.name
+          value: nas-01
+        - name: storageClass.defaultClass
+          value: "false"
+  destination:
+    server: https://kubernetes.default.svc  # In-cluster; adjust for remote clusters
+    namespace: nfs-provisioner
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
