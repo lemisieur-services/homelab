@@ -6,8 +6,5 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: nas.lab.lemisieur.com
   share: /var/nfs/shared/lab_k8s_storage
-  nfsvers: "3"
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
-mountOptions:
-  - nfsvers=3
