@@ -8,5 +8,3 @@ parameters:
   share: /var/nfs/shared/lab_k8s_storage
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
-mountOptions:
-  - nolock
