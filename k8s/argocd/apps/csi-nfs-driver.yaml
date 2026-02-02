@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: csi-driver-nfs
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+    chart: csi-driver-nfs
+    targetRevision: 4.12.0
+    helm:
+      values: |
+        externalSnapshotter.enabled: true
+        #controller.runOnControlPlane: true
+        #controller.replicas: 2
+        controller.dnsPolicy: ClusterFirstWithHostNet
+        node.dnsPolicy: ClusterFirstWithHostNet
+        #kubeletDir: "/var/snap/microk8s/common/var/lib/kubelet"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: csi-driver-nfs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
