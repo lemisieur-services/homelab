@@ -7,7 +7,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     name: lemisieur-k8s-secrets
-    kind: SecretStore
+    kind: ClusterSecretStore
   target:
     name: gh-app
     creationPolicy: Owner
