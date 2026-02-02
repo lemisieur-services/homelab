@@ -38,3 +38,21 @@ spec:
       selfHeal: true
     syncOptions:
       - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gh-arc-controller-resources
+  namespace: gh-arc-controller
+spec:
+  project: github
+  source:
+    repoURL: https://github.com/lemisieur-services/homelab.git
+    targetRevision: main
+    path: k8s/gh-arc/controller
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-secrets
+  syncPolicy:
+    automated:
+      enabled: true

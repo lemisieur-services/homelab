@@ -1,0 +1,23 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: gh-app
+  namespace: gh-arc-runners
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: lemisieur-k8s-secrets
+    kind: SecretStore
+  target:
+    name: gh-app
+    creationPolicy: Owner
+  data:
+  - secretKey: github_app_id
+    remoteRef:
+      key: gharc-ghapp-appid
+  - secretKey: github_app_installation_id
+    remoteRef:
+      key: gharc-ghapp-appinstallationid
+  - secretKey: github_app_private_key
+    remoteRef:
+      key: gharc-ghapp-appprivatekey
