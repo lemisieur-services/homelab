@@ -48,7 +48,7 @@ data:
       - scrypted:
           href: https://cams.lab.lemisieur.com
           description: cams.lab.lemisieur.com
-          icon: sh-scrypted
+          icon: si-homebridge-#491F59
     - network:
       - site-01:
           href: https://site-01.lab.lemisieur.com
