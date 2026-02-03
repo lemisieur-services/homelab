@@ -29,6 +29,7 @@ spec:
     namespace: gh-arc-runners  # Separate NS for runners; create if needed
   syncPolicy:
     automated:
+      enabled: true
       prune: true
       selfHeal: true
     syncOptions:
@@ -51,3 +52,5 @@ spec:
   syncPolicy:
     automated:
       enabled: true
+      prune: true
+      selfHeal: true
