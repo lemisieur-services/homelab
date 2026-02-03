@@ -1,9 +1,0 @@
-apiVersion: longhorn.io/v1beta2
-kind: BackupTarget
-metadata:
-  name: test  # Choose a descriptive name for your backup target
-  namespace: longhorn
-spec:
-  backupTargetURL: "nfs://nas.lab.lemisieur.com:/var/nfs/shared/lab_k8s_storage?nfsOptions=soft,timeo=330,retrans=3"
-  credentialSecret: "" # Leave empty if no credentials are required
-  pollInterval: 2m0s # How often Longhorn checks the backup target for new backups
