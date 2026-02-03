@@ -8,7 +8,7 @@ data:
   kubernetes.yaml: |
     mode: cluster
   settings.yaml: |
-   title: homelab
+    title: homelab
     theme: dark
     color: gray
     useEqualHeights: true
