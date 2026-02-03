@@ -99,7 +99,7 @@ data:
 
   widgets.yaml: |
     - logo:
-      icon: https://avatars.githubusercontent.com/u/126491032
+        icon: https://avatars.githubusercontent.com/u/126491032
     - greeting:
         text_size: xl
         text: HomeLab
