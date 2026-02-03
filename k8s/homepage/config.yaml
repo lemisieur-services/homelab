@@ -34,11 +34,7 @@ data:
 
   custom.css: ""
   custom.js: ""
-  bookmarks.yaml: |
-    - Developer:
-        - Github:
-            - abbr: GH
-              href: https://github.com/
+  bookmarks.yaml: ""
   services.yaml: |
     - home:
       - homeassistant:
@@ -101,26 +97,5 @@ data:
           description: pbs.lab.lemisieur.com
           icon: si-proxmox-#E57000
 
-  widgets.yaml: |
-    - kubernetes:
-        cluster:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
-          label: "cluster"
-        nodes:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
-    - resources:
-        backend: resources
-        expanded: true
-        cpu: true
-        memory: true
-        network: default
-    - search:
-        provider: duckduckgo
-        target: _blank
+  widgets.yaml: ""
   docker.yaml: ""
