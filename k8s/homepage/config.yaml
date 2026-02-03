@@ -5,8 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
 data:
-  #kubernetes.yaml: |
-  #  mode: cluster
+  kubernetes.yaml: ""
   settings.yaml: |
     title: homelab
     theme: dark
@@ -41,20 +40,67 @@ data:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
+    - home:
+      - homeassistant:
+          href: https://ha.lab.lemisieur.com
+          description: ha.lab.lemisieur.com
+          icon: si-homeassistant-#18BCF2
+      - homebridge:
+          href: https://hb.lab.lemisieur.com
+          description: hb.lab.lemisieur.com
+          icon: si-homebridge-#491F59
+      - scrypted:
+          href: https://cams.lab.lemisieur.com
+          description: cams.lab.lemisieur.com
+          icon: sh-scrypted
+    - network:
+      - site-01:
+          href: https://site-01.lab.lemisieur.com
+          description: site-01.lab.lemisieur.com
+          icon: si-ubiquiti-#0559C9
+      - site-01-fiber:
+          href: https://site-01-fiber.lab.lemisieur.com
+          description: site-01-fiber.lab.lemisieur.com
+          icon: si-ubiquiti-#0559C9
+      - site-02:
+          href: https://site-02.lab.lemisieur.com
+          description: site-02.lab.lemisieur.com
+          icon: si-ubiquiti-#0559C9
+      - proxy:
+          href: https://srvs.lab.lemisieur.com
+          description: srvs.lab.lemisieur.com
+          icon: si-envoyproxy-#AC6199
+      - nextdns:
+          href: https://my.nextdns.io
+          description: my.nextdns.io
+          icon: si-nextdns-#007BFF
+    - hosting:
+      - level.io:
+          href: https://app.level.io
+          description: app.level.io
+          icon: si-removedotbg-#2EB4E3
+      - proxmox:
+          href: https://pve.lab.lemisieur.com
+          description: pve.lab.lemisieur.com
+          icon: si-proxmox-#E57000
+      - docker-02:
+          href: https://portainer.lab.lemisieur.com/#!/2/docker/dashboard
+          description: docker-02.lab.lemisieur.com
+          icon: si-docker-#2496ED
+    - data:
+      - nas-01:
+          href: https://nas.lab.lemisieur.com
+          description: nas-01.lab.lemisieur.com
+          icon: si-truenas-#0095D5
+      - nas-02:
+          href: https://nas-02.lab.lemisieur.com
+          description: nas-02.lab.lemisieur.com
+          icon: si-truenas-#0095D5   
+      - pbs:
+          href: https://pbs.lab.lemisieur.com
+          description: pbs.lab.lemisieur.com
+          icon: si-proxmox-#E57000
 
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
-
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
   widgets.yaml: |
     - kubernetes:
         cluster:
