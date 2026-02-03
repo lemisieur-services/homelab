@@ -97,5 +97,15 @@ data:
           description: pbs.lab.lemisieur.com
           icon: si-proxmox-#E57000
 
-  widgets.yaml: ""
+  widgets.yaml: |
+    - logo:
+      icon: https://avatars.githubusercontent.com/u/126491032
+    - greeting:
+        text_size: xl
+        text: HomeLab
+    - datetime:
+        text_size: xl
+        format:
+            timeStyle: short
+            hour12: true
   docker.yaml: ""
