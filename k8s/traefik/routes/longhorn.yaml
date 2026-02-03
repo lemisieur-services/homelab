@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-frontend
+  namespace: longhorn
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`longhorn.k8s.lab.lemisieur.com`)
+    kind: Rule
+    priority: 10
+    services:
+    - name: longhorn-frontend
+      port: 80
