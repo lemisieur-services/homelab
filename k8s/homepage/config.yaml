@@ -10,7 +10,7 @@ data:
   settings.yaml: |
     title: homelab
     theme: dark
-    color: gray
+    #color: gray
     useEqualHeights: true
     statusStyle: "dot"
     disableCollapse: true
