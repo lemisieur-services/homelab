@@ -4,7 +4,7 @@ metadata:
   name: traefik-certs
   namespace: argocd
 spec:
-  project: gitops-01
+  project: default
   source:
     repoURL: https://github.com/lemisieur-services/homelab.git
     targetRevision: main
