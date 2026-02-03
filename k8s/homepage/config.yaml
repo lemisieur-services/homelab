@@ -99,7 +99,7 @@ data:
 
   widgets.yaml: |
     - logo:
-        icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/I_Love_New_York.svg/1101px-I_Love_New_York.svg.png
+        icon: https://avatars.githubusercontent.com/u/126491032
     - greeting:
         text_size: xl
         text: HomeLab
