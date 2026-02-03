@@ -5,12 +5,11 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
 data:
-  kubernetes.yaml: |
-    mode: cluster
+  #kubernetes.yaml: |
+  #  mode: cluster
   settings.yaml: |
     title: homelab
     theme: dark
-    #color: gray
     useEqualHeights: true
     statusStyle: "dot"
     disableCollapse: true
