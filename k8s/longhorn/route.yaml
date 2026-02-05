@@ -7,17 +7,11 @@ spec:
   entryPoints:
   - websecure
   routes:
-  - match: Host(`longhorn.k8s.lab.lemisieur.com`) && PathPrefix(`/oauth2`)
-    kind: Rule
-    priority: 20
-    services:
-    - name: longhorn-oauth2-proxy
-      port: 80
   - match: Host(`longhorn.k8s.lab.lemisieur.com`)
     kind: Rule
     priority: 10
     middlewares:
-      - name: oauth2-proxy-chain
+      - name: oauth2-proxy
     services:
     - name: longhorn-frontend
       port: 80
