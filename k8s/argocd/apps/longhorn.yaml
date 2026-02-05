@@ -23,6 +23,10 @@ spec:
                 name: oauth2-proxy-secret
             - configMapRef:
                 name: oauth2-proxy-config
+          config:
+            clientID: ""
+            clientSecret: ""
+            cookieSecret: ""
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
