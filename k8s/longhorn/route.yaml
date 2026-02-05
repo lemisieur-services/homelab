@@ -17,7 +17,7 @@ spec:
     kind: Rule
     priority: 10
     middlewares:
-      - name: oauth2-proxy
+      - name: oauth2-proxy-chain
     services:
     - name: longhorn-frontend
       port: 80
