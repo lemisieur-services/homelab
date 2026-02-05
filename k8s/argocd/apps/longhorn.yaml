@@ -27,6 +27,7 @@ spec:
             clientID: ""
             clientSecret: ""
             cookieSecret: ""
+            requiredSecretKeys: ""
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
