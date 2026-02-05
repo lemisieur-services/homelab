@@ -5,7 +5,7 @@ metadata:
 data:
   oauth2_proxy.cfg: |-
     provider = "entra-id"
-    issuer_url = "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
+    oidc_issuer_url = "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
     scope = "openid profile email"
     email_domains = "*"
     upstreams = ["static://200"]
