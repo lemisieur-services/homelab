@@ -5,14 +5,13 @@ metadata:
 data:
   oauth2_proxy.cfg: |-
     scope = "openid profile email"
-    email-domains = "*"
+    email_domains = "*"
     upstreams = ["static://200"]
-    http-address = "0.0.0.0:4180"
-    pass-authorization-header = "false"
-    set-authorization-header = "false"
-    pass-access-token = "true"
-    cookie-secure = "false"
-    cookie-samesite = "lax"
-    cookie-refresh = "1h"
-    cookie-expire = "8h"
-    skip-provider-button = "false"
+    http_address = "0.0.0.0:4180"
+    pass_authorization_header = false
+    set_authorization_header = false
+    pass_access_token = true
+    cookie_secure = false
+    cookie_samesite = "lax"
+    cookie_refresh = "1h"
+    cookie_expire = "8h"
