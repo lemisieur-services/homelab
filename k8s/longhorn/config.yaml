@@ -4,6 +4,7 @@ metadata:
   name: oauth2-proxy-config
 data:
   oauth2_proxy.cfg: |-
+    provider = "entra_id"
     scope = "openid profile email"
     email_domains = "*"
     upstreams = ["static://200"]
