@@ -23,7 +23,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostSNI(`api.k8s.lab.lemisieur.com`)
+    - match: Host(`api.k8s.lab.lemisieur.com`)
       services:
         - name: k8s-api-lb
           port: 6443
