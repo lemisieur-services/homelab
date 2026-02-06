@@ -21,7 +21,7 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
-    - k8sapi
+    - websecure
   routes:
     - match: HostSNI(`api.k8s.lab.lemisieur.com`)
       services:
