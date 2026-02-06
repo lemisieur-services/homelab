@@ -10,20 +10,6 @@ spec:
       targetPort: 6443
       protocol: TCP
       name: https-api
-  externalTrafficPolicy: Local
+  externalTrafficPolicy: Cluster
   selector:
     component: kube-apiserver
----
-apiVersion: traefik.io/v1alpha1
-kind: IngressRouteTCP
-metadata:
-  name: k8s-api-tcp
-  namespace: kube-system
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: HostSNI(`api.k8s.lab.lemisieur.com`)
-      services:
-        - name: k8s-api-lb
-          port: 6443
