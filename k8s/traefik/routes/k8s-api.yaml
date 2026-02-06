@@ -13,3 +13,17 @@ spec:
   externalTrafficPolicy: Local
   selector:
     component: kube-apiserver
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: k8s-api-tcp
+  namespace: kube-system
+spec:
+  entryPoints:
+    - k8sapi
+  routes:
+    - match: HostSNI(`api.k8s.lab.lemisieur.com`)
+      services:
+        - name: k8s-api-lb
+          port: 6443
