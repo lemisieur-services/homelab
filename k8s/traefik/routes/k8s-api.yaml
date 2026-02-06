@@ -1,50 +1,15 @@
-apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
-metadata:
-  name: k8s-api-transport
-  namespace: traefik
-spec:
-  insecureSkipVerify: true
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-external-api
-  namespace: traefik
+  name: k8s-api-lb
+  namespace: kube-system
 spec:
+  type: LoadBalancer
   ports:
-    - name: https-api
-      protocol: TCP
-      port: 6443
+    - port: 6443
       targetPort: 6443
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: k8s-external-api
-subsets:
-  - addresses:
-      - ip: 192.168.7.179
-      - ip: 192.168.7.10
-      - ip: 192.168.7.115
-    ports:
-      - name: https-api
-        port: 6443
----
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  name: k8s-external-api
-  namespace: traefik
-spec:
-  entryPoints:
-  - websecure
-  routes:
-  - match: Host(`api.k8s.lab.lemisieur.com`)
-    kind: Rule
-    priority: 10
-    services:
-    - name: k8s-external-api
-      port: 6443
-      scheme: https
-      serversTransport: k8s-api-transport
+      protocol: TCP
+      name: https-api
+  externalTrafficPolicy: Local
+  selector:
+    component: kube-apiserver
