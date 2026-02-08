@@ -18,17 +18,22 @@ spec:
       targetRevision: 10.1.3
       helm:
         values: |
-          proxyVarsAsSecrets: true
           config:
-            existingSecret: oauth2-proxy-secret
-            requiredSecretKeys: []
-            configFile: |-
+            existingSecret: 'oauth2-proxy-secret'
+            configFile: |
               reverse_proxy = true
-              redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
               email_domains = ["*"]
               scope = "openid email profile"
               provider = "oidc"
               oidc_issuer_url = "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
+          extraArgs:
+            - --provider=oidc
+            - --provider-display-name=Bacchus Dex
+            - --redirect-url=https://longhorn.k8s.lab.lemisieur.com/oauth2/callback
+            - --oidc-issuer-url=https://auth.bacchus.io/dex
+            - --skip-provider-button
+            - --approval-prompt=auto
+              
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
