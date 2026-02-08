@@ -12,24 +12,7 @@ spec:
       helm:
         values: |
           preUpgradeChecker:
-            jobEnabled: false
-    - chart: oauth2-proxy
-      repoURL: https://oauth2-proxy.github.io/manifests
-      targetRevision: 10.1.3
-      helm:
-        values: |
-          config:
-            existingSecret: oauth2-proxy-secret
-            configFile: |
-              email_domains = ["*"]
-              cookie_secure = false
-              provider = "github"
-              redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
-              pass_access_token = true
-              pass_authorization_header = true
-              pass_user_headers = true
-              set_authorization_header = true
-              
+            jobEnabled: false              
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
