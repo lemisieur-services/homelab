@@ -17,6 +17,7 @@ spec:
           config:
             existingSecret: gh-oauth-secret
             configFile: |
+              upstreams = [ "static://200" ]
               provider = "github"
               email_domains = ["*"]
               cookie_secure = true
