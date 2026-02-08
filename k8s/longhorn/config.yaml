@@ -18,9 +18,5 @@ data:
         emailDomains:
           - "*"
 
-    upstreams:
-      - id: static
-        uri: "static://200"
-
     sessionStorage:
       type: cookie
