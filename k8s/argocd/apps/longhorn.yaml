@@ -21,6 +21,7 @@ spec:
           proxyVarsAsSecrets: true
           config:
             existingSecret: oauth2-proxy-secret
+            clientID: "12345"
             configFile: |-
               reverse_proxy = true
               redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
