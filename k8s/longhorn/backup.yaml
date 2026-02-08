@@ -1,6 +1,6 @@
 apiVersion: longhorn.io/v1beta2
 kind: Setting
 metadata:
-  name: nas-01
+  name: backup-target
   namespace: longhorn
 value: "nfs://nas-01.lab.lemisieur.com/var/nfs/shared/lab_k8s_storage"
