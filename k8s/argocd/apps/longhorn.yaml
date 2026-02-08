@@ -21,15 +21,13 @@ spec:
           proxyVarsAsSecrets: true
           config:
             existingSecret: oauth2-proxy-secret
-            clientID: "12345"
             configFile: |-
               reverse_proxy = true
               redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
               email_domains = ["*"]
               scope = "openid email profile"
-              provider = "entra-id"
+              provider = "oidc"
               oidc_issuer_url = "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
-              client_id = "YOUR-APP-ID"
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
