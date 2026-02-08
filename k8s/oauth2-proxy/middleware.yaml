@@ -5,7 +5,7 @@ metadata:
   namespace: oauth2-proxy
 spec:
   forwardAuth:
-    address: http://oauth2-proxy.oauth.svc.cluster.local:4180/oauth2/auth
+    address: http://oauth2-proxy.oauth.svc.cluster.local:4180/oauth2
     trustForwardHeader: true
     authResponseHeaders:
       - X-Auth-Request-User
