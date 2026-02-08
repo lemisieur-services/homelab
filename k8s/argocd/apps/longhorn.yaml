@@ -19,9 +19,7 @@ spec:
       helm:
         values: |
           proxyVarsAsSecrets: true
-          configFile: |-
-            upstreams = ""
-            email_domains = [ "*" ]
+          configFile: ""
           alphaConfig:
             enabled: true
             existingConfig: oauth2-proxy-config
