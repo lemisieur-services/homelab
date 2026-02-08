@@ -19,7 +19,6 @@ spec:
       helm:
         values: |
           config:
-            clientID: "0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7"
             existingSecret: 'oauth2-proxy-secret'
             configFile: |
               reverse_proxy = true
@@ -27,6 +26,7 @@ spec:
               scope = "openid email profile"
           extraArgs:
             - --provider=oidc
+            - --client-id=0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7
             - --redirect-url=https://longhorn.k8s.lab.lemisieur.com/oauth2/callback
             - --oidc-issuer-url=https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0
             - --approval-prompt=auto
