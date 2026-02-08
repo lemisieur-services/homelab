@@ -30,6 +30,7 @@ spec:
               pass_authorization_header = true
               pass_user_headers = true
               set_authorization_header = true
+              skip_provider_button = true
   destination:
     server: https://kubernetes.default.svc
     namespace: oauth2-proxy
