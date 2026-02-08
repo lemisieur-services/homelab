@@ -13,10 +13,16 @@ spec:
   data:
   - secretKey: github_app_id
     remoteRef:
+      conversionStrategy: Default	
+      decodingStrategy: None
       key: gharc-ghapp-appid
   - secretKey: github_app_installation_id
     remoteRef:
+      conversionStrategy: Default	
+      decodingStrategy: None
       key: gharc-ghapp-appinstallationid
   - secretKey: github_app_private_key
     remoteRef:
+      conversionStrategy: Default	
+      decodingStrategy: None
       key: gharc-ghapp-appprivatekey
