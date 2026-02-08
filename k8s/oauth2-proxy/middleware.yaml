@@ -18,6 +18,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: oauth2-errors
+  namespace: oauth2-proxy
 spec:
   errors:
     status:
@@ -32,6 +33,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: oauth2-signin
+  namespace: oauth2-proxy
 spec:
   chain:
     middlewares:
