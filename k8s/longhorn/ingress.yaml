@@ -18,9 +18,7 @@ spec:
     kind: Rule
     priority: 10
     middlewares:
-    - name: oauth2-proxy-auth
-      namespace: oauth2-proxy
-    - name: oauth2-proxy-errors
+    - name: oauth2-signin
       namespace: oauth2-proxy
     services:
     - name: longhorn-frontend
