@@ -24,7 +24,7 @@ spec:
               email_domains = ["*"]
               cookie_secure = false
               provider = "github"
-              redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
+              redirect_url = "https://oauth.k8s.lab.lemisieur.com/oauth2/callback"
               pass_access_token = true
               pass_authorization_header = true
               pass_user_headers = true
