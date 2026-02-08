@@ -27,7 +27,7 @@ spec:
              provider = "entra-id"
              oidc_issuer_url = "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
              redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
-             scope = "openid"
+             scope = "openid profile User.Read"
              pass_access_token = true
              pass_authorization_header = true
              pass_user_headers = true
