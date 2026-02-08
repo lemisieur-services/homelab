@@ -19,15 +19,12 @@ spec:
       helm:
         values: |
           proxyVarsAsSecrets: true
-          config:
-            existingSecret: oauth2-proxy-secret
-            requiredSecretKeys:
-              - client-id
-              - client-secret
-              - cookie-secret
+          configFile: |-
+            email_domains = [ "*" ]
           alphaConfig:
             enabled: true
             existingConfig: oauth2-proxy-config
+            existingSecret: oauth2-proxy-secret
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
