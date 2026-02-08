@@ -22,7 +22,6 @@ spec:
             enabled: true
             existingConfig: oauth2-proxy-config
             existingSecret: oauth2-proxy-secret
-          proxyVarsAsSecrets: true
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
