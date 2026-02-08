@@ -18,8 +18,8 @@ spec:
       targetRevision: 10.1.3
       helm:
         values: |
+          proxyVarsAsSecrets: false
           config:
-            proxyVarsAsSecrets: false
             existingSecret: oauth2-proxy-secret
             configFile: |
              email_domains = ["*"]
@@ -32,10 +32,6 @@ spec:
              pass_authorization_header = true
              pass_user_headers = true
              set_authorization_header = true
-          extraArgs:
-            - --cookie-secure=false
-            - --skip-provider-button
-            - --ssl-insecure-skip-verify
               
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
