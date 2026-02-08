@@ -7,7 +7,7 @@ spec:
   entryPoints:
   - websecure
   routes:
-  - match: Host(`test.k8s.lab.lemisieur.com`)
+  - match: Host(`longhorn.k8s.lab.lemisieur.com`)
     kind: Rule
     priority: 10
     services:
