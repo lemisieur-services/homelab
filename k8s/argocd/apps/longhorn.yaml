@@ -19,33 +19,17 @@ spec:
       helm:
         values: |
           proxyVarsAsSecrets: false
-          extraEnv:
-            - name: OAUTH2_PROXY_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: oauth2-proxy-secret
-                  key: client-id
-            - name: OAUTH2_PROXY_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: oauth2-proxy-secret
-                  key: client-secret
-            - name: OAUTH2_PROXY_COOKIE_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: oauth2-proxy-secret
-                  key: cookie-secret
           config:
             configFile: |
             email_domains = ["*"]
-             cookie_secure = false
-             provider = "github"
-             redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
-             scope = "read:user user:email"
-             pass_access_token = true
-             pass_authorization_header = true
-             pass_user_headers = true
-             set_authorization_header = true
+            cookie_secure = false
+            provider = "github"
+            redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
+            scope = "read:user user:email"
+            pass_access_token = true
+            pass_authorization_header = true
+            pass_user_headers = true
+            set_authorization_header = true
               
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
