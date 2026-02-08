@@ -6,21 +6,21 @@ data:
   config.yaml: |-
     server:
       BindAddress: "0.0.0.0:4180"
+
     providers:
       - id: entraid
-        provider: entra-id
+        provider: oidc
         clientID: "${OAUTH2_PROXY_CLIENT_ID}"
         clientSecret: "${OAUTH2_PROXY_CLIENT_SECRET}"
         oidcConfig:
           issuerURL: "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
         scope: "openid profile email"
+        emailDomains:
+          - "*"
+
     upstreams:
       - id: static
         uri: "static://200"
+
     sessionStorage:
       type: cookie
-    internalSchemes:
-      - http
-      - https
-    trustedIPs:
-      - "127.0.0.1"

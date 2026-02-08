@@ -20,9 +20,6 @@ spec:
         values: |
           proxyVarsAsSecrets: true
           config:
-            # Disable legacy config file rendering/mount
-            configFile: ""
-            existingConfig: ""
             existingSecret: oauth2-proxy-secret
             requiredSecretKeys:
               - client-id
