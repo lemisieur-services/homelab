@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/lemisieur-services/homelab.git
     targetRevision: main
     path: k8s/storage
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: storage
