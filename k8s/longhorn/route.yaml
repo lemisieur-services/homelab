@@ -11,5 +11,5 @@ spec:
     kind: Rule
     priority: 10
     services:
-    - name: oauth2-proxy
-      port: 4180
+    - name: longhorn-oauth2-proxy
+      port: 80
