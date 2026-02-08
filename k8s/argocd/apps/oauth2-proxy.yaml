@@ -21,7 +21,7 @@ spec:
               email_domains = ["*"]
               cookie_secure = true
               cookie_domains = ["k8s.lab.lemisieur.com"]
-              whitelist_domains = ["k8s.lab.lemisieur.com"]
+              whitelist_domains = ["*"]
               reverse_proxy = true
               redirect_url = "https://oauth.k8s.lab.lemisieur.com/oauth2/callback"
               scope = "read:user user:email"
