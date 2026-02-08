@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: oauth2-proxy-config
 data:
-  oauth2_proxy.cfg: |-
+  config.yaml: |-
     server:
       BindAddress: "0.0.0.0:4180"
     providers:
