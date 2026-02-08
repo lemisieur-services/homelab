@@ -19,7 +19,7 @@ spec:
       helm:
         values: |
           config:
-            existingSecret: oauth2-secret
+            existingSecret: oauth2-proxy-secret
             configFile: |
              email_domains = ["*"]
              cookie_secure = false
