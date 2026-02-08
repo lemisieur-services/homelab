@@ -5,13 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/lemisieur-services/homelab.git
-    targetRevision: main
-    path: k8s/argocd/config
-  destination:
-    server: https://kubernetes.default.svc
+  sources:
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/argocd/config
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/argocd/projects
   syncPolicy:
     automated:
       enabled: true
       prune: true
+  destination:
+    server: https://kubernetes.default.svc
