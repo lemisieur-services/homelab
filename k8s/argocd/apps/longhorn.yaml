@@ -21,7 +21,7 @@ spec:
           config:
             existingSecret: oauth2-proxy-secret
             configFile: |
-             user_id_claim = oid
+             user_id_claim = "oid"
              email_domains = ["*"]
              cookie_secure = false
              provider = "oidc"
