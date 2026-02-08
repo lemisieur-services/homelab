@@ -20,6 +20,7 @@ spec:
         values: |
           proxyVarsAsSecrets: true
           configFile: |-
+            upstreams = ""
             email_domains = [ "*" ]
           alphaConfig:
             enabled: true
