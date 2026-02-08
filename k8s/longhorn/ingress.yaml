@@ -13,6 +13,8 @@ spec:
     middlewares:
     - name: oauth2-proxy-auth
       namespace: oauth2-proxy
+    - name: oauth2-proxy-errors
+      namespace: oauth2-proxy
     services:
     - name: longhorn-frontend
       port: 80
