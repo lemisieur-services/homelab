@@ -1,0 +1,96 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oauth2-proxy
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: oauth2-proxy
+    repoURL: https://oauth2-proxy.github.io/manifests
+    targetRevision: 10.1.3
+    helm:
+      values: |
+        config:
+          existingSecret: gh-oauth-secret
+          configFile: |
+            provider = "github"
+            email_domains = ["*"]
+            cookie_secure = true
+            cookie_domains = ["k8s.lab.lemisieur.com"]
+            whitelist_domains = ["k8s.lab.lemisieur.com"]
+            reverse_proxy = true
+            redirect_url = "https://oauth.k8s.lab.lemisieur.com/oauth2/callback"
+            scope = "read:user user:email"
+            pass_access_token = true
+            pass_authorization_header = true
+            pass_user_headers = true
+            set_authorization_header = true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: oauth2-proxy
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: gh-oauth-secret
+  namespace: oauth2-proxy
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: lemisieur-k8s-secrets
+  target:
+    name: gh-oauth-secret
+    creationPolicy: Owner
+    template:
+      data:
+        client-id: "{{ .client_id }}"
+        client-secret: "{{ .client_secret }}"
+        cookie-secret: "{{ .cookie_secret }}"
+  data:
+    - secretKey: client_id
+      remoteRef:
+        key: longhorn-oauth-clientid
+    - secretKey: client_secret
+      remoteRef:
+        key: longhorn-oauth-clientsecret
+    - secretKey: cookie_secret
+      remoteRef:
+        key: oauth2proxy-cookie-secret
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`oauth.k8s.lab.lemisieur.com`)
+      kind: Rule
+      services:
+        - name: oauth2-proxy
+          port: 4180
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: oauth2-proxy-auth
+  namespace: oauth
+spec:
+  forwardAuth:
+    address: http://oauth2-proxy.oauth.svc.cluster.local:4180/oauth2/auth
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-Auth-Request-User
+      - X-Auth-Request-Email
+      - Authorization
