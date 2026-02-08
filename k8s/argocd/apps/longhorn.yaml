@@ -21,18 +21,14 @@ spec:
           config:
             existingSecret: oauth2-proxy-secret
             configFile: |
-             #user_id_claim = "oid"
-             email_domains = ["*"]
-             cookie_secure = false
-             provider = "oidc"
-             oidc_issuer_url = "https://login.microsoftonline.com/0bd8c7f7-2a0b-46b8-9b7d-934844b3dee7/v2.0"
-             redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
-             scope = "openid email profile"
-             pass_access_token = true
-             pass_authorization_header = true
-             pass_user_headers = true
-             set_authorization_header = true
-             skip_claims_from_profile_url = true
+              email_domains = ["*"]
+              cookie_secure = false
+              provider = "github"
+              redirect_url = "https://longhorn.k8s.lab.lemisieur.com/oauth2/callback"
+              pass_access_token = true
+              pass_authorization_header = true
+              pass_user_headers = true
+              set_authorization_header = true
               
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
