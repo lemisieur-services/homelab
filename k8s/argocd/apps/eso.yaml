@@ -5,12 +5,15 @@ metadata:
   namespace: argocd  # Adjust to your ArgoCD namespace
 spec:
   project: eso
-  source:
-    repoURL: https://charts.external-secrets.io
-    chart: external-secrets
-    targetRevision: "1.3.1"
-    helm:
-      releaseName: external-secrets
+  sources:
+    - repoURL: https://charts.external-secrets.io
+      chart: external-secrets
+      targetRevision: "1.3.1"
+      helm:
+        releaseName: external-secrets
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/eso
   destination:
     server: https://kubernetes.default.svc  # In-cluster; adjust for remote clusters
     namespace: external-secrets
