@@ -11,9 +11,12 @@ spec:
       targetRevision: 2.33.6
       helm:
         values: |
-          enterpriseEdition.enabled=true
-          enterpriseEdition.image.tag=lts
-          persistence.storageClass=local-ssd            
+          enterpriseEdition:
+            enabled: true
+            image:
+              tag: lts
+          persistence:
+            storageClass: local-ssd          
     # - repoURL: https://github.com/lemisieur-services/homelab.git
     #   targetRevision: main
     #   path: k8s/portainer
