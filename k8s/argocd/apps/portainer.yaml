@@ -16,10 +16,12 @@ spec:
             image:
               tag: lts
           persistence:
-            storageClass: local-ssd          
-    # - repoURL: https://github.com/lemisieur-services/homelab.git
-    #   targetRevision: main
-    #   path: k8s/portainer
+            storageClass: local-ssd    
+          service:
+            type: ClusterIP      
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/portainer
   destination:
     server: https://kubernetes.default.svc
     namespace: portainer
