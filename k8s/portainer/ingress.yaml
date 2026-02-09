@@ -12,4 +12,4 @@ spec:
     match: Host(`portainer.k8s.lab.lemisieur.com`)
     services:
     - name: portainer
-      port: 8000
+      port: 9000
