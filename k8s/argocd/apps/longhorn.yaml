@@ -13,8 +13,31 @@ spec:
         values: |
           preUpgradeChecker:
             jobEnabled: false
+          global:
+            tolerations:
+              - key: "node.kubernetes.io/role"
+                operator: "Equal"
+                value: "proxy"
+                effect: "NoSchedule"
+
           defaultSettings:
-            taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'    
+            taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'
+
+          # Your existing ones (overrides if needed)
+          longhornManager:
+            tolerations:
+              - key: "node.kubernetes.io/role"
+                operator: "Equal"
+                value: "proxy"
+                effect: "NoSchedule"
+
+          # Fallback for CSI deployer (not the DaemonSet)
+          longhornDriver:
+            tolerations:
+              - key: "node.kubernetes.io/role"
+                operator: "Equal"
+                value: "proxy"
+                effect: "NoSchedule
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
