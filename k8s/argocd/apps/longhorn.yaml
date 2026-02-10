@@ -16,26 +16,6 @@ spec:
           defaultSettings:
             webhookEnabled: false
             taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'
-          global:
-            tolerations:
-              - key: "node.kubernetes.io/role"
-                operator: "Equal"
-                value: "proxy"
-                effect: "NoSchedule"
-          # Your existing ones (overrides if needed)
-          longhornManager:
-            tolerations:
-              - key: "node.kubernetes.io/role"
-                operator: "Equal"
-                value: "proxy"
-                effect: "NoSchedule"
-          # Fallback for CSI deployer (not the DaemonSet)
-          longhornDriver:
-            tolerations:
-              - key: "node.kubernetes.io/role"
-                operator: "Equal"
-                value: "proxy"
-                effect: "NoSchedule"
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
