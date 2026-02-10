@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: uptimekuma
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: uptime-kuma
+      repoURL: https://helm.irsigler.cloud
+      targetRevision: 2.24.0
+      helm:
+        values: |
+          volume:
+            storageClassName: local-ssd
+          tolerations:
+            - key: node.kubernetes.io/role
+              operator: Equal
+              value: proxy
+              effect: NoSchedule
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: node-role.kubernetes.io/proxy
+                        operator: Exists
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: uptimekuma
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
