@@ -12,7 +12,9 @@ spec:
       helm:
         values: |
           preUpgradeChecker:
-            jobEnabled: false      
+            jobEnabled: false
+          defaultSettings:
+            taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'    
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/longhorn
