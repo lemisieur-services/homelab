@@ -18,6 +18,9 @@ spec:
               operator: Equal
               value: proxy
               effect: NoSchedule
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/uptimekuma
   destination:
     server: https://kubernetes.default.svc
     namespace: uptimekuma
