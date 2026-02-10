@@ -16,6 +16,12 @@ spec:
           defaultSettings:
             taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'
           # Your existing ones (overrides if needed)
+          csi:
+            tolerations:
+              - key: "node.kubernetes.io/role"
+                operator: "Equal"
+                value: "proxy"
+                effect: "NoSchedule"
           longhornManager:
             tolerations:
               - key: "node.kubernetes.io/role"
