@@ -11,5 +11,7 @@ spec:
   - kind: Rule
     match: Host(`uptimekuma.k8s.lab.lemisieur.com`)
     services:
+    - name: oauth2-signin
+      namespace: oauth2-proxy
     - name: uptimekuma-uptime-kuma
       port: 3001
