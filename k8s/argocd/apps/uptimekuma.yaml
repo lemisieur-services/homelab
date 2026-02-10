@@ -13,13 +13,11 @@ spec:
         values: |
           volume:
             storageClassName: local-ssd
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: node-role.kubernetes.io/proxy
-                        operator: Exists
+          tolerations:
+            - key: node.kubernetes.io/role
+              operator: Equal
+              value: proxy
+              effect: NoSchedule
   destination:
     server: https://kubernetes.default.svc
     namespace: uptimekuma
