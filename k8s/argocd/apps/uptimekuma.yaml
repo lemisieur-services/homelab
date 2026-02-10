@@ -13,11 +13,6 @@ spec:
         values: |
           volume:
             storageClassName: local-ssd
-          tolerations:
-            - key: node.kubernetes.io/role
-              operator: Equal
-              value: proxy
-              effect: NoSchedule
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
