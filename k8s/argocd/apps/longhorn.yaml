@@ -13,14 +13,15 @@ spec:
         values: |
           preUpgradeChecker:
             jobEnabled: false
+          defaultSettings:
+            webhookEnabled: false
+            taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'
           global:
             tolerations:
               - key: "node.kubernetes.io/role"
                 operator: "Equal"
                 value: "proxy"
                 effect: "NoSchedule"
-          defaultSettings:
-            taintToleration: 'node.kubernetes.io/role=proxy:NoSchedule'
           # Your existing ones (overrides if needed)
           longhornManager:
             tolerations:
