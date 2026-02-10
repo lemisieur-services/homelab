@@ -13,7 +13,7 @@ spec:
         values: |
           preUpgradeChecker:
             jobEnabled: false  
-          longhornDriver:
+          global:
             tolerations:
               - key: node.kubernetes.io/role
                 operator: Equal
