@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: homeassistant
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: ha.ip.lab.lemisieur.com
+  ports:
+  - port: 8123
+    targetPort: 8123
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: homeassistant-transport
+  namespace: traefik
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homeassistant
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`ha.lab.lemisieur.com`)
+    services:
+    - name: homeassistant
+      port: 8123
+      scheme: https
+      serversTransport: homeassistant-transport
+      weight: 100
