@@ -1,11 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pve
+  name: pve-01
   namespace: traefik
 spec:
   type: ExternalName
   externalName: pve-01.ip.lab.lemisieur.com
+  ports:
+  - port: 8006
+    targetPort: 8006
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pve-02
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: pve-02.ip.lab.lemisieur.com
   ports:
   - port: 8006
     targetPort: 8006
@@ -22,10 +34,16 @@ spec:
   - kind: Rule
     match: Host(`pve.k8s.lab.lemisieur.com`)
     services:
-    - name: pve
+    - name: pve-01
       port: 8006
       scheme: https
       serversTransport: pve-transport
+      weight: 100
+    - name: pve-02
+      port: 8006
+      scheme: https
+      serversTransport: pve-transport
+      weight: 100
 ---
 apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
