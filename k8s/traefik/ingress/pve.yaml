@@ -38,6 +38,8 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  tls:
+    secretName: lab-lemisieur-com
   routes:
   - kind: Rule
     match: Host(`pve.k8s.lab.lemisieur.com`) || Host(`pve.lab.lemisieur.com`)
