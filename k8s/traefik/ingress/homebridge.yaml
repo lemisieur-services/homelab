@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: homeassistant
+  name: homebridge
   namespace: traefik
 spec:
   type: ExternalName
   externalName: ha.ip.lab.lemisieur.com
   ports:
-  - port: 8123
-    targetPort: 8123
+  - port: 8581
+    targetPort: 8581
 ---
 apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
-  name: homeassistant-transport
+  name: homebridge-transport
   namespace: traefik
 spec:
   insecureSkipVerify: true
@@ -21,7 +21,7 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: homeassistant
+  name: homebridge
   namespace: traefik
 spec:
   entryPoints:
@@ -32,8 +32,8 @@ spec:
   - kind: Rule
     match: Host(`ha.lab.lemisieur.com`)
     services:
-    - name: homeassistant
-      port: 8123
+    - name: homebridge
+      port: 8581
       scheme: http
-      serversTransport: homeassistant-transport
+      serversTransport: homebridge-transport
       weight: 100
