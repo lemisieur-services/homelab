@@ -6,6 +6,8 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  tls:
+    secretName: k8s-lab-lemisieur-com
   routes:
   - match: Host(`argocd.k8s.lab.lemisieur.com`)
     kind: Rule
