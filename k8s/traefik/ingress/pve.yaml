@@ -24,4 +24,13 @@ spec:
     services:
     - name: pve
       port: 8006
-      scheme: https  # Forces HTTPS to backend
+      scheme: https
+    serversTransport: pve-transport
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: pve-transport
+  namespace: traefik
+spec:
+  insecureSkipVerify: true
