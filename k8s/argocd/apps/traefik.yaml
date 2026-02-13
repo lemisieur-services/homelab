@@ -6,6 +6,16 @@ metadata:
 spec:
   project: default
   sources:
+    - repoURL: https://traefik.github.io/charts
+      chart: traefik
+      targetRevision: 39.0.1
+      helm:
+        releaseName: traefik
+        values: |
+          providers:
+            kubernetesCRD:
+              allowCrossNamespace: true
+              allowExternalNameServices: true
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/traefik/certs
@@ -14,6 +24,7 @@ spec:
       path: k8s/traefik/ingress
   destination:
     server: https://kubernetes.default.svc
+    namespace: traefik
   syncPolicy:
     automated:
       enabled: true
