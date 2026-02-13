@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: printer
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: canon.ip.lab.lemisieur.com
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homebridge
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`printer.lab.lemisieur.com`)
+    services:
+    - name: printer
+      port: 80
+      scheme: http
+      passHostHeader: true
+      weight: 80
