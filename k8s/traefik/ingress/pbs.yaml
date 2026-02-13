@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pbs
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: pbs.ip.lab.lemisieur.com
+  ports:
+  - port: 8007
+    targetPort: 8007
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: pbs-transport
+  namespace: traefik
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pbs
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`pbs.lab.lemisieur.com`)
+    services:
+    - name: pbs
+      port: 8007
+      scheme: https
+      serversTransport: pbs-transport
+      weight: 100
