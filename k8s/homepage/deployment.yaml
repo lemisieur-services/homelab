@@ -27,7 +27,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
-              value: home.k8s.lab.lemisieur.com
+              value: home.k8s.lab.lemisieur.com,home.lab.lemisieur.com,lab.lemisieur.com
           ports:
             - name: http
               containerPort: 3000
