@@ -7,9 +7,11 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  tls:
+    secretName: lab-lemisieur-com
   routes:
   - kind: Rule
-    match: Host(`uptimekuma.k8s.lab.lemisieur.com`)
+    match: Host(`uptimekuma.k8s.lab.lemisieur.com`) || Host(`uptimekuma.lab.lemisieur.com`)
     middlewares:
     - name: oauth2-signin
       namespace: oauth2-proxy
