@@ -5,7 +5,7 @@ metadata:
   namespace: traefik
 spec:
   type: ExternalName
-  externalName: ha.ip.lab.lemisieur.com
+  externalName: hb.ip.lab.lemisieur.com
   ports:
   - port: 8581
     targetPort: 8581
@@ -22,9 +22,10 @@ spec:
     secretName: lab-lemisieur-com
   routes:
   - kind: Rule
-    match: Host(`ha.lab.lemisieur.com`)
+    match: Host(`hb.lab.lemisieur.com`)
     services:
     - name: homebridge
       port: 8581
       scheme: http
+      passHostHeader: true
       weight: 100

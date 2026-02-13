@@ -27,4 +27,5 @@ spec:
     - name: homeassistant
       port: 8123
       scheme: http
+      passHostHeader: true
       weight: 100
