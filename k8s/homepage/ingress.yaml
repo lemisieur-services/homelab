@@ -6,7 +6,7 @@ spec:
   entryPoints:
   - websecure
   routes:
-  - match: Host(`home.k8s.lab.lemisieur.com`)
+  - match: Host(`home.k8s.lab.lemisieur.com`) || Host(`home.lab.lemisieur.com`) ||  Host(`lab.lemisieur.com`)
     kind: Rule
     priority: 10
     services:
