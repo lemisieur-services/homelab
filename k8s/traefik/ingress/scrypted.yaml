@@ -5,7 +5,7 @@ metadata:
   namespace: traefik
 spec:
   type: ExternalName
-  externalName: scrypted.ip.lab.lemisieur.com\\
+  externalName: scrypted.ip.lab.lemisieur.com
   ports:
   - port: 10443
     targetPort: 10443
