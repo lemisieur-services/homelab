@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scrypted
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: scrypted.ip.lab.lemisieur.com\\
+  ports:
+  - port: 10443
+    targetPort: 10443
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: scrypted-transport
+  namespace: traefik
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: scrypted
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`scrypted.lab.lemisieur.com`)
+    services:
+    - name: scrypted
+      port: 10443
+      scheme: https
+      serversTransport: scrypted-transport
+      weight: 100
