@@ -11,14 +11,6 @@ spec:
     targetPort: 8123
 ---
 apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
-metadata:
-  name: homeassistant-transport
-  namespace: traefik
-spec:
-  insecureSkipVerify: true
----
-apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: homeassistant
@@ -35,5 +27,4 @@ spec:
     - name: homeassistant
       port: 8123
       scheme: http
-      serversTransport: homeassistant-transport
       weight: 100

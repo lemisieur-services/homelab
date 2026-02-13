@@ -11,14 +11,6 @@ spec:
     targetPort: 8581
 ---
 apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
-metadata:
-  name: homebridge-transport
-  namespace: traefik
-spec:
-  insecureSkipVerify: true
----
-apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: homebridge
@@ -35,5 +27,4 @@ spec:
     - name: homebridge
       port: 8581
       scheme: http
-      serversTransport: homebridge-transport
       weight: 100
