@@ -2,7 +2,6 @@ apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: k8s-lab-lemisieur-com
-  namespace: traefik
 spec:
   refreshInterval: 1h
   secretStoreRef:
