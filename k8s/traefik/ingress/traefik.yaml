@@ -7,6 +7,8 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  tls:
+    secretName: k8s-lab-lemisieur-com
   routes:
   - kind: Rule
     match: Host(`traefik.k8s.lab.lemisieur.com`)
