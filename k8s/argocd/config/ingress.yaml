@@ -2,14 +2,12 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: argocd-server
-  namespace: argocd
+  namespace: traefik
 spec:
   entryPoints:
   - websecure
   tls:
     secretName: k8s-lab-lemisieur-com
-    secretRef:
-      namespace: traefik
   routes:
   - match: Host(`argocd.k8s.lab.lemisieur.com`)
     kind: Rule
