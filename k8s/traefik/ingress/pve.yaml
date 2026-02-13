@@ -23,6 +23,14 @@ spec:
     targetPort: 8006
 ---
 apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: pve-transport
+  namespace: traefik
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: pve
@@ -32,7 +40,7 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`pve.k8s.lab.lemisieur.com`)
+    match: Host(`pve.k8s.lab.lemisieur.com`) || Host(`pve.lab.lemisieur.com`)
     services:
     - name: pve-01
       port: 8006
@@ -44,11 +52,3 @@ spec:
       scheme: https
       serversTransport: pve-transport
       weight: 100
----
-apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
-metadata:
-  name: pve-transport
-  namespace: traefik
-spec:
-  insecureSkipVerify: true
