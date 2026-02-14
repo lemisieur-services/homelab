@@ -6,6 +6,9 @@ metadata:
 spec:
   project: default
   sources:
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/traefik/certs
     - chart: uptime-kuma
       repoURL: https://helm.irsigler.cloud
       targetRevision: 2.24.0
