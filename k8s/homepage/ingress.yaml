@@ -5,6 +5,8 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  tls:
+    secretName: lab-lemisieur-com
   routes:
   - match: Host(`home.k8s.lab.lemisieur.com`) || Host(`home.lab.lemisieur.com`) ||  Host(`lab.lemisieur.com`)
     kind: Rule

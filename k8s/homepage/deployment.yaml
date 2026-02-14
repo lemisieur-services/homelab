@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: homepage
 spec:
   revisionHistoryLimit: 3
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
   selector:
@@ -21,6 +21,13 @@ spec:
       automountServiceAccountToken: true
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
+      tolerations:
+        - key: node.kubernetes.io/role
+          operator: Equal
+          value: proxy
+          effect: NoSchedule
+      nodeSelector:
+        node.kubernetes.io/class: proxy
       containers:
         - name: homepage
           image: ghcr.io/gethomepage/homepage:latest

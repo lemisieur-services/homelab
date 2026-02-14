@@ -5,10 +5,13 @@ metadata:
   namespace: argocd
 spec:
   project: homepage
-  source:
-    repoURL: https://github.com/lemisieur-services/homelab.git
-    targetRevision: main
-    path: k8s/homepage
+  sources:
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/traefik/certs
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/homepage
   destination:
     server: https://kubernetes.default.svc
     namespace: homepage
