@@ -29,10 +29,11 @@ spec:
             initContainers:
               - name: token-generator
                 image: ghcr.io/mshekow/github-app-installation-token:latest
-                args:
-                  - "$(APP_ID)"
-                  - "$(INSTALLATION_ID)"
-                  - /secrets/app_private_key.pem
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    index.js "$APP_ID" "$INSTALLATION_ID" /secrets/app_private_key.pem > /token/github_token
                 env:
                   - name: APP_ID
                     valueFrom:
