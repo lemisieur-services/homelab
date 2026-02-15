@@ -15,7 +15,7 @@ spec:
       data:
         GH_APP_ID: "{{ .app_id }}"
         GH_APP_INSTALLATION_ID: "{{ .app_installation_id }}"
-        GH_APP_KEY: "{{ .app_private_key }}"
+        GH_APP_PRIVATE_KEY: "{{ .app_private_key }}"
   data:
     - secretKey: app_id
       remoteRef:
