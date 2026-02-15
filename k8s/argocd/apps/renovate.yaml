@@ -19,6 +19,8 @@ spec:
             useFull: false
           cronjob:
             schedule: "0 1 * * *"
+            successfulJobsHistoryLimit: 3
+            failedJobsHistoryLimit: 1
             commandOverride:
               - /bin/sh
               - -c
