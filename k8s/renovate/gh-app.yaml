@@ -25,6 +25,3 @@ spec:
     - secretKey: app_private_key
       remoteRef:
         key: renovate-ghapp-appprivatekey
-    - secretKey: app_webhook_secret
-      remoteRef:
-        key: renovate-ghapp-appwebhooksecret
