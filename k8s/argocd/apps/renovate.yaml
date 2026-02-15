@@ -9,7 +9,7 @@ spec:
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/renovate
-    - repoURL: oci://ghcr.io/renovatebot/charts
+    - repoURL: ghcr.io/renovatebot/charts
       chart: renovate
       targetRevision: 46.14.1
       helm:
