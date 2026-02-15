@@ -71,8 +71,11 @@ spec:
                 "platform": "github",
                 "autodiscover": true,
                 "onboarding": false,
-                "requireConfig": "optional"
+                "requireConfig": "optional",
+                "dependencyDashboard": true
               }
+          env:
+            LOG_LEVEL: debug
   destination:
     server: https://kubernetes.default.svc
     namespace: renovate
