@@ -9,31 +9,56 @@ spec:
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/renovate
-    - repoURL: https://mend.github.io/renovate-ce-ee
-      chart: mend-renovate-ce
-      targetRevision: 13.6.0
+    - repoURL: https://renovatebot.github.io/helm-charts
+      chart: renovate
+      targetRevision: 46.14.1
       helm:
         releaseName: renovate
         values: |
           image:
-            repository: ghcr.io/mend/renovate-ce
-            tag: 13.6.0
-            useFull: true
-            pullPolicy: IfNotPresent
+            tag: 43.15.1
+            useFull: false
+          cronjob:
+            schedule: "0 1 * * *"
+            commandOverride:
+              - /bin/sh
+              - -c
+              - |
+                export RENOVATE_TOKEN="$(cat /token/github_token)"
+                exec renovate
+            initContainers:
+              - name: token-generator
+                image: ghcr.io/mshekow/github-app-installation-token:latest
+                env:
+                  - name: APP_ID
+                    valueFrom:
+                      secretKeyRef:
+                        name: github-app
+                        key: GH_APP_ID
+                  - name: APP_PRIVATE_KEY
+                    valueFrom:
+                      secretKeyRef:
+                        name: github-app
+                        key: GH_APP_PRIVATE_KEY
+                  - name: INSTALLATION_ID
+                    valueFrom:
+                      secretKeyRef:
+                        name: github-app
+                        key: GH_APP_INSTALLATION_ID
+                  - name: OUTPUT_FILE
+                    value: /token/github_token
+                volumeMounts:
+                  - name: token-vol
+                    mountPath: /token          
 
+          existingSecret: "github-app"
           renovate:
-            mendRnvAcceptTos: "y"
-            mendRnvPlatform: "github"
-            mendRnvEndpoint: "https://api.github.com/"
-            existingSecret: "github-app"
             config: |
-              module.exports = {
-                platform: "github",
-                repositories: ["lemisieur-services/homelab"],
-                autodiscover: false
+              {
+                "platform": "github",
+                "repositories": ["lemisieur-services/homelab"],
+                "autodiscover": false
               }
-
-          mendRnvCronJobSchedulerAll: "0 * * * *"
   destination:
     server: https://kubernetes.default.svc
     namespace: renovate

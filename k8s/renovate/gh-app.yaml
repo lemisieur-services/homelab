@@ -13,8 +13,9 @@ spec:
     creationPolicy: Owner
     template:
       data:
-        MEND_RNV_GITHUB_APP_ID: "{{ .app_id }}"
-        MEND_RNV_GITHUB_APP_KEY: "{{ .app_private_key }}"
+        GH_APP_ID: "{{ .app_id }}"
+        GH_APP_INSTALLATION_ID: "{{ .app_installation_id }}"
+        GH_APP_KEY: "{{ .app_private_key }}"
   data:
     - secretKey: app_id
       remoteRef:
