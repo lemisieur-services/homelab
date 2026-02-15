@@ -13,10 +13,8 @@ spec:
     creationPolicy: Owner
     template:
       data:
-        RENOVATE_GITHUB_APP_ID: "{{ .app_id }}"
-        RENOVATE_GITHUB_APP_INSTALLATION_ID: "{{ .app_installation_id }}"
-        RENOVATE_GITHUB_APP_PRIVATE_KEY_PEM: "{{ .app_private_key }}"
-        RENOVATE_GIT_AUTHOR: "Renovate Bot <bot@renovateapp.com>"
+        MEND_RNV_GITHUB_APP_ID: "{{ .app_id }}"
+        MEND_RNV_GITHUB_APP_KEY: "{{ .app_private_key }}"
   data:
     - secretKey: app_id
       remoteRef:
@@ -27,3 +25,6 @@ spec:
     - secretKey: app_private_key
       remoteRef:
         key: renovate-ghapp-appprivatekey
+    - secretKey: app_webhook_secret
+      remoteRef:
+        key: renovate-ghapp-appwebhooksecret

@@ -9,23 +9,31 @@ spec:
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/renovate
-    - repoURL: ghcr.io/renovatebot/charts
-      chart: renovate
-      targetRevision: 46.14.1
+    - repoURL: https://mend.github.io/renovate-ce-ee
+      chart: mend-renovate-ce
+      targetRevision: 13.6.0
       helm:
         releaseName: renovate
         values: |
-          cronjob:
-            schedule: "@hourly"
-          
+          image:
+            repository: ghcr.io/mend/renovate-ce
+            tag: 13.6.0
+            useFull: true
+            pullPolicy: IfNotPresent
+
           renovate:
+            mendRnvAcceptTos: "y"
+            mendRnvPlatform: "github"
+            mendRnvEndpoint: "https://api.github.com/"
+            existingSecret: "github-app"
             config: |
-              {
-                "platform": "github",
-                "repositories": ["lemisieur-services/homelab"],
-                "autodiscover": false
+              module.exports = {
+                platform: "github",
+                repositories: ["lemisieur-services/homelab"],
+                autodiscover: false
               }
-          existingSecret: "github-app"
+
+          mendRnvCronJobSchedulerAll: "0 * * * *"
   destination:
     server: https://kubernetes.default.svc
     namespace: renovate
