@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: renovate
+  namespace: argocd
+spec:
+  project: renovate
+  sources:
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/renovate
+    - repoURL: oci://ghcr.io/renovatebot/charts
+      chart: renovate
+      targetRevision: 46.14.1
+      helm:
+        releaseName: renovate
+        values: |
+          cronjob:
+            schedule: "@hourly"
+          
+          renovate:
+            config: |
+              {
+                "platform": "github",
+                "repositories": ["lemisieur-services/homelab"],
+                "autodiscover": false
+              }
+          existingSecret: "renovate-github-app"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: renovate
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true

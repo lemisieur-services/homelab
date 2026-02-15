@@ -1,0 +1,29 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: github-app
+  namespace: renovate
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: lemisieur-k8s-secrets
+  target:
+    name: github-app
+    creationPolicy: Owner
+    template:
+      data:
+        RENOVATE_GITHUB_APP_ID: "{{ .app_id }}"
+        RENOVATE_GITHUB_APP_INSTALLATION_ID: "{{ .app_installation_id }}"
+        RENOVATE_GITHUB_APP_PRIVATE_KEY_PEM: "{{ .app_private_key }}"
+        RENOVATE_GIT_AUTHOR: "Renovate Bot <bot@renovateapp.com>"
+  data:
+    - secretKey: app_id
+      remoteRef:
+        key: renovate-ghapp-appid
+    - secretKey: app_installation_id
+      remoteRef:
+        key: renovate-ghapp-appinstallationid
+    - secretKey: app_private_key
+      remoteRef:
+        key: renovate-ghapp-appprivatekey
