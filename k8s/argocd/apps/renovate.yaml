@@ -16,7 +16,6 @@ spec:
         releaseName: renovate
         values: |
           image:
-            tag: 43.15.1
             useFull: false
           cronjob:
             schedule: "0 1 * * *"
