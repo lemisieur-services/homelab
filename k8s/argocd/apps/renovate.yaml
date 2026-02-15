@@ -72,10 +72,10 @@ spec:
                 "autodiscover": true,
                 "onboarding": false,
                 "requireConfig": "optional",
-                "dependencyDashboard": true
+                "dependencyDashboard": false
               }
           env:
-            LOG_LEVEL: debug
+            LOG_LEVEL: info
   destination:
     server: https://kubernetes.default.svc
     namespace: renovate
