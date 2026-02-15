@@ -52,6 +52,12 @@ spec:
                     mountPath: /token          
 
           existingSecret: "github-app"
+          extraVolumes:
+            - name: token-vol
+              emptyDir: {}
+          extraVolumeMounts:
+            - name: token-vol
+              mountPath: /token
           renovate:
             config: |
               {
