@@ -25,7 +25,7 @@ spec:
                 "repositories": ["lemisieur-services/homelab"],
                 "autodiscover": false
               }
-          existingSecret: "renovate-github-app"
+          existingSecret: "github-app"
   destination:
     server: https://kubernetes.default.svc
     namespace: renovate
