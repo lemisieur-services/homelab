@@ -30,7 +30,7 @@ spec:
         node.kubernetes.io/class: proxy
       containers:
         - name: homepage
-          image: ghcr.io/gethomepage/homepage:latest
+          image: ghcr.io/gethomepage/homepage:v1.10.1
           imagePullPolicy: Always
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
