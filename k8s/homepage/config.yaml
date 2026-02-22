@@ -84,7 +84,7 @@ data:
           href: https://pbs.lab.lemisieur.com
           description: pbs.lab.lemisieur.com
           icon: si-proxmox-#E57000
-    - k8s
+    - k8s:
       - kubernetes:
           cluster:
             show: false
@@ -107,7 +107,7 @@ data:
           description: nas-02.lab.lemisieur.com
           icon: si-truenas-#0095D5   
     - monitoring:
-       - uptimekuma:
+      - uptimekuma:
           href: https://uptimekuma.lab.lemisieur.com
           description: uptimekuma.lab.lemisieur.com
           icon: si-uptimekuma-#5CDD8B
