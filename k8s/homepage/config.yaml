@@ -109,7 +109,7 @@ data:
             description: longhorn.k8s.lab.lemisieur.com
             icon: sh-longhorn
             namespace: longhorn
-            app: longhorn-driver-deployer
+            app: longhorn-manager
     - data:
         - nas-01:
             href: https://nas.lab.lemisieur.com
