@@ -13,13 +13,6 @@ spec:
         values: |
           args:
             - --kubelet-insecure-tls
-          tolerations:
-            - key: node.kubernetes.io/role
-              operator: Equal
-              value: proxy
-              effect: NoSchedule
-          nodeSelector:
-            node.kubernetes.io/class: proxy
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
