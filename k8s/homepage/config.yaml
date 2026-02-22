@@ -35,10 +35,10 @@ data:
       network:
         style: row
         columns: 4
-      platform:
+      virtualization:
         style: row
         columns: 4
-      infra:
+      kubernetes:
         style: row
         columns: 3
       data:
@@ -82,21 +82,11 @@ data:
             href: https://my.nextdns.io
             description: my.nextdns.io
             icon: si-nextdns-#007BFF
-    - platform:
+    - virtualization:
         - proxmox:
             href: https://pve.lab.lemisieur.com
             description: pve.lab.lemisieur.com
             icon: si-proxmox-#E57000
-        - pbs:
-            href: https://pbs.lab.lemisieur.com
-            description: pbs.lab.lemisieur.com
-            icon: si-proxmox-#E57000
-        - argocd:
-            href: https://argocd.k8s.lab.lemisieur.com
-            description: argocd.k8s.lab.lemisieur.com
-            icon: si-argo-#EF7B4D
-            namespace: argocd
-            app: argocd-server
         - portainer:
             href: https://portainer.k8s.lab.lemisieur.com
             description: portainer.k8s.lab.lemisieur.com
@@ -109,29 +99,19 @@ data:
             icon: si-traefikproxy-#24A1C1
             namespace: traefik
             app: traefik
-        - oauth2-proxy:
-            href: https://oauth.k8s.lab.lemisieur.com
-            description: oauth.k8s.lab.lemisieur.com
-            icon: si-authelia-#113155
-            namespace: oauth2-proxy
-            app: oauth2-proxy
         - longhorn:
             href: https://longhorn.k8s.lab.lemisieur.com
             description: longhorn.k8s.lab.lemisieur.com
             icon: sh-longhorn
             namespace: longhorn
             app: longhorn
-    - infra:
-        - arc-controller:
-            description: GitHub Actions Runner Controller
-            icon: si-githubactions-#2088FF
-            namespace: gh-arc-controller
-            app: gha-rs-controller
-        - arc-runners:
-            description: GitHub Actions Runners
-            icon: si-github-#181717
-            namespace: gh-arc-runners
-            podSelector: actions.github.com/scale-set-name=gh-arc-runners
+    - kubernetes:
+        - argocd:
+            href: https://argocd.k8s.lab.lemisieur.com
+            description: argocd.k8s.lab.lemisieur.com
+            icon: si-argo-#EF7B4D
+            namespace: argocd
+            app: argocd-server
         - external-secrets:
             description: External Secrets Operator
             icon: si-vault-#000000
@@ -152,6 +132,22 @@ data:
             icon: si-renovatebot-#1A1F6C
             namespace: renovate
             app: renovate
+        - github-arc-controller:
+            description: GitHub Actions Runner Controller
+            icon: si-githubactions-#2088FF
+            namespace: gh-arc-controller
+            app: gha-rs-controller
+        - github-arc-runners:
+            description: GitHub Actions Runners
+            icon: si-github-#181717
+            namespace: gh-arc-runners
+            podSelector: actions.github.com/scale-set-name=gh-arc-runners
+        - oauth2-proxy:
+            href: https://oauth.k8s.lab.lemisieur.com
+            description: oauth.k8s.lab.lemisieur.com
+            icon: si-authelia-#113155
+            namespace: oauth2-proxy
+            app: oauth2-proxy
     - data:
         - nas-01:
             href: https://nas.lab.lemisieur.com
@@ -161,6 +157,10 @@ data:
             href: https://nas-02.lab.lemisieur.com
             description: nas-02.lab.lemisieur.com
             icon: si-truenas-#0095D5
+        - pbs:
+            href: https://pbs.lab.lemisieur.com
+            description: pbs.lab.lemisieur.com
+            icon: si-proxmox-#E57000
     - monitoring:
         - uptimekuma:
             href: https://uptimekuma.lab.lemisieur.com
