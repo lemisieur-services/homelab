@@ -85,18 +85,18 @@ data:
           description: pbs.lab.lemisieur.com
           icon: si-proxmox-#E57000
     - k8s:
-      - kubernetes:
-          cluster:
-            show: false
-            cpu: true
-            memory: true
-            showLabel: true
-            label: "cluster"
-          nodes:
-            show: true
-            cpu: true
-            memory: true
-            showLabel: true
+      - argocd:
+          href: https://argocd.k8s.lab.lemisieur.com
+          description: argocd.k8s.lab.lemisieur.com
+          icon: si-argo-#EF7B4D
+      - portainer:
+          href: https://portainer.k8s.lab.lemisieur.com
+          description: portainer.k8s.lab.lemisieur.com
+          icon: sh-portainer
+      - longhorn:
+          href: https://longhorn.k8s.lab.lemisieur.com
+          description: longhorn.k8s.lab.lemisieur.com
+          icon: sh-longhorn
     - data:
       - nas-01:
           href: https://nas.lab.lemisieur.com
