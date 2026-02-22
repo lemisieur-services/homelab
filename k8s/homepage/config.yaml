@@ -66,11 +66,6 @@ data:
           href: https://site-02.lab.lemisieur.com
           description: site-02.lab.lemisieur.com
           icon: si-ubiquiti-#0559C9
-      - traefik:
-          href: https://traefik.k8s.lab.lemisieur.com
-          description: traefik.k8s.lab.lemisieur.com
-          icon: si-envoyproxy-#AC6199
-          namespace: traefik
       - nextdns:
           href: https://my.nextdns.io
           description: my.nextdns.io
@@ -93,6 +88,13 @@ data:
           href: https://portainer.k8s.lab.lemisieur.com
           description: portainer.k8s.lab.lemisieur.com
           icon: sh-portainer
+          namespace: portainer
+          app: portainer
+      - traefik:
+          href: https://traefik.k8s.lab.lemisieur.com
+          description: traefik.k8s.lab.lemisieur.com
+          icon: si-traefikproxy-#24A1C1
+          namespace: traefik
       - longhorn:
           href: https://longhorn.k8s.lab.lemisieur.com
           description: longhorn.k8s.lab.lemisieur.com
