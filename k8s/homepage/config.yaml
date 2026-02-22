@@ -6,9 +6,9 @@ metadata:
     app.kubernetes.io/name: homepage
 data:
   kubernetes.yaml: |
-    mode: default
+    mode: cluster
     ingress: false
-    traefik: false
+    traefik: true
     gateway: false
   settings.yaml: |
     title: homelab
@@ -70,6 +70,7 @@ data:
           href: https://traefik.k8s.lab.lemisieur.com
           description: traefik.k8s.lab.lemisieur.com
           icon: si-envoyproxy-#AC6199
+          namespace: traefik
       - nextdns:
           href: https://my.nextdns.io
           description: my.nextdns.io
