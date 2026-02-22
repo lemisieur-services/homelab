@@ -102,7 +102,7 @@ data:
         - longhorn:
             href: https://longhorn.k8s.lab.lemisieur.com
             description: longhorn.k8s.lab.lemisieur.com
-            icon: sh-longhorn
+            icon: https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/rancher-longhorn.png
             namespace: longhorn
             app: longhorn
     - kubernetes:
@@ -114,7 +114,7 @@ data:
             app: argocd-server
         - external-secrets:
             description: External Secrets Operator
-            icon: si-vault-#FFEC6E
+            icon: si-cryptomator-#49B04A
             namespace: external-secrets
             app: external-secrets
         - reloader:
