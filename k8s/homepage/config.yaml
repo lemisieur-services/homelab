@@ -99,6 +99,7 @@ data:
           description: uptimekuma.lab.lemisieur.com
           icon: si-uptimekuma-#5CDD8B
           namespace: uptimekuma
+          app: uptime-kuma
 
   widgets.yaml: |
     - logo:
