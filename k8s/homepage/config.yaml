@@ -5,7 +5,11 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
 data:
-  kubernetes.yaml: ""
+  kubernetes.yaml: |
+    mode: default
+    ingress: false
+    traefik: false
+    gateway: false
   settings.yaml: |
     title: homelab
     theme: dark
@@ -46,43 +50,39 @@ data:
           description: hb.lab.lemisieur.com
           icon: si-homebridge-#491F59
       - scrypted:
-          href: https://cams.lab.lemisieur.com
-          description: cams.lab.lemisieur.com
-          icon: si-homebridge-#491F59
+          href: https://scrypted.lab.lemisieur.com
+          description: scrypted.lab.lemisieur.com
+          icon: sh-scrypted
     - network:
-      - site-01:
-          href: https://site-01.lab.lemisieur.com
-          description: site-01.lab.lemisieur.com
-          icon: si-ubiquiti-#0559C9
       - site-01-fiber:
           href: https://site-01-fiber.lab.lemisieur.com
           description: site-01-fiber.lab.lemisieur.com
+          icon: si-ubiquiti-#0559C9
+      - site-01:
+          href: https://site-01.lab.lemisieur.com
+          description: site-01.lab.lemisieur.com
           icon: si-ubiquiti-#0559C9
       - site-02:
           href: https://site-02.lab.lemisieur.com
           description: site-02.lab.lemisieur.com
           icon: si-ubiquiti-#0559C9
-      - proxy:
-          href: https://srvs.lab.lemisieur.com
-          description: srvs.lab.lemisieur.com
+      - traefik:
+          href: https://traefik.k8s.lab.lemisieur.com
+          description: traefik.k8s.lab.lemisieur.com
           icon: si-envoyproxy-#AC6199
       - nextdns:
           href: https://my.nextdns.io
           description: my.nextdns.io
           icon: si-nextdns-#007BFF
-    - hosting:
-      - level.io:
-          href: https://app.level.io
-          description: app.level.io
-          icon: si-removedotbg-#2EB4E3
+    - vm:
       - proxmox:
           href: https://pve.lab.lemisieur.com
           description: pve.lab.lemisieur.com
           icon: si-proxmox-#E57000
-      - docker-02:
-          href: https://portainer.lab.lemisieur.com/#!/2/docker/dashboard
-          description: docker-02.lab.lemisieur.com
-          icon: si-docker-#2496ED
+      - pbs:
+          href: https://pbs.lab.lemisieur.com
+          description: pbs.lab.lemisieur.com
+          icon: si-proxmox-#E57000
     - data:
       - nas-01:
           href: https://nas.lab.lemisieur.com
@@ -92,10 +92,11 @@ data:
           href: https://nas-02.lab.lemisieur.com
           description: nas-02.lab.lemisieur.com
           icon: si-truenas-#0095D5   
-      - pbs:
-          href: https://pbs.lab.lemisieur.com
-          description: pbs.lab.lemisieur.com
-          icon: si-proxmox-#E57000
+    - monitoring:
+       - uptimekuma:
+          href: https://uptimekuma.lab.lemisieur.com
+          description: uptimekuma.lab.lemisieur.com
+          icon: si-uptimekuma-#5CDD8B
 
   widgets.yaml: |
     - logo:
