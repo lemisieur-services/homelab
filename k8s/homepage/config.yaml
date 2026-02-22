@@ -84,6 +84,19 @@ data:
           href: https://pbs.lab.lemisieur.com
           description: pbs.lab.lemisieur.com
           icon: si-proxmox-#E57000
+    - k8s
+      - kubernetes:
+          cluster:
+            show: false
+            cpu: true
+            memory: true
+            showLabel: true
+            label: "cluster"
+          nodes:
+            show: true
+            cpu: true
+            memory: true
+            showLabel: true
     - data:
       - nas-01:
           href: https://nas.lab.lemisieur.com
@@ -107,16 +120,4 @@ data:
     - greeting:
         text_size: xl
         text: HomeLab
-    - kubernetes:
-        cluster:
-          show: false
-          cpu: true
-          memory: true
-          showLabel: true
-          label: "cluster"
-        nodes:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
   docker.yaml: ""
