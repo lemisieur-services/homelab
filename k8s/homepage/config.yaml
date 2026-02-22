@@ -60,7 +60,7 @@ data:
         - homebridge:
             href: https://hb.lab.lemisieur.com
             description: hb.lab.lemisieur.com
-            icon: si-homebridge-#491F59
+            icon: si-homebridge-#8B5CF6
         - scrypted:
             href: https://scrypted.lab.lemisieur.com
             description: scrypted.lab.lemisieur.com
@@ -114,7 +114,7 @@ data:
             app: argocd-server
         - external-secrets:
             description: External Secrets Operator
-            icon: si-vault-#000000
+            icon: si-vault-#FFEC6E
             namespace: external-secrets
             app: external-secrets
         - reloader:
@@ -129,7 +129,7 @@ data:
             podSelector: app=metallb,component=controller
         - renovate:
             description: Renovate Bot
-            icon: si-renovatebot-#1A1F6C
+            icon: si-renovatebot-#0075FF
             namespace: renovate
             app: renovate
         - github-arc-controller:
@@ -139,13 +139,13 @@ data:
             app: gha-rs-controller
         - github-arc-runners:
             description: GitHub Actions Runners
-            icon: si-github-#181717
+            icon: si-github-#FFFFFF
             namespace: gh-arc-runners
             podSelector: actions.github.com/scale-set-name=gh-arc-runners
         - oauth2-proxy:
             href: https://oauth.k8s.lab.lemisieur.com
             description: oauth.k8s.lab.lemisieur.com
-            icon: si-authelia-#113155
+            icon: si-authelia-#4B9FFF
             namespace: oauth2-proxy
             app: oauth2-proxy
     - data:
