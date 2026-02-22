@@ -30,22 +30,22 @@ data:
       provider: google # google, duckduckgo, bing, baidu, brave or custom
     layout:
       home:
-        style: row
+        style: column
         columns: 3
       network:
-        style: row
+        style: column
         columns: 4
       virtualization:
-        style: row
+        style: column
         columns: 4
       kubernetes:
-        style: row
+        style: column
         columns: 3
       data:
-        style: row
+        style: column
         columns: 2
       monitoring:
-        style: row
+        style: column
         columns: 3
 
   custom.css: ""
