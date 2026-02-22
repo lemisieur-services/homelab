@@ -34,8 +34,17 @@ data:
         columns: 3
       network:
         style: row
-        columns: 3
+        columns: 4
+      platform:
+        style: row
+        columns: 4
       infra:
+        style: row
+        columns: 3
+      data:
+        style: row
+        columns: 2
+      monitoring:
         style: row
         columns: 3
 
@@ -73,7 +82,7 @@ data:
             href: https://my.nextdns.io
             description: my.nextdns.io
             icon: si-nextdns-#007BFF
-    - vm:
+    - platform:
         - proxmox:
             href: https://pve.lab.lemisieur.com
             description: pve.lab.lemisieur.com
@@ -82,7 +91,6 @@ data:
             href: https://pbs.lab.lemisieur.com
             description: pbs.lab.lemisieur.com
             icon: si-proxmox-#E57000
-    - k8s:
         - argocd:
             href: https://argocd.k8s.lab.lemisieur.com
             description: argocd.k8s.lab.lemisieur.com
@@ -138,7 +146,7 @@ data:
             description: MetalLB Load Balancer
             icon: si-kubernetes-#326CE5
             namespace: metallb-system
-            app: metallb
+            podSelector: app=metallb,component=controller
         - renovate:
             description: Renovate Bot
             icon: si-renovatebot-#1A1F6C
