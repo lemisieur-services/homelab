@@ -97,6 +97,7 @@ data:
           href: https://uptimekuma.lab.lemisieur.com
           description: uptimekuma.lab.lemisieur.com
           icon: si-uptimekuma-#5CDD8B
+          namespace: uptimekuma
 
   widgets.yaml: |
     - logo:
