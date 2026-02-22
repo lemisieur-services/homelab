@@ -98,6 +98,12 @@ data:
             icon: si-traefikproxy-#24A1C1
             namespace: traefik
             app: traefik
+        - oauth2-proxy:
+            href: https://oauth.k8s.lab.lemisieur.com
+            description: oauth.k8s.lab.lemisieur.com
+            icon: si-authelia-#113155
+            namespace: oauth2-proxy
+            app: oauth2-proxy
         - longhorn:
             href: https://longhorn.k8s.lab.lemisieur.com
             description: longhorn.k8s.lab.lemisieur.com
