@@ -84,6 +84,8 @@ data:
           href: https://argocd.k8s.lab.lemisieur.com
           description: argocd.k8s.lab.lemisieur.com
           icon: si-argo-#EF7B4D
+          namespace: argocd
+          app: argocd
       - portainer:
           href: https://portainer.k8s.lab.lemisieur.com
           description: portainer.k8s.lab.lemisieur.com
@@ -95,10 +97,13 @@ data:
           description: traefik.k8s.lab.lemisieur.com
           icon: si-traefikproxy-#24A1C1
           namespace: traefik
+          app: traefik
       - longhorn:
           href: https://longhorn.k8s.lab.lemisieur.com
           description: longhorn.k8s.lab.lemisieur.com
           icon: sh-longhorn
+          namespace: longhorn
+          app: longhorn-driver-deployer
     - data:
       - nas-01:
           href: https://nas.lab.lemisieur.com
