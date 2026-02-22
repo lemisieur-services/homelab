@@ -35,6 +35,9 @@ data:
       network:
         style: row
         columns: 3
+      infra:
+        style: row
+        columns: 3
 
   custom.css: ""
   custom.js: ""
@@ -110,6 +113,37 @@ data:
             icon: sh-longhorn
             namespace: longhorn
             app: longhorn
+    - infra:
+        - arc-controller:
+            description: GitHub Actions Runner Controller
+            icon: si-githubactions-#2088FF
+            namespace: gh-arc-controller
+            app: gha-rs-controller
+        - arc-runners:
+            description: GitHub Actions Runners
+            icon: si-github-#181717
+            namespace: gh-arc-runners
+            podSelector: actions.github.com/scale-set-name=gh-arc-runners
+        - external-secrets:
+            description: External Secrets Operator
+            icon: si-vault-#000000
+            namespace: external-secrets
+            app: external-secrets
+        - reloader:
+            description: Reloader
+            icon: si-kubernetes-#326CE5
+            namespace: reloader
+            app: reloader
+        - metallb:
+            description: MetalLB Load Balancer
+            icon: si-kubernetes-#326CE5
+            namespace: metallb-system
+            app: metallb
+        - renovate:
+            description: Renovate Bot
+            icon: si-renovatebot-#1A1F6C
+            namespace: renovate
+            app: renovate
     - data:
         - nas-01:
             href: https://nas.lab.lemisieur.com
