@@ -107,14 +107,9 @@ data:
     - greeting:
         text_size: xl
         text: HomeLab
-    - datetime:
-        text_size: xl
-        format:
-            timeStyle: short
-            hour12: true
     - kubernetes:
         cluster:
-          show: true
+          show: false
           cpu: true
           memory: true
           showLabel: true
