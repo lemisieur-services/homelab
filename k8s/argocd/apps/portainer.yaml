@@ -8,7 +8,7 @@ spec:
   sources:
     - chart: portainer
       repoURL: https://portainer.github.io/k8s/
-      targetRevision: 2.33.6
+      targetRevision: 2.39.0
       helm:
         values: |
           enterpriseEdition:
