@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyfin
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: jellyfin-01.ip.lab.lemisieur.com
+  ports:
+  - port: 8096
+    targetPort: 8096
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jellyfin
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`jellyfin.lab.lemisieur.com`)
+    services:
+    - name: jellyfin
+      port: 8096
+      scheme: http
+      passHostHeader: true
+      weight: 100
