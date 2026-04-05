@@ -1,0 +1,17 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: seerr
+  namespace: seerr
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`seer.lab.lemisieur.com`)
+    services:
+    - name: seerr
+      port: 80
