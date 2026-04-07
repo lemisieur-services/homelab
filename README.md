@@ -1,50 +1,42 @@
 # Homelab
 
-This repository contains the configurations and scripts used in my home lab. Feel free to use them where you see fit. Contributions are welcome!
+This repository contains the configurations I use to manage my personal homelab. It is shared publicly for reference and inspiration — feel free to browse, but please read the disclaimer below before using anything here.
 
 ## Table of Contents
 
 - [Homelab](#homelab)
   - [Table of Contents](#table-of-contents)
+  - [Disclaimer](#disclaimer)
   - [Overview](#overview)
   - [Directory Structure](#directory-structure)
-  - [Usage](#usage)
-    - [Deploying Mac Scripts](#deploying-mac-scripts)
-    - [Deploying Homepage](#deploying-homepage)
-    - [Running Media Services](#running-media-services)
-    - [Contributing](#contributing)
-    - [License](#license)
+  - [License](#license)
+
+## Disclaimer
+
+> **This repository is provided as-is, without any warranty or guarantee of any kind.**
+>
+> The configurations and scripts here are what I personally use to manage my own homelab. They are shared for reference only. I make no claims that they will work in your environment, and I am not responsible for any issues that may arise from using them. Use at your own risk.
 
 ## Overview
 
-This repository is meant to be the home of all my home lab configurations and scripts. It includes various services and tools that I use to manage and automate my home lab environment.
+This is my personal homelab repository. It houses all the Kubernetes manifests, network configurations, and tooling I use to run and automate my homelab environment. The setup is built around ArgoCD for GitOps-style deployments and Traefik as the ingress controller.
 
 ## Directory Structure
 
-- **.github/workflows/**: GitHub Actions workflows for deploying configurations.
-- **services/homepage/**: Configuration files and Docker setup for the homepage service.
-- **services/mac-scripts/**: Shell scripts for managing Mac-specific tasks.
-- **services/media-services/**: Docker setup for media-related services, like downloads and streaming.
+- **k8s/**: Kubernetes manifests for all services deployed in the homelab.
+  - **argocd/**: ArgoCD Application definitions for GitOps deployments.
+  - **homepage/**: Configuration for the homelab dashboard.
+  - **traefik/**: Traefik ingress controller configuration and TLS certificates.
+  - **eso/**: External Secrets Operator configuration (secrets sourced from Azure Key Vault).
+  - **longhorn/**: Longhorn distributed storage configuration.
+  - **oauth2-proxy/**: OAuth2 Proxy for authentication.
+  - **uptimekuma/**: Uptime Kuma monitoring configuration.
+  - **seerr/**: Overseerr/Jellyseerr configuration.
+  - **portainer/**: Portainer container management configuration.
+  - **renovate/**: Renovate bot configuration for automated dependency updates.
+  - **gh-arc/**: GitHub Actions Runner Controller configuration.
+- **network/**: Network-related configurations.
 
-## Usage
+## License
 
-### Deploying Mac Scripts
-
-The `macscripts-deploy.yml` workflow deploys Mac scripts to a remote server. It triggers on pushes to the `main` branch affecting files in the `services/mac-scripts/` directory.
-
-### Deploying Homepage
-
-The `homepage-deploy.yml` workflow deploys the homepage configuration to a NAS drive. It triggers on pushes to the `main` branch affecting files in the `services/homepage/` directory or the workflow file itself.
-
-### Running Media Services
-
-The `docker-compose.yml` file in the `services/media-services/` directory sets up various media services using Docker. To start the services, navigate to the directory and run:
-```sh
-docker-compose up -d
-```
-
-### Contributing
-Contributions are welcome! Please open an issue or submit a pull request with your changes. Make sure to follow the existing code style and include relevant tests.
-
-### License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
