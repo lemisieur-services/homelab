@@ -11,7 +11,7 @@ spec:
       path: k8s/traefik/certs
     - chart: uptime-kuma
       repoURL: https://helm.irsigler.cloud
-      targetRevision: 2.25.0
+      targetRevision: 4.1.0
       helm:
         values: |
           volume:
