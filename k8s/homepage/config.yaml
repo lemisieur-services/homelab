@@ -74,11 +74,11 @@ data:
             href: https://site-02.lab.lemisieur.com
             description: site-02.lab.lemisieur.com
             icon: si-ubiquiti-#0559C9
-        - dns-01
+        - dns-01:
             href: https://dns-01.lab.lemisieur.com
             description: dns-01.lab.lemisieur.com
             icon: sh-technitium
-        - dns-02
+        - dns-02:
             href: https://dns-02.lab.lemisieur.com
             description: dns-02.lab.lemisieur.com
             icon: sh-technitium
