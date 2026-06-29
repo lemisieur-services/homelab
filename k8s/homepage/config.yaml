@@ -77,11 +77,11 @@ data:
         - dns-01
             href: https://dns-01.lab.lemisieur.com
             description: dns-01.lab.lemisieur.com
-            icon: sh-technitium-dark
+            icon: sh-technitium
         - dns-02
             href: https://dns-02.lab.lemisieur.com
             description: dns-02.lab.lemisieur.com
-            icon: sh-technitium-dark  
+            icon: sh-technitium
         - nextdns:
             href: https://my.nextdns.io
             description: my.nextdns.io
