@@ -11,7 +11,7 @@ spec:
       path: k8s/renovate
     - repoURL: https://renovatebot.github.io/helm-charts
       chart: renovate
-      targetRevision: 46.207.0
+      targetRevision: 46.211.1
       helm:
         releaseName: renovate
         values: |
