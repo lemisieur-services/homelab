@@ -66,10 +66,6 @@ data:
             description: scrypted.lab.lemisieur.com
             icon: sh-scrypted
     - network:
-        - site-01-fiber:
-            href: https://site-01-fiber.lab.lemisieur.com
-            description: site-01-fiber.lab.lemisieur.com
-            icon: si-ubiquiti-#0559C9
         - site-01:
             href: https://site-01.lab.lemisieur.com
             description: site-01.lab.lemisieur.com
@@ -78,6 +74,14 @@ data:
             href: https://site-02.lab.lemisieur.com
             description: site-02.lab.lemisieur.com
             icon: si-ubiquiti-#0559C9
+        - dns-01
+            href: https://dns-01.lab.lemisieur.com
+            description: dns-01.lab.lemisieur.com
+            icon: sh-technitium-dark
+        - dns-02
+            href: https://dns-02.lab.lemisieur.com
+            description: dns-02.lab.lemisieur.com
+            icon: sh-technitium-dark  
         - nextdns:
             href: https://my.nextdns.io
             description: my.nextdns.io
