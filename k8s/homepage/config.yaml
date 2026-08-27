@@ -154,7 +154,7 @@ data:
             app: oauth2-proxy
     - data:
         - nas-01:
-            href: https://nas.lab.lemisieur.com
+            href: https://nas-01.lab.lemisieur.com
             description: nas-01.lab.lemisieur.com
             icon: si-truenas-#0095D5
         - nas-02:
