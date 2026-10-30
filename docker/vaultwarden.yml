@@ -3,19 +3,22 @@ services:
     image: vaultwarden/server@sha256:efb3cde962015fcc036b2ea625242248611943b27212ebf4392841fb30fad055
     container_name: vaultwarden
     restart: unless-stopped
+
     environment:
-		DOMAIN: https://vault.lab.lemisieur.com
-		SIGNUPS_ALLOWED: false
-		SIGNUPS_VERIFY: false
-		INVITATIONS_ALLOWED: false
-		SENDS_ALLOWED: false
-		EMERGENCY_ACCESS_ALLOWED: false
-		LOGIN_RATELIMIT_SECONDS: 60
-		LOGIN_RATELIMIT_MAX_BURST: 10
-		UNAUTHENTICATED_RATELIMIT_SECONDS: 60
-		UNAUTHENTICATED_RATELIMIT_MAX_BURST: 50
-		# ADMIN_TOKEN: ${ADMIN_TOKEN}
+      DOMAIN: "https://vault.lab.lemisieur.com"
+      SIGNUPS_ALLOWED: "false"
+      SIGNUPS_VERIFY: "false"
+      INVITATIONS_ALLOWED: "false"
+      SENDS_ALLOWED: "false"
+      EMERGENCY_ACCESS_ALLOWED: "false"
+      LOGIN_RATELIMIT_SECONDS: 60
+      LOGIN_RATELIMIT_MAX_BURST: 10
+      UNAUTHENTICATED_RATELIMIT_SECONDS: 60
+      UNAUTHENTICATED_RATELIMIT_MAX_BURST: 50
+      # ADMIN_TOKEN: ${ADMIN_TOKEN}
+
     volumes:
       - /bitwarden:/data:rw
+
     ports:
-      - 8000:80
+      - "8000:80"
