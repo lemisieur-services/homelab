@@ -22,7 +22,7 @@ spec:
     secretName: lab-lemisieur-com
   routes:
   - kind: Rule
-    match: Host(`vault.lab.lemisieur.com`)
+    match: Host(`vault.lemisieur.com`)
     services:
     - name: vaultwarden
       port: 8000
