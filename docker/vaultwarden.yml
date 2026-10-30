@@ -10,4 +10,4 @@ services:
     volumes:
       - /bitwarden:/data:rw
     ports:
-      - 127.0.0.1:8000:80
+      - 8000:80
