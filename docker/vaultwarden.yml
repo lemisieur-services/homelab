@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
 
     environment:
-      DOMAIN: "https://vault.lab.lemisieur.com"
+      DOMAIN: "https://vault.lemisieur.com"
       SIGNUPS_ALLOWED: "false"
       SIGNUPS_VERIFY: "false"
       INVITATIONS_ALLOWED: "false"
