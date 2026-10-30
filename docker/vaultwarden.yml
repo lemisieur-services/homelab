@@ -6,6 +6,7 @@ services:
     environment:
       DOMAIN: https://vault.lab.lemisieur.com
       SIGNUPS_ALLOWED: false
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
     volumes:
       - ./bitwarden:/data:rw
     ports:
