@@ -8,6 +8,6 @@ services:
       SIGNUPS_ALLOWED: false
       ADMIN_TOKEN: ${ADMIN_TOKEN}
     volumes:
-      - ./bitwarden:/data:rw
+      - /bitwarden:/data:rw
     ports:
       - 127.0.0.1:8000:80
