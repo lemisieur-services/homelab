@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vaultwarden
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: vaultwarden-01.ip.lab.lemisieur.com
+  ports:
+  - port: 8000
+    targetPort: 8000
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vault
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`vault.lab.lemisieur.com`)
+    services:
+    - name: vaultwarden
+      port: 8000
+      scheme: http
+      passHostHeader: true
+      weight: 100
