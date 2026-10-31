@@ -19,7 +19,7 @@ spec:
   entryPoints:
   - websecure
   tls:
-    secretName: lab-lemisieur-com
+    secretName: vault-lemisieur-com
   routes:
   - kind: Rule
     match: Host(`vault.lemisieur.com`)
