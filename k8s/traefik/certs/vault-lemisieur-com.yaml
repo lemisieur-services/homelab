@@ -1,0 +1,20 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: vault-lemisieur-com
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: lemisieur-k8s-secrets
+    kind: ClusterSecretStore
+  target:
+    name: vault-lemisieur-com
+    template:
+      type: kubernetes.io/tls
+      data:
+        tls.crt: '{{ .cert | b64dec | pkcs12cert }}'
+        tls.key: '{{ .cert | b64dec | pkcs12key }}'
+  data:
+  - secretKey: cert
+    remoteRef:
+      key: vault-lemisieur-com
