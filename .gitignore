@@ -17,6 +17,7 @@
 # Sensitive files
 **/*.tfvars
 **/*.tfvars.json
+**/1password-credentials.json
 
 # Ignore editor specific files
 **/.vscode/
