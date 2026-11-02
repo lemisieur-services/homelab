@@ -30,6 +30,7 @@ This is my personal homelab repository. It houses all the Kubernetes manifests, 
   - **eso/**: External Secrets Operator configuration (secrets sourced from Azure Key Vault).
   - **longhorn/**: Longhorn distributed storage configuration.
   - **oauth2-proxy/**: OAuth2 Proxy for authentication.
+  - **onepassword-connect/**: Service-only 1Password Connect deployment and external credentials.
   - **uptimekuma/**: Uptime Kuma monitoring configuration.
   - **seerr/**: Overseerr/Jellyseerr configuration.
   - **portainer/**: Portainer container management configuration.
