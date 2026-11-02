@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: isponsorblocktv
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/lemisieur-services/homelab.git
+    targetRevision: main
+    path: k8s/isponsorblocktv
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: isponsorblocktv
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

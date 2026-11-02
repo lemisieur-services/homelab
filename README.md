@@ -31,6 +31,7 @@ This is my personal homelab repository. It houses all the Kubernetes manifests, 
   - **longhorn/**: Longhorn distributed storage configuration.
   - **oauth2-proxy/**: OAuth2 Proxy for authentication.
   - **uptimekuma/**: Uptime Kuma monitoring configuration.
+  - **isponsorblocktv/**: iSponsorBlockTV deployment, persistent storage, and TV pairing instructions.
   - **seerr/**: Overseerr/Jellyseerr configuration.
   - **portainer/**: Portainer container management configuration.
   - **renovate/**: Renovate bot configuration for automated dependency updates.
