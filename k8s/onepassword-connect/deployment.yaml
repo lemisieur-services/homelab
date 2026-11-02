@@ -31,7 +31,7 @@ spec:
         node.kubernetes.io/class: proxy
       containers:
         - name: connect-api
-          image: 1password/connect-api:1.8.4
+          image: 1password/connect-api:1.8.4@sha256:0f74924c55c9156b8116f59f485223b2c2d30a5148d362562aa27838159bdffa
           env:
             - name: OP_SESSION
               valueFrom:
@@ -63,7 +63,7 @@ spec:
             - name: shared-data
               mountPath: /home/opuser/.op/data
         - name: connect-sync
-          image: 1password/connect-sync:1.8.4
+          image: 1password/connect-sync:1.8.4@sha256:ca34850f2a20ca302e688a9347cdb696f29ce3bfc011d2554eff338e315c9089
           env:
             - name: OP_SESSION
               valueFrom:
