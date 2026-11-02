@@ -1,64 +1,31 @@
 # 1Password Connect
 
-This ArgoCD application runs one 1Password Connect instance in the
-`onepassword-connect` namespace on the homelab's proxy nodes. The API and sync
-containers share an `emptyDir` volume for their encrypted cache, following
-[1Password's two-container architecture](https://developer.1password.com/docs/connect/server-configuration/).
+ArgoCD deploys the Connect API and sync containers, a ClusterIP Service on port
+8080, and a namespaced SecretStore for the `lab-01` vault. There is no Ingress
+or external Service exposure.
 
-## Bootstrap credentials
+## Existing Secrets
 
-Create a Connect server and download its `1password-credentials.json` file using
-the [1Password setup instructions](https://developer.1password.com/docs/connect/get-started/).
-Upload the raw JSON file contents as an Azure Key Vault secret named
-`onepassword-connect-credentials` in the existing `lemisieur-k8s-secrets` vault.
-Do not base64-encode the JSON or commit credentials or access tokens to Git.
+Following the [External Secrets 1Password guide](https://external-secrets.io/latest/provider/1password-automation/),
+these Secrets must already exist in the `onepassword-connect` namespace:
 
-The existing External Secrets Operator and `lemisieur-k8s-secrets`
-ClusterSecretStore must be healthy and authorized to read that secret. The
-`ExternalSecret` creates a Kubernetes Secret named
-`onepassword-connect-credentials`, with a `1password-credentials.json` key
-mounted read-only into both containers. The Deployment will wait for this Secret
-to exist; it does not bootstrap credentials from Connect itself.
+| Secret | Key | Value |
+| --- | --- | --- |
+| `connect-server-credentials` | `1password-credentials.json` | Base64-encoded contents of the credentials JSON |
+| `onepassword-connect-token` | `token` | Connect access token with access to `lab-01` |
 
-The ArgoCD Application at `k8s/argocd/apps/onepassword-connect.yaml` follows the
-repository's automated sync policy and creates the namespace. If application
-discovery is not already configured for that directory, register it explicitly:
+Both containers read `OP_SESSION` from the credentials Secret. Its decoded
+Kubernetes Secret value must itself be base64-encoded JSON, as required by the
+guide's environment-variable approach. The access token is a separate client
+credential used by the SecretStore, not a replacement for the server credentials.
+Neither Secret is created or managed by this application.
 
-```sh
-kubectl apply -f k8s/argocd/apps/onepassword-connect.yaml
-```
+## Usage
 
-## Service-only access
-
-Set clients' `OP_CONNECT_HOST` to
+ExternalSecrets in this namespace can reference `kind: SecretStore`,
+`name: onepassword-connect`. Other in-cluster clients can reach
 `http://onepassword-connect.onepassword-connect.svc.cluster.local:8080`.
-Provide a scoped Connect access token to each client separately as
-`OP_CONNECT_TOKEN`, as described in the
-[1Password setup instructions](https://developer.1password.com/docs/connect/get-started/).
 
-The only Service is a `ClusterIP` exposing API port 8080. There is no Ingress,
-IngressRoute, Gateway route, NodePort, LoadBalancer, host port, or host networking;
-the sync health port and container bus ports are not exposed by the Service.
-ClusterIP is not a network access-control policy: use this HTTP endpoint only on
-a trusted cluster network, consistent with
-[1Password's TLS guidance](https://developer.1password.com/docs/connect/server-configuration/#tls).
-
-## Operations
-
-Both containers have readiness and liveness probes. They run as non-root with
-read-only root filesystems and no Kubernetes API token; the shared cache remains
-writable. The existing Reloader installation restarts the Deployment when its
-credentials Secret changes.
-
-The cache is ephemeral and is repopulated from 1Password after Pod replacement.
-Allow outbound connectivity to 1Password for initial synchronization and updates;
-there is no PVC or Kubernetes Operator in this deployment.
-
-After ArgoCD syncs, check credentials and rollout:
-
-```sh
-kubectl -n onepassword-connect wait \
-  --for=condition=Ready externalsecret/onepassword-connect-credentials --timeout=120s
-kubectl -n onepassword-connect rollout status deployment/onepassword-connect
-kubectl -n onepassword-connect get service onepassword-connect
-```
+The API and sync containers share an ephemeral cache and use health probes.
+The existing Reloader restarts them when credentials change. HTTP assumes a
+trusted cluster network; the [guide recommends encrypted connections](https://external-secrets.io/latest/provider/1password-automation/#deploy-a-connect-server).

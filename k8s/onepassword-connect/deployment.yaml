@@ -8,7 +8,6 @@ metadata:
     reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
-  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: onepassword-connect
@@ -18,14 +17,11 @@ spec:
         app.kubernetes.io/name: onepassword-connect
     spec:
       automountServiceAccountToken: false
-      enableServiceLinks: false
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
         runAsGroup: 999
         fsGroup: 999
-        seccompProfile:
-          type: RuntimeDefault
       tolerations:
         - key: node.kubernetes.io/role
           operator: Equal
@@ -36,24 +32,18 @@ spec:
       containers:
         - name: connect-api
           image: 1password/connect-api:1.8.4
-          imagePullPolicy: IfNotPresent
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
           env:
             - name: OP_SESSION
-              value: /credentials/1password-credentials.json
+              valueFrom:
+                secretKeyRef:
+                  name: connect-server-credentials
+                  key: 1password-credentials.json
             - name: OP_HTTP_PORT
               value: "8080"
             - name: OP_BUS_PORT
               value: "11220"
             - name: OP_BUS_PEERS
               value: localhost:11221
-            - name: OP_LOG_LEVEL
-              value: info
           ports:
             - name: http
               containerPort: 8080
@@ -69,38 +59,23 @@ spec:
               port: http
             initialDelaySeconds: 15
             periodSeconds: 30
-          resources:
-            requests:
-              cpu: 100m
-              memory: 64Mi
-            limits:
-              memory: 256Mi
           volumeMounts:
-            - name: credentials
-              mountPath: /credentials
-              readOnly: true
             - name: shared-data
               mountPath: /home/opuser/.op/data
         - name: connect-sync
           image: 1password/connect-sync:1.8.4
-          imagePullPolicy: IfNotPresent
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
           env:
             - name: OP_SESSION
-              value: /credentials/1password-credentials.json
+              valueFrom:
+                secretKeyRef:
+                  name: connect-server-credentials
+                  key: 1password-credentials.json
             - name: OP_HTTP_PORT
               value: "8081"
             - name: OP_BUS_PORT
               value: "11221"
             - name: OP_BUS_PEERS
               value: localhost:11220
-            - name: OP_LOG_LEVEL
-              value: info
           ports:
             - name: sync-health
               containerPort: 8081
@@ -116,25 +91,9 @@ spec:
               port: sync-health
             initialDelaySeconds: 15
             periodSeconds: 30
-          resources:
-            requests:
-              cpu: 100m
-              memory: 64Mi
-            limits:
-              memory: 256Mi
           volumeMounts:
-            - name: credentials
-              mountPath: /credentials
-              readOnly: true
             - name: shared-data
               mountPath: /home/opuser/.op/data
       volumes:
-        - name: credentials
-          secret:
-            secretName: onepassword-connect-credentials
-            defaultMode: 0440
-            items:
-              - key: 1password-credentials.json
-                path: 1password-credentials.json
         - name: shared-data
           emptyDir: {}
