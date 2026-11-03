@@ -11,10 +11,12 @@ spec:
     name: vault-lemisieur-com
     template:
       type: kubernetes.io/tls
-      data:
-        tls.crt: '{{ .cert | b64dec | pkcs12cert }}'
-        tls.key: '{{ .cert | b64dec | pkcs12key }}'
   data:
-  - secretKey: cert
+  - secretKey: tls.crt
     remoteRef:
-      key: vault-lemisieur-com
+      key: sslcert-vault_lemisieur_com
+      property: tls.crt
+  - secretKey: tls.key
+    remoteRef:
+      key: sslcert-vault_lemisieur_com
+      property: tls.key
