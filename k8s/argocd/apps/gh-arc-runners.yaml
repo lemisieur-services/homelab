@@ -28,6 +28,23 @@ spec:
             value: "1"
           - name: maxRunners
             value: "10"
+        valuesObject:
+          template:
+            spec:
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 1001
+                runAsGroup: 123
+                seccompProfile:
+                  type: RuntimeDefault
+              containers:
+                - name: runner
+                  image: ghcr.io/actions/actions-runner:latest
+                  command: ["/home/runner/run.sh"]
+                  securityContext:
+                    allowPrivilegeEscalation: false
+                    capabilities:
+                      drop: ["ALL"]
 
   destination:
     server: https://kubernetes.default.svc
