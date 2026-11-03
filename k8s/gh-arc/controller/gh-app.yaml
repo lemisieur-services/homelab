@@ -6,26 +6,20 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: lemisieur-k8s-secrets
+    name: onepassword-labk8s
     kind: ClusterSecretStore
   target:
     name: gh-app
   data:
   - secretKey: github_app_id
     remoteRef:
-      conversionStrategy: Default	
-      decodingStrategy: None
-      metadataPolicy: None
-      key: gharc-ghapp-appid
+      key: githubarc-ghapp
+      property: username
   - secretKey: github_app_installation_id
     remoteRef:
-      conversionStrategy: Default	
-      decodingStrategy: None
-      metadataPolicy: None
-      key: gharc-ghapp-appinstallationid
+      key: githubarc-ghapp
+      property: installation_id
   - secretKey: github_app_private_key
     remoteRef:
-      conversionStrategy: Default	
-      decodingStrategy: None
-      metadataPolicy: None
-      key: gharc-ghapp-appprivatekey
+      key: githubarc-ghapp
+      property: private_key
