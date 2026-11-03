@@ -11,11 +11,12 @@ spec:
     name: k8s-lab-lemisieur-com
     template:
       type: kubernetes.io/tls
-      data:
-        tls.crt: '{{ .cert | b64dec | pkcs12cert }}'
-        tls.key: '{{ .cert | b64dec | pkcs12key }}'
   data:
-  - secretKey: cert
+  - secretKey: tls.crt
     remoteRef:
-      key: ssl-certificates
-      property: k8s-lab-lemisieur-com.pfx
+      key: sslcert-k8s_lab_lemisieur_com
+      property: tls.crt
+  - secretKey: tls.key
+    remoteRef:
+      key: sslcert-k8s_lab_lemisieur_com
+      property: tls.key
