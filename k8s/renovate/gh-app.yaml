@@ -27,5 +27,5 @@ spec:
         property: password
     - secretKey: app_private_key
       remoteRef:
-        key: renovate-ghapp
-        property: private_key
+        key: renovate-ghapp-privatekey
+        property: private_key.pem
