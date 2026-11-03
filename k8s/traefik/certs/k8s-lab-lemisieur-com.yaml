@@ -5,7 +5,7 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: lemisieur-k8s-secrets
+    name: onepassword-labk8s
     kind: ClusterSecretStore
   target:
     name: k8s-lab-lemisieur-com
@@ -17,4 +17,5 @@ spec:
   data:
   - secretKey: cert
     remoteRef:
-      key: k8s-lab-lemisieur-com
+      key: ssl-certificates
+      property: k8s-lab-lemisieur-com.pfx
