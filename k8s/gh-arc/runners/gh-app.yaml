@@ -22,4 +22,4 @@ spec:
   - secretKey: github_app_private_key
     remoteRef:
       key: githubarc-ghapp
-      property: private_key
+      property: private_key.pem
