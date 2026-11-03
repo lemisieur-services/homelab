@@ -5,7 +5,7 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: lemisieur-k8s-secrets
+    name: onepassword-labk8s
     kind: ClusterSecretStore
   target:
     name: lab-lemisieur-com
