@@ -5,31 +5,34 @@ metadata:
   namespace: argocd
 spec:
   project: github
-  source:
+
+  sources:
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/gh-arc/runners
-    - repoURL: ghcr.io/actions/actions-runner-controller-charts
+
+    - repoURL: oci://ghcr.io/actions/actions-runner-controller-charts
       chart: gha-runner-scale-set
-      targetRevision: "0.15.1"
+      targetRevision: 0.15.1
       helm:
         parameters:
           - name: githubConfigUrl
-            value: "https://github.com/lemisieur-services"
+            value: https://github.com/lemisieur-services
           - name: githubConfigSecret
-            value: "gh-app"
+            value: gh-app
           - name: controllerServiceAccount.namespace
-            value: "gh-arc-controller"  # Controller namespace
+            value: gh-arc-controller
           - name: controllerServiceAccount.name
-            value: "gha-runner-scale-set-controller"
+            value: gha-runner-scale-set-controller
           - name: minRunners
-            value: "1"  # Min idle runners
+            value: "1"
           - name: maxRunners
-            value: "10"  # Max runners
-          # Optional: - name: containerMode value: "kubernetes" (or dind)
+            value: "10"
+
   destination:
     server: https://kubernetes.default.svc
-    namespace: gh-arc-runners  # Separate NS for runners; create if needed
+    namespace: gh-arc-runners
+
   syncPolicy:
     automated:
       enabled: true
