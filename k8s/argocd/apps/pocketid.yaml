@@ -16,7 +16,7 @@ spec:
         releaseName: pocket-id
         values: |
           image:
-            tag: v2.4.0
+            tag: v2.19.2
           existingSecret: pocket-id-secret
           config:
             appUrl: https://fed.lab.lemisieur.com
