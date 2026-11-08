@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pocketid
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/traefik/certs
+    - repoURL: ghcr.io/hobbit44/pocket-id-helm
+      chart: pocket-id
+      targetRevision: 2.4.0
+      helm:
+        releaseName: pocket-id
+        values: |
+          config:
+            appUrl: https://fed.lab.lemisieur.com
+            trustProxy: "true"
+          persistence:
+            enabled: true
+            existingClaim: pocket-id-data
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/pocketid
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pocketid
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
