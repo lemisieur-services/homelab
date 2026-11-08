@@ -17,7 +17,7 @@ spec:
         values: |
           config:
             appUrl: https://fed.lab.lemisieur.com
-            trustProxy: "true"
+            trustProxy: '"true"'
           enterprise:
             enabled: false
           persistence:
