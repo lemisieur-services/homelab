@@ -18,6 +18,8 @@ spec:
           config:
             appUrl: https://fed.lab.lemisieur.com
             trustProxy: "true"
+          enterprise:
+            enabled: false
           persistence:
             enabled: true
             existingClaim: pocket-id-data
