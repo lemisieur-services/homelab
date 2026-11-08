@@ -9,29 +9,40 @@ spec:
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/traefik/certs
-    - repoURL: ghcr.io/hobbit44/pocket-id-helm
+    - repoURL: https://anza-labs.github.io/charts
       chart: pocket-id
-      targetRevision: 2.4.0
+      targetRevision: 2.2.2
       helm:
         releaseName: pocket-id
         values: |
-          image:
-            tag: v2.19.2
-          existingSecret: pocket-id-secret
-          config:
-            appUrl: https://fed.lab.lemisieur.com
-            trustProxy: '"true"'
-          enterprise:
-            enabled: false
+          host: fed.lab.lemisieur.com
+          trustProxy: true
+          pocketID:
+            image:
+              tag: v2.19.2
+          secret:
+            create: false
+            name: pocket-id-secret
+          service:
+            port: 1411
           persistence:
-            enabled: true
-            existingClaim: pocket-id-data
+            data:
+              enabled: true
+              existingClaim: pocket-id-data
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/pocketid
   destination:
     server: https://kubernetes.default.svc
     namespace: pocketid
+  # The previous chart omitted this immutable StatefulSet field.
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      name: pocket-id
+      namespace: pocketid
+      jsonPointers:
+        - /spec/serviceName
   syncPolicy:
     automated:
       enabled: true
@@ -40,3 +51,4 @@ spec:
       allowEmpty: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
