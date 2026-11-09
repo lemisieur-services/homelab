@@ -1,0 +1,27 @@
+# The app only serves TLS on 8443 with its own certificate.
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: certmanager-transport
+  namespace: certmanager
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: certmanager
+  namespace: certmanager
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+  - kind: Rule
+    match: Host(`clm.lab.lemisieur.com`)
+    services:
+    - name: certmanager
+      port: 8443
+      scheme: https
+      serversTransport: certmanager-transport
