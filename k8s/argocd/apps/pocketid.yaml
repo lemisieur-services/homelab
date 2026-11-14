@@ -11,7 +11,7 @@ spec:
       path: k8s/traefik/certs
     - repoURL: https://anza-labs.github.io/charts
       chart: pocket-id
-      targetRevision: 2.2.2
+      targetRevision: 2.3.0
       helm:
         releaseName: pocket-id
         values: |
