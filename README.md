@@ -35,7 +35,6 @@ This is my personal homelab repository. It houses all the Kubernetes manifests, 
   - **isponsorblocktv/**: iSponsorBlockTV deployment, persistent storage, and TV pairing instructions.
   - **certmanager/**: Homelab Cert Manager deployment, PVC-backed data, and Traefik ingress (clm.lab.lemisieur.com).
   - **seerr/**: Overseerr/Jellyseerr configuration.
-  - **portainer/**: Portainer container management configuration.
   - **renovate/**: Renovate bot configuration for automated dependency updates.
   - **gh-arc/**: GitHub Actions Runner Controller configuration.
 - **network/**: Network-related configurations.

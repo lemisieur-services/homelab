@@ -91,12 +91,6 @@ data:
             href: https://pve.lab.lemisieur.com
             description: pve.lab.lemisieur.com
             icon: si-proxmox-#E57000
-        - portainer:
-            href: https://portainer.k8s.lab.lemisieur.com
-            description: portainer.k8s.lab.lemisieur.com
-            icon: sh-portainer
-            namespace: portainer
-            app: portainer
         - traefik:
             href: https://traefik.k8s.lab.lemisieur.com
             description: traefik.k8s.lab.lemisieur.com
