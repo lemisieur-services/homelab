@@ -9,10 +9,10 @@ plugins, not Kubernetes cluster data or browser sessions.
 1. Create a Pocket ID client with the redirect URI
    `https://headlamp.k8s.lab.lemisieur.com/oidc-callback`. The issuer is
    `https://fed.lab.lemisieur.com`.
-2. The deployment requires a `headlamp-oidc` Secret in the `headlamp`
-   namespace with `OIDC_CLIENT_ID` and `OIDC_CLIENT_SECRET` keys. The planned
-   ExternalSecret sourcing these from `headlamp-oauth` in the
-   `onepassword-labk8s` ClusterSecretStore has not been added.
+2. The `onepassword-labk8s` ClusterSecretStore must have access to
+   `headlamp-oauth` for the OIDC client credentials and `sslcert-rootca`
+   with its `root.crt` attachment for trust in the issuer. ExternalSecrets
+   create the corresponding Secrets in the `headlamp` namespace.
 3. Configure the Kubernetes API server to trust the issuer and accept the
    client ID as an OIDC audience, then grant appropriate Kubernetes RBAC
    permissions to the authenticated user or group. API-server configuration
@@ -25,8 +25,8 @@ plugins, not Kubernetes cluster data or browser sessions.
    manages the required `headlamp` AppProject from `k8s/argocd/projects`.
 
 Check the Application, secrets, PVC, pod, HTTPS and login using an authorized
-identity. Restart the Headlamp pod after OIDC secret changes because environment
-variables are read at startup.
+identity. Restart the Headlamp pod after OIDC credential or CA changes:
+credentials and the Go system certificate pool are loaded at startup.
 
 The chart uses the default rolling deployment strategy and does not expose a
 strategy override. A rollout can stall if Longhorn cannot attach the

@@ -1,0 +1,18 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: root-ca
+  namespace: headlamp
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: onepassword-labk8s
+  target:
+    name: root-ca
+    creationPolicy: Owner
+  data:
+    - secretKey: root.crt
+      remoteRef:
+        key: sslcert-rootca
+        property: root.crt
