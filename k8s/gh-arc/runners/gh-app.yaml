@@ -18,7 +18,7 @@ spec:
   - secretKey: github_app_installation_id
     remoteRef:
       key: githubarc-ghapp
-      property: password
+      property: installation_id
   - secretKey: github_app_private_key
     remoteRef:
       key: githubarc-ghapp-privatekey
