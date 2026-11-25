@@ -1,0 +1,14 @@
+name: Test ARC runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: Show runner info
+        run: |
+          echo "Scheduled on: $(hostname)"
+          uname -a
+          whoami
