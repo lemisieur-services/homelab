@@ -27,6 +27,8 @@ spec:
               value: https://fed.lab.lemisieur.com
             - name: OIDC_CALLBACK_URL
               value: https://headlamp.k8s.lab.lemisieur.com/oidc-callback
+            - name: HEADLAMP_CONFIG_OIDC_SCOPES
+              value: openid,profile,email,groups
             - name: SSL_CERT_DIR
               value: /etc/ssl/certs:/headlamp/root-ca
           podSecurityContext:

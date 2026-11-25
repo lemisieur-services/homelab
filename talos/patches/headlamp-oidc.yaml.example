@@ -1,0 +1,19 @@
+machine:
+  files:
+    - path: /var/etc/headlamp-oidc/ca.crt
+      permissions: 0o644
+      op: overwrite
+      content: |
+        REPLACE_WITH_PEM_ENCODED_ROOT_CA
+cluster:
+  apiServer:
+    extraVolumes:
+      - hostPath: /var/etc/headlamp-oidc
+        mountPath: /etc/kubernetes/headlamp-oidc
+        readonly: true
+    extraArgs:
+      oidc-issuer-url: https://fed.lab.lemisieur.com
+      oidc-client-id: REPLACE_WITH_HEADLAMP_CLIENT_ID
+      oidc-ca-file: /etc/kubernetes/headlamp-oidc/ca.crt
+      oidc-groups-claim: groups
+      oidc-groups-prefix: "oidc:"
