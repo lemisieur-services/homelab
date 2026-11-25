@@ -16,6 +16,13 @@ spec:
             kubernetesCRD:
               allowCrossNamespace: true
               allowExternalNameServices: true
+          ports:
+            websecure:
+              transport:
+                respondingTimeouts:
+                  readTimeout: 0
+                  writeTimeout: 0
+                  idleTimeout: 0
           tolerations:
             - key: node.kubernetes.io/role
               operator: Equal
