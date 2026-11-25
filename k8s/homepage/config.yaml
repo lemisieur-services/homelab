@@ -91,6 +91,10 @@ data:
             href: https://pve.lab.lemisieur.com
             description: pve.lab.lemisieur.com
             icon: si-proxmox-#E57000
+        - omni:
+            href: https://lemisieur-k8s01.na-west-2.omni.siderolabs.io
+            description: lemisieur-k8s01.na-west-2.omni.siderolabs.io
+            icon: si-talos-#FF7300
         - traefik:
             href: https://traefik.k8s.lab.lemisieur.com
             description: traefik.k8s.lab.lemisieur.com
