@@ -38,7 +38,8 @@ credentials and the Go system certificate pool are loaded at startup.
 
 The Talos patch is not applied by Argo CD. On a machine with authorized
 `talosctl` access, copy `talos/patches/headlamp-oidc.yaml.example` outside the
-repository and replace both placeholders. Use the Headlamp client ID from
+repository and replace both placeholders. The patch has not been validated on
+a running Talos node. Use the Headlamp client ID from
 `headlamp-oauth` and the PEM root CA that validates the Pocket ID issuer's
 certificate chain (the `root.crt` attachment in `sslcert-rootca` if it is that
 CA). Never include the client secret or a private key in the patch.
@@ -51,7 +52,8 @@ it contains sensitive credentials. Check the existing API-server
 authentication settings and extra volumes, and review the merged configuration
 for conflicts. In particular, do not mix OIDC flags with an existing
 `authentication-config`, and avoid appending duplicate entries when reapplying
-or rotating the CA. Keep administrative access available.
+or rotating the CA. The `create` operation is required for a CA file that
+does not already exist. Keep administrative access available.
 
 Apply the completed patch to each control-plane node, one at a time:
 

@@ -2,7 +2,7 @@ machine:
   files:
     - path: /var/etc/headlamp-oidc/ca.crt
       permissions: 0o644
-      op: overwrite
+      op: create
       content: |
         REPLACE_WITH_PEM_ENCODED_ROOT_CA
 cluster:
