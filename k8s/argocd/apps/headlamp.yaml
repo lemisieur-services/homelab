@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: headlamp
+  namespace: argocd
+spec:
+  project: headlamp
+  sources:
+    - repoURL: https://kubernetes-sigs.github.io/headlamp/
+      chart: headlamp
+      targetRevision: 0.46.0
+      helm:
+        releaseName: headlamp
+        values: |
+          clusterRoleBinding:
+            create: false
+          config:
+            oidc:
+              secret:
+                create: false
+              externalSecret:
+                enabled: true
+                name: headlamp-oidc
+              callbackURL: https://headlamp.k8s.lab.lemisieur.com/oidc-callback
+          env:
+            - name: OIDC_ISSUER_URL
+              value: https://fed.lab.lemisieur.com
+            - name: OIDC_CALLBACK_URL
+              value: https://headlamp.k8s.lab.lemisieur.com/oidc-callback
+          podSecurityContext:
+            fsGroup: 101
+          persistentVolumeClaim:
+            enabled: true
+            accessModes:
+              - ReadWriteOnce
+            size: 5Gi
+            storageClassName: local-ssd
+          volumes:
+            - name: plugins
+              persistentVolumeClaim:
+                claimName: headlamp
+          volumeMounts:
+            - name: plugins
+              mountPath: /headlamp/plugins
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/traefik/certs
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/headlamp
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: headlamp
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

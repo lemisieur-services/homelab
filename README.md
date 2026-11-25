@@ -37,6 +37,7 @@ This is my personal homelab repository. It houses all the Kubernetes manifests, 
   - **seerr/**: Overseerr/Jellyseerr configuration.
   - **renovate/**: Renovate bot configuration for automated dependency updates.
   - **gh-arc/**: GitHub Actions Runner Controller configuration.
+  - **headlamp/**: Headlamp ingress and deployment prerequisites.
 - **network/**: Network-related configurations.
 
 ## License

@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: headlamp
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Headlamp deployment
+  sourceRepos:
+    - https://kubernetes-sigs.github.io/headlamp/
+    - https://github.com/lemisieur-services/homelab.git
+  destinations:
+    - namespace: headlamp
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: PersistentVolumeClaim
+    - group: ""
+      kind: Service
+    - group: ""
+      kind: ServiceAccount
+    - group: apps
+      kind: Deployment
+    - group: external-secrets.io
+      kind: ExternalSecret
+    - group: traefik.io
+      kind: IngressRoute
+  orphanedResources:
+    warn: false
