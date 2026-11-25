@@ -14,10 +14,13 @@ plugins, not Kubernetes cluster data or browser sessions.
    with its `root.crt` attachment for trust in the issuer. ExternalSecrets
    create the corresponding Secrets in the `headlamp` namespace.
 3. Configure the Kubernetes API server to trust the issuer and accept the
-   client ID as an OIDC audience, then grant appropriate Kubernetes RBAC
-   permissions to the authenticated user or group. API-server configuration
-   and RBAC are managed separately; OIDC login alone does not grant cluster
-   access. The chart's default cluster-admin binding is disabled.
+   client ID as an OIDC audience. Configure it to read the `groups` claim with
+   the `oidc:` group prefix (for example, `--oidc-groups-claim=groups` and
+   `--oidc-groups-prefix=oidc:`), and ensure Pocket ID includes the `headlamp`
+   group in the token. API-server configuration is managed separately.
+   The application's ClusterRoleBinding grants `cluster-admin` to
+   `oidc:headlamp`, giving its members unrestricted access to the cluster,
+   including Secrets. The chart's default cluster-admin binding is disabled.
 4. Ensure DNS resolves the hostname to Traefik and the
    `k8s-lab-lemisieur-com` certificate covers it. Apply
    `k8s/argocd/apps/headlamp.yaml` to Argo CD if Applications in that directory
