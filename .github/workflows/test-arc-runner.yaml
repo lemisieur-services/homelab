@@ -5,7 +5,7 @@ on:
 
 jobs:
   test:
-    runs-on: site01-linux
+    runs-on: gh-arc-runners
     steps:
       - name: Show runner info
         run: |
