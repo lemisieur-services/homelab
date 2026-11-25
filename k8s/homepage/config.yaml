@@ -114,6 +114,10 @@ data:
             icon: si-argo-#EF7B4D
             namespace: argocd
             app: argocd-server
+        - headlamp:
+            href: https://headlamp.k8s.lab.lemisieur.com
+            description: headlamp.k8s.lab.lemisieur.com
+            icon: sh-headlamp
         - external-secrets:
             description: External Secrets Operator
             icon: si-cryptomator-#49B04A
