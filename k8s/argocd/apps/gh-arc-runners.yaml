@@ -29,6 +29,8 @@ spec:
           - name: maxRunners
             value: "10"
         valuesObject:
+          scaleSetLabels:
+            - site01-linux
           template:
             spec:
               securityContext:
