@@ -8,7 +8,7 @@ metadata:
 spec:
   description: Garage S3 deployment
   sourceRepos:
-    - https://github.com/deuxfleurs-org/garage.git
+    - https://github.com/datahub-local/garage-helm.git
     - https://github.com/lemisieur-services/homelab.git
   destinations:
     - namespace: garage
@@ -16,6 +16,10 @@ spec:
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRole
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding
   namespaceResourceWhitelist:
     - group: ""
       kind: ConfigMap
@@ -23,8 +27,14 @@ spec:
       kind: Service
     - group: ""
       kind: ServiceAccount
+    - group: ""
+      kind: Secret
     - group: apps
       kind: StatefulSet
+    - group: apps
+      kind: Deployment
+    - group: batch
+      kind: Job
     - group: rbac.authorization.k8s.io
       kind: Role
     - group: rbac.authorization.k8s.io
