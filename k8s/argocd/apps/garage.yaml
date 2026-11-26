@@ -6,25 +6,22 @@ metadata:
 spec:
   project: garage
   sources:
-    - repoURL: https://github.com/deuxfleurs-org/garage.git
-      targetRevision: 9a4a1a2bdb0641f859f4458ff1e19f00a378e25c
-      path: script/helm/garage
+    - repoURL: https://github.com/datahub-local/garage-helm.git
+      targetRevision: 2e42e83e48a38d357583577e96188713224553de
+      path: garage
       helm:
         releaseName: garage
         values: |
           garage:
-            singleNode: true
-            existingRpcSecret: garage-rpc
-            noClusterRole: true
-            kubernetesSkipCrd: true
+            secret:
+              create: false
+              name: garage-secrets
             garageTomlString: |
               metadata_dir = "/mnt/meta"
               data_dir = "/mnt/data"
               db_engine = "lmdb"
               replication_factor = 1
               rpc_bind_addr = "[::]:3901"
-              rpc_secret = "__RPC_SECRET_REPLACE__"
-
               [s3_api]
               api_bind_addr = "[::]:3900"
               s3_region = "garage"
@@ -37,6 +34,10 @@ spec:
 
               [admin]
               api_bind_addr = "[::]:3903"
+          image:
+            tag: v2.6.0
+          deployment:
+            replicaCount: 1
           persistence:
             meta:
               storageClass: local-ssd
@@ -46,6 +47,18 @@ spec:
               size: 20Gi
           nodeSelector:
             kubernetes.io/arch: amd64
+          clusterConfig:
+            enabled: true
+            layout:
+              enabled: true
+              capacity: 18G
+            buckets: []
+            keys: {}
+          webui:
+            enabled: true
+            auth:
+              enabled: true
+              existingSecret: garage-secrets
     - repoURL: https://github.com/lemisieur-services/homelab.git
       targetRevision: main
       path: k8s/garage

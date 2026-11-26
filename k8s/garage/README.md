@@ -1,61 +1,93 @@
 # Garage
 
-The Argo CD Application renders the official Garage 0.10.7 Helm chart
-(Garage v2.6.0) from its pinned Git revision and applies the local manifests
-for its ExternalSecrets and Traefik route. It runs one Garage node with
-automatic single-node layout and replication factor 1. Its metadata and data
-use separate 1 GiB and 20 GiB `local-ssd` PVCs. Longhorn maintains two replicas
-of each volume; this is not the same as Garage-level replication or a backup,
-and the 21 GiB of PVCs can
-consume roughly 42 GiB across Longhorn replicas. Adjust the sizes before
-deployment to suit the available SSD capacity.
+The Argo CD Application renders the datahub-local Garage chart 1.0.0, pinned
+to its Git revision. The Garage image remains at v2.6.0; the chart's default
+v2.5.0 would be a downgrade. One node uses separate 1 GiB metadata and 20 GiB
+data `local-ssd` PVCs. Longhorn maintains two replicas of each volume; this
+is not Garage-level replication or a backup.
 
-## Prerequisites and deployment
+## Prerequisites and cutover
 
-1. In the 1Password `lab-k8s` vault, create an item named `garage-rpc` with
-   a `password` field containing a new 32-byte random secret encoded as 64
-   hexadecimal characters. Generate it privately with `openssl rand -hex 32`;
-   do not commit or share the value. The existing `onepassword-labk8s`
-   ClusterSecretStore and External Secrets operator must be working. No sealed
-   secret is needed. The store must also have access to the existing
-   `sslcert-lab_lemisieur_com` item with `tls.crt` and `tls.key` fields for
-   the TLS certificate.
-2. Ensure `local-ssd` and Longhorn are healthy and an amd64 Kubernetes node
-   can run the pod. Point `s3.lab.lemisieur.com` DNS to Traefik and ensure
-   the certificate covers that name. Merge these files to `main` and wait for
-   the `argocd-config` Application to create the Garage AppProject. If
-   Applications under `k8s/argocd/apps` are not automatically registered,
-   apply the Application once with `kubectl apply -f k8s/argocd/apps/garage.yaml`.
-3. Check `kubectl -n garage get externalsecret,ingressroute,pvc,pods` and
-   `kubectl -n garage exec garage-0 -- /garage status`. The pod cannot start
-   until External Secrets has created `garage-rpc`.
+Before merging, rename the existing `garage-rpc` 1Password item to
+`garage-secrets` in the `lab-k8s` vault and prepare these fields:
 
-The S3 endpoint is `https://s3.lab.lemisieur.com`, region `garage`; use
-path-style S3 addressing. It is also available inside the cluster at
+- `rpc-token`: Keep the existing RPC secret. For a fresh installation,
+  generate its 64 hexadecimal characters privately with `openssl rand -hex 32`.
+- `admin-token`: A new random admin API token, for example generated privately
+  with `openssl rand -hex 32`.
+- `webui-auth`: The complete `username:bcrypt-hash` output from
+  `htpasswd -nBC 10 USERNAME` (which prompts for the password). Generate it
+  privately; do not commit credentials.
+
+The `onepassword-labk8s` ClusterSecretStore and External Secrets operator must
+be working. The store also needs the existing `sslcert-lab_lemisieur_com`
+item. Point `s3.lab.lemisieur.com` and `garage.lab.lemisieur.com` to Traefik;
+the certificate must cover both names.
+
+The previous chart and this chart use different immutable StatefulSet
+selectors. For an existing installation, the first sync cannot update the
+StatefulSet in place. After merging and letting Argo CD update the AppProject,
+delete **only the StatefulSet** with
+`kubectl -n garage delete statefulset garage --cascade=foreground`, then sync
+the Garage Application. Expect S3 downtime during replacement. Do not delete
+the PVCs: the new StatefulSet reuses `meta-garage-0` and `data-garage-0`.
+If the application is being installed fresh, no deletion is needed.
+
+Check `kubectl -n garage get externalsecret,ingressroute,pvc,pods,job` and
+`kubectl -n garage exec garage-0 -- /garage status`. The chart's configuration
+job assigns the single-node layout with 18G capacity; inspect its logs if
+layout or bucket creation fails. Garage and the job require the RPC and admin
+secrets; the UI also requires its authentication secret.
+
+## Access and declarative configuration
+
+The S3 endpoint is `https://s3.lab.lemisieur.com`, region `garage`, using
+path-style addressing. Inside the cluster it is
 `http://garage.garage.svc.cluster.local:3900`. Traefik forwards the host header
-without an authentication middleware so S3 signature authentication works.
-No website ingress or admin API Service is enabled.
-Create a bucket and a scoped S3 access key with the Garage CLI, and store the
-resulting credentials in 1Password for consumers; these are distinct from the
-RPC secret. See the [Garage quick start](https://garagehq.deuxfleurs.fr/documentation/quick-start/)
-for bucket creation and key permissions. Do not send credentials to Git or
-logs.
+without authentication middleware so S3 signatures work. The authenticated UI
+is at `https://garage.lab.lemisieur.com`; the admin API is not exposed by
+Traefik.
 
-The AppProject permits only the Garage namespace, its two Git sources, the
-namespaced resource kinds used by the chart and manifests, and namespace
-creation.
-Kubernetes discovery is disabled in this single-node configuration, so the
-Garage CRD and cluster-wide RBAC are not required or allowed.
+Define buckets under `clusterConfig.buckets` in
+`k8s/argocd/apps/garage.yaml`. No bucket names are configured initially:
 
-The RPC secret is copied into the runtime configuration by the chart's init
-container. After changing it in 1Password, wait for the ExternalSecret to
-refresh and restart the StatefulSet pod to load it. The single-node mode is
-for a fresh deployment; migrating to a multi-node Garage layout requires a
-deliberate configuration and data migration plan.
+```yaml
+clusterConfig:
+  enabled: true
+  buckets:
+    - name: example
+  keys:
+    example-client:
+      secretName: example-s3-credentials
+      keyId: keyId
+      secretKey: secretKey
+      buckets:
+        - name: example
+          read: true
+          write: true
+```
 
-Back up both PVCs consistently, quiescing Garage as appropriate. The
-StatefulSet retains its PVCs by default, but deleting the namespace deletes
-the claims; `local-ssd` uses Longhorn's `Retain` reclaim policy. Volume
-expansion requires more than editing the chart values: follow the upstream
-[PVC expansion procedure](https://garagehq.deuxfleurs.fr/documentation/cookbook/kubernetes/#increase-pvc-size-on-running-garage-instances)
-and update the Garage layout capacity as appropriate.
+Supply key credentials via a Kubernetes Secret, preferably sourced from
+1Password with an ExternalSecret. Garage key IDs must be `GK` followed by
+24 hexadecimal characters, and secret keys must be 64 hexadecimal characters.
+Do not put credentials in Git. For lifecycle management, explicitly grant
+`owner: true` to the appropriate key. See the
+[chart documentation](https://github.com/datahub-local/garage-helm/tree/garage-1.0.0/garage)
+for further options.
+
+The chart's job creates buckets, imports keys and grants permissions on sync;
+it does not remove buckets, keys or permissions when they are removed from
+values. Its script suppresses errors for several of these operations, so
+verify the resulting state using the UI or Garage CLI rather than relying
+solely on job success.
+
+The chart unconditionally creates a ClusterRole and ClusterRoleBinding granting
+its service account permissions on CRDs and GarageNode resources, although
+this single-node configuration does not enable Kubernetes discovery. The
+AppProject must allow those cluster-scoped resources as well as the chart's
+namespaced resources. Restrict access to the namespace and service account
+accordingly.
+
+ExternalSecret updates do not restart pods automatically. After rotating the
+RPC secret, admin token or UI credentials, wait for the secret to refresh and
+restart both the Garage StatefulSet and WebUI Deployment.
