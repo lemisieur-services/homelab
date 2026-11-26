@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: garage
+  namespace: argocd
+spec:
+  project: garage
+  sources:
+    - repoURL: https://github.com/deuxfleurs-org/garage.git
+      targetRevision: 9a4a1a2bdb0641f859f4458ff1e19f00a378e25c
+      path: script/helm/garage
+      helm:
+        releaseName: garage
+        values: |
+          garage:
+            singleNode: true
+            existingRpcSecret: garage-rpc
+            noClusterRole: true
+            kubernetesSkipCrd: true
+            garageTomlString: |
+              metadata_dir = "/mnt/meta"
+              data_dir = "/mnt/data"
+              db_engine = "lmdb"
+              replication_factor = 1
+              rpc_bind_addr = "[::]:3901"
+              rpc_secret = "__RPC_SECRET_REPLACE__"
+
+              [s3_api]
+              api_bind_addr = "[::]:3900"
+              s3_region = "garage"
+              public_endpoint = "https://s3.lab.lemisieur.com"
+              public_endpoint_path_style = true
+
+              [s3_web]
+              bind_addr = "[::]:3902"
+              root_domain = ".web.garage.invalid"
+
+              [admin]
+              api_bind_addr = "[::]:3903"
+          persistence:
+            meta:
+              storageClass: local-ssd
+              size: 1Gi
+            data:
+              storageClass: local-ssd
+              size: 20Gi
+          nodeSelector:
+            kubernetes.io/arch: amd64
+    - repoURL: https://github.com/lemisieur-services/homelab.git
+      targetRevision: main
+      path: k8s/garage
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: garage
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

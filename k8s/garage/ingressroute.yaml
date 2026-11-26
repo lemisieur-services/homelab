@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: garage-s3
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: lab-lemisieur-com
+  routes:
+    - kind: Rule
+      match: Host(`s3.lab.lemisieur.com`)
+      services:
+        - name: garage
+          port: 3900
+          scheme: http
+          passHostHeader: true
