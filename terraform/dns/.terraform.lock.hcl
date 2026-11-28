@@ -5,7 +5,9 @@ provider "registry.terraform.io/bartei/technitium" {
   version     = "1.0.1"
   constraints = "1.0.1"
   hashes = [
+    "h1:3IxGtr2xOId/2BIJzMpJ6AkeEqXJGjMXB4XuIa4iysI=",
     "h1:7nj+FRaM3PBk5cVcErzwQKLA6ciHT4o2zD1/l9R4E4M=",
+    "h1:P7AmembzrRWZiWuxV2YoN3gBHbF8++MhEfbKgPmP5ic=",
     "zh:105d81ae09e0db84d6b2c9786b51e7683cf5f908e5fdf22ab71418d6da543900",
     "zh:53ce069e6a13cc3ded3db05a78dc9aa52acae922ee7b145c2eea72603bf60178",
     "zh:57f48df2dca41eb6f5d60500c71816d8245097871e51534647365ff6938336f1",
