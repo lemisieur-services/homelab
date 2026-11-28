@@ -21,7 +21,15 @@ successful plan.
    change an existing state key without migrating the state.
 3. Generate and commit the root's `.terraform.lock.hcl`; CI uses it in
    read-only mode. The same OpenTofu version, currently 1.13.10, is used for
-   all roots and both plan and apply.
+   all roots and both plan and apply. Include checksums for both runner
+   architectures and your local platform, for example on Apple Silicon:
+
+   ```sh
+   tofu providers lock -platform=linux_amd64 -platform=linux_arm64 -platform=darwin_arm64
+   ```
+
+   Run this from the root configuration directory and review provider
+   signing keys and lock-file changes before committing.
 4. Add `1password.env` in that folder, even if it is empty. Put only
    1Password secret references there, using the environment variable names
    expected by the provider or by OpenTofu, for example:
