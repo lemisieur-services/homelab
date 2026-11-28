@@ -1,0 +1,37 @@
+name: Configure lab CA trust
+description: Load the lab root CA from 1Password and configure job TLS trust.
+
+inputs:
+  op-token:
+    description: 1Password service account token with access to the lab CA
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Load lab root CA from 1Password
+      uses: 1password/load-secrets-action@v5
+      with:
+        export-env: true
+      env:
+        OP_SERVICE_ACCOUNT_TOKEN: ${{ inputs.op-token }}
+        LAB_ROOT_CA: op://lab-gha/sslcert-rootca/root.crt
+    - name: Configure lab CA trust
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        : "${LAB_ROOT_CA:?1Password returned an empty lab root CA}"
+        printf '%s\n' "$LAB_ROOT_CA" > "$RUNNER_TEMP/lab-root-ca.pem"
+        if ! openssl x509 -in "$RUNNER_TEMP/lab-root-ca.pem" -noout; then
+          echo "The lab root CA must be a PEM-encoded certificate." >&2
+          exit 1
+        fi
+        cat /etc/ssl/certs/ca-certificates.crt "$RUNNER_TEMP/lab-root-ca.pem" > "$RUNNER_TEMP/lab-ca-bundle.pem"
+        {
+          echo "SSL_CERT_FILE=$RUNNER_TEMP/lab-ca-bundle.pem"
+          echo "AWS_CA_BUNDLE=$RUNNER_TEMP/lab-ca-bundle.pem"
+          echo "CURL_CA_BUNDLE=$RUNNER_TEMP/lab-ca-bundle.pem"
+          echo "REQUESTS_CA_BUNDLE=$RUNNER_TEMP/lab-ca-bundle.pem"
+          echo "GIT_SSL_CAINFO=$RUNNER_TEMP/lab-ca-bundle.pem"
+          echo "NODE_EXTRA_CA_CERTS=$RUNNER_TEMP/lab-root-ca.pem"
+        } >> "$GITHUB_ENV"

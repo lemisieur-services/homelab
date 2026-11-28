@@ -53,3 +53,10 @@ record definitions, then import existing entries before applying; see
 Always review the plan, especially after importing, since configuration
 differences can update existing entries. Removing a managed zone can delete the
 zone and its records, including records not managed by Terraform.
+
+## GitHub Actions
+
+The [shared OpenTofu workflow](../README.md#github-actions) loads the DNS
+provider settings from [`1password.env`](1password.env). Create the
+`technitium-dns` item in the `lab-gha` vault with `server-url` and `api-token`
+fields.

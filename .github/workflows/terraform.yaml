@@ -1,0 +1,154 @@
+name: Terraform
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'terraform/**'
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+env:
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  PR_NUMBER: ${{ github.event.pull_request.number }}
+  PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+
+jobs:
+  discover:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event.action != 'closed' || github.event.pull_request.merged == true)
+    runs-on: gh-arc-runners
+    environment: terraform
+    outputs:
+      roots: ${{ steps.roots.outputs.roots }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.action == 'closed' && github.event.pull_request.merge_commit_sha || github.sha }}
+      - name: Configure lab CA trust
+        uses: ./.github/actions/lab-ca
+        with:
+          op-token: ${{ secrets.OP_TOKEN }}
+      - name: Discover changed Terraform roots
+        id: roots
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          files="$RUNNER_TEMP/opentofu-changed-files.jsonl"
+          page_file="$RUNNER_TEMP/opentofu-changed-page.json"
+          : > "$files"
+          page=1
+          total=0
+          while :; do
+            curl --fail-with-body --silent --show-error \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files?per_page=100&page=$page" \
+              -o "$page_file"
+            jq -e 'type == "array"' "$page_file" > /dev/null
+            count="$(jq 'length' "$page_file")"
+            jq -c '.[]' "$page_file" >> "$files"
+            total=$((total + count))
+            if [ "$total" -ge 3000 ]; then
+              echo "GitHub's pull request file list is limited to 3000 files; refusing an incomplete plan." >&2
+              exit 1
+            fi
+            if [ "$count" -lt 100 ]; then
+              break
+            fi
+            page=$((page + 1))
+          done
+          roots="$(bash .github/scripts/changed-terraform-roots.sh "$files")"
+          echo "Changed Terraform roots: $roots"
+          echo "roots=$roots" >> "$GITHUB_OUTPUT"
+
+  plan-or-apply:
+    needs: discover
+    if: needs.discover.outputs.roots != '[]'
+    runs-on: gh-arc-runners
+    environment: terraform
+    strategy:
+      fail-fast: false
+      matrix:
+        root: ${{ fromJSON(needs.discover.outputs.roots) }}
+    concurrency:
+      group: opentofu-${{ matrix.root }}-${{ github.event.action == 'closed' && 'apply' || github.event.pull_request.number }}
+      cancel-in-progress: false
+    env:
+      ROOT: ${{ matrix.root }}
+    defaults:
+      run:
+        working-directory: terraform/${{ matrix.root }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.action == 'closed' && github.event.pull_request.merge_commit_sha || github.sha }}
+      - name: Configure lab CA trust
+        uses: ./.github/actions/lab-ca
+        with:
+          op-token: ${{ secrets.OP_TOKEN }}
+      - uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: 1.13.10
+          tofu_wrapper: false
+      - name: Load credentials from 1Password
+        uses: 1password/load-secrets-action@v5
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_TOKEN }}
+          OP_ENV_FILE: terraform/${{ matrix.root }}/1password.env
+          AWS_ACCESS_KEY_ID: op://lab-gha/terraform/key-id
+          AWS_SECRET_ACCESS_KEY: op://lab-gha/terraform/secret-key
+          AWS_ENDPOINT_URL_S3: op://lab-gha/terraform/endpoint
+          AWS_DEFAULT_REGION: op://lab-gha/terraform/region
+          PLAN_BUCKET: op://lab-gha/terraform/plan-bucket
+      - name: Install AWS CLI v2 (rootless)
+        run: |
+          curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m)-2.27.49.zip" -o "$RUNNER_TEMP/awscliv2.zip"
+          unzip -q "$RUNNER_TEMP/awscliv2.zip" -d "$RUNNER_TEMP"
+          "$RUNNER_TEMP/aws/install" -i "$RUNNER_TEMP/aws-cli" -b "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Configure S3 path-style access
+        run: |
+          printf '[default]\ns3 =\n    addressing_style = path\n' > "$RUNNER_TEMP/opentofu-aws-config"
+          echo "AWS_CONFIG_FILE=$RUNNER_TEMP/opentofu-aws-config" >> "$GITHUB_ENV"
+      - name: Check merged commit is the current main tip
+        if: github.event.action == 'closed'
+        run: |
+          main_sha="$(git ls-remote origin refs/heads/main | cut -f1)"
+          if [ -z "$main_sha" ] || [ "$main_sha" != "$(git rev-parse HEAD)" ]; then
+            echo "Main has advanced since this merge; refusing to apply this plan." >&2
+            exit 1
+          fi
+      - name: Retrieve matching plan from S3
+        if: github.event.action == 'closed'
+        run: |
+          tree="$(git rev-parse HEAD^{tree})"
+          key="${ROOT}/pr-${PR_NUMBER}/${PR_HEAD_SHA}/${tree}.tfplan"
+          aws s3api get-object --endpoint-url "$AWS_ENDPOINT_URL_S3" --region "$AWS_DEFAULT_REGION" \
+            --bucket "$PLAN_BUCKET" --key "$key" "$RUNNER_TEMP/plan.tfplan" > /dev/null
+      - name: Initialize OpenTofu
+        run: tofu init -lockfile=readonly
+      - name: Plan
+        if: github.event.action != 'closed'
+        run: tofu plan -no-color -out="$RUNNER_TEMP/plan.tfplan"
+      - name: Save plan to S3
+        if: github.event.action != 'closed'
+        run: |
+          tree="$(git rev-parse HEAD^{tree})"
+          key="${ROOT}/pr-${PR_NUMBER}/${PR_HEAD_SHA}/${tree}.tfplan"
+          aws s3api put-object --endpoint-url "$AWS_ENDPOINT_URL_S3" --region "$AWS_DEFAULT_REGION" \
+            --bucket "$PLAN_BUCKET" --key "$key" --body "$RUNNER_TEMP/plan.tfplan" > /dev/null
+          echo "Saved plan for tree $tree."
+      - name: Apply saved plan
+        if: github.event.action == 'closed'
+        run: tofu apply -no-color "$RUNNER_TEMP/plan.tfplan"
+      - name: Remove local plan
+        if: always()
+        run: rm -f "$RUNNER_TEMP/plan.tfplan"

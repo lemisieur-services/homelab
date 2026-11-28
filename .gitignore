@@ -13,6 +13,7 @@
 # Terraform directories
 **/.terraform/
 **/.terraform.lock.hcl
+!terraform/*/.terraform.lock.hcl
 
 # Sensitive files
 **/*.tfvars
