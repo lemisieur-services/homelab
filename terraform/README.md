@@ -9,6 +9,13 @@ only when the merged tree matches and the merge commit is still the tip of
 same PR head and tree replaces that root's stored plan; review the latest
 successful plan.
 
+Each root reports its plan or apply status in the workflow summary and a PR
+comment. Plan checks also show the numbers of resources to add, change and
+delete; replacements count as both an addition and a deletion. Apply counts
+describe the saved plan, not necessarily completed changes if apply fails.
+The comments contain counts and status, not the full plan. The repository must
+allow GitHub Actions to create PR comments and commit statuses.
+
 ## Adding a root
 
 1. Add the configuration under `terraform/<root>/`, with a name beginning with
