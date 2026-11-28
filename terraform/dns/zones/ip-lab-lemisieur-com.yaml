@@ -1,0 +1,108 @@
+zone: ip.lab.lemisieur.com
+type: Primary
+records:
+  canon:
+    name: canon.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.9.221
+    ttl: 120
+  ha:
+    name: ha.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.234
+    ttl: 120
+  hb:
+    name: hb.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.35
+    ttl: 120
+  k8sctrl-01:
+    name: k8sctrl-01.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.179
+    ttl: 120
+  k8sctrl-02:
+    name: k8sctrl-02.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.10
+    ttl: 120
+  k8sctrl-03:
+    name: k8sctrl-03.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.115
+    ttl: 120
+  k8sworker-01:
+    name: k8sworker-01.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.252
+    ttl: 120
+  k8sworker-02:
+    name: k8sworker-02.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.41
+    ttl: 120
+  k8sworker-03:
+    name: k8sworker-03.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.8.165
+    ttl: 120
+  kvm-01:
+    name: kvm-01.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.106
+    ttl: 120
+  kvm-02:
+    name: kvm-02.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.236
+    ttl: 120
+  kvm-03:
+    name: kvm-03.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.132
+    ttl: 120
+  lab02-unas2-01:
+    name: lab02-unas2-01.ip.lab.lemisieur.com
+    type: A
+    value: 10.0.1.167
+    ttl: 120
+  macmini-01:
+    name: macmini-01.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.9.78
+    ttl: 120
+  milo:
+    name: milo.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.54
+    ttl: 120
+  nas-01:
+    name: nas-01.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.6.90
+    ttl: 120
+  pbs:
+    name: pbs.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.95
+    ttl: 120
+  pbs-02:
+    name: pbs-02.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.7.96
+    ttl: 120
+  pve-01:
+    name: pve-01.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.1.230
+    ttl: 120
+  pve-02:
+    name: pve-02.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.1.79
+    ttl: 120
+  scrypted:
+    name: scrypted.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.5.70
+    ttl: 120

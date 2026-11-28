@@ -1,0 +1,48 @@
+zone: lab.lemisieur.com
+type: Primary
+records:
+  apex:
+    name: lab.lemisieur.com
+    type: A
+    value: 192.168.7.242
+    ttl: 120
+  wildcard:
+    name: "*.lab.lemisieur.com"
+    type: A
+    value: 192.168.7.242
+    ttl: 120
+  site-01:
+    name: site-01.lab.lemisieur.com
+    type: A
+    value: 192.168.1.1
+    ttl: 120
+  site-02:
+    name: site-02.lab.lemisieur.com
+    type: A
+    value: 10.0.0.1
+    ttl: 120
+  travel:
+    name: travel.lab.lemisieur.com
+    type: A
+    value: 10.254.254.1
+    ttl: 3600
+  macmini:
+    name: macmini.lab.lemisieur.com
+    type: CNAME
+    value: macmini-01.ip.lab.lemisieur.com
+    ttl: 120
+  nas:
+    name: nas.lab.lemisieur.com
+    type: CNAME
+    value: nas-01.ip.lab.lemisieur.com
+    ttl: 120
+  nas-01:
+    name: nas-01.lab.lemisieur.com
+    type: CNAME
+    value: nas-01.ip.lab.lemisieur.com
+    ttl: 120
+  nas-02:
+    name: nas-02.lab.lemisieur.com
+    type: CNAME
+    value: lab02-unas2-01.ip.lab.lemisieur.com
+    ttl: 120

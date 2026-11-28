@@ -1,0 +1,18 @@
+zone: k8s.lab.lemisieur.com
+type: Primary
+records:
+  apex:
+    name: k8s.lab.lemisieur.com
+    type: A
+    value: 192.168.7.242
+    ttl: 120
+  wildcard:
+    name: "*.k8s.lab.lemisieur.com"
+    type: A
+    value: 192.168.7.242
+    ttl: 120
+  api:
+    name: api.k8s.lab.lemisieur.com
+    type: A
+    value: 192.168.7.241
+    ttl: 120

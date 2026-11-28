@@ -1,0 +1,38 @@
+zone: cam.lab.lemisieur.com
+type: Primary
+records:
+  bureau:
+    name: bureau.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.74
+    ttl: 120
+  cours-01:
+    name: cours-01.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.7
+    ttl: 120
+  cours-02:
+    name: cours-02.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.254
+    ttl: 120
+  entree-doorbell:
+    name: entree-doorbell.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.38
+    ttl: 120
+  patio-01:
+    name: patio-01.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.167
+    ttl: 120
+  salon:
+    name: salon.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.216
+    ttl: 120
+  soussol:
+    name: soussol.cam.lab.lemisieur.com
+    type: A
+    value: 192.168.3.124
+    ttl: 120

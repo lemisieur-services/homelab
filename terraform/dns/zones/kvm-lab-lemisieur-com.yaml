@@ -1,0 +1,18 @@
+zone: kvm.lab.lemisieur.com
+type: Primary
+records:
+  milo:
+    name: milo.kvm.lab.lemisieur.com
+    type: CNAME
+    value: kvm-01.ip.lab.lemisieur.com
+    ttl: 120
+  pve-01:
+    name: pve-01.kvm.lab.lemisieur.com
+    type: CNAME
+    value: kvm-02.ip.lab.lemisieur.com
+    ttl: 120
+  pve-02:
+    name: pve-02.kvm.lab.lemisieur.com
+    type: CNAME
+    value: kvm-03.ip.lab.lemisieur.com
+    ttl: 120
