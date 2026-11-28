@@ -106,3 +106,8 @@ records:
     type: A
     value: 192.168.5.70
     ttl: 120
+  test:
+    name: test.ip.lab.lemisieur.com
+    type: A
+    value: 192.168.5.70
+    ttl: 120
