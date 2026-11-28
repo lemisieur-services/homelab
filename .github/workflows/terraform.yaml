@@ -109,11 +109,7 @@ jobs:
           AWS_DEFAULT_REGION: op://lab-gha/terraform/region
           PLAN_BUCKET: op://lab-gha/terraform/plan-bucket
       - name: Install AWS CLI v2 (rootless)
-        run: |
-          curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m)-2.27.49.zip" -o "$RUNNER_TEMP/awscliv2.zip"
-          unzip -q "$RUNNER_TEMP/awscliv2.zip" -d "$RUNNER_TEMP"
-          "$RUNNER_TEMP/aws/install" -i "$RUNNER_TEMP/aws-cli" -b "$RUNNER_TEMP/bin"
-          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+        uses: ./.github/actions/install-aws-cli
       - name: Configure S3 path-style access
         run: |
           printf '[default]\ns3 =\n    addressing_style = path\n' > "$RUNNER_TEMP/opentofu-aws-config"

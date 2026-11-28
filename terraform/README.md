@@ -1,7 +1,7 @@
 # OpenTofu configurations
 
 Each direct subdirectory of `terraform/` is an independent OpenTofu root. The
-[GitHub Actions workflow](../.github/workflows/opentofu.yaml) plans each root
+[GitHub Actions workflow](../.github/workflows/terraform.yaml) plans each root
 changed by a PR against `main`, including changes in nested directories. It
 saves the test-merge plans to S3 and applies the matching plans after merge,
 only when the merged tree matches and the merge commit is still the tip of
@@ -72,8 +72,10 @@ contain secrets. Actions logs can also contain sensitive infrastructure details.
 
 The ephemeral `gh-arc-runners` runner must reach the S3 endpoint, each
 provider's endpoint, 1Password, GitHub, and the OpenTofu provider registry.
-The workflow installs OpenTofu and AWS CLI for each job and uses temporary
-files; it does not depend on runner storage surviving a job.
+The workflow installs OpenTofu and uses the
+[AWS CLI action](../.github/actions/install-aws-cli/action.yml) for each job.
+Both use temporary files; the workflow does not depend on runner storage
+surviving a job.
 
 Only same-repository PRs run the jobs; fork PRs are skipped. Same-repository
 contributors who can change workflow or OpenTofu code must be trusted with the

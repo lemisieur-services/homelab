@@ -1,0 +1,20 @@
+name: Install AWS CLI v2
+description: Install AWS CLI v2 without root privileges.
+
+inputs:
+  version:
+    description: 'AWS CLI version to install'
+    default: '2.27.49'
+
+runs:
+  using: composite
+  steps:
+    - name: Install AWS CLI v2
+      shell: bash
+      env:
+        AWS_CLI_VERSION: ${{ inputs.version }}
+      run: |
+        curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m)-${AWS_CLI_VERSION}.zip" -o "$RUNNER_TEMP/awscliv2.zip"
+        unzip -q "$RUNNER_TEMP/awscliv2.zip" -d "$RUNNER_TEMP"
+        "$RUNNER_TEMP/aws/install" -i "$RUNNER_TEMP/aws-cli" -b "$RUNNER_TEMP/bin"
+        echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
